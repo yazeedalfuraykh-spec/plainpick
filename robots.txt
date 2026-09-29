@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yazeedalfuraykh-spec.github.io/plainpick/sitemap.xml
