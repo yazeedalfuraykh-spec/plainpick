@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,39 +8,33 @@
 <title>Electronics & Technology — Plainpick</title>
 <meta name="description" content="Fact-checked reviews of high-performance laptops, noise-canceling headphones, GaN fast chargers, and smart home ecosystems.">
 <link rel="stylesheet" href="../style.css">
+<!-- Zero-FOUC Theme Preloader Script -->
 <script>
-function filterCatalog() {
-  var input = document.getElementById('globalSearchInput');
-  if (!input) return;
-  var filter = input.value.toLowerCase();
-  var cards = document.getElementsByClassName('searchable-item');
-  var count = 0;
-  for (var i = 0; i < cards.length; i++) {
-    var text = cards[i].innerText.toLowerCase();
-    if (text.indexOf(filter) > -1) {
-      cards[i].style.display = "";
-      count++;
-    } else {
-      cards[i].style.display = "none";
-    }
-  }
-  var countEl = document.getElementById('searchResultCount');
-  if (countEl) {
-    countEl.innerText = filter ? "Showing " + count + " matching results" : "";
-  }
-}
+(function() {
+  try {
+    var savedTheme = localStorage.getItem('plainpick_theme');
+    var theme = savedTheme ? savedTheme : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch(e) {}
+})();
 </script>
 </head>
 <body>
 <header>
   <div class="header-top">
-    <a class="brand" href="../index.html">Plainpick</a>
+    <div class="brand-group">
+      <a class="brand" href="../index.html">
+        <span class="brand-accent">Plain</span>pick
+      </a>
+      <span class="brand-tagline">Global Discovery & Verification</span>
+    </div>
     <div class="header-controls">
       <div class="search-bar">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 110+ products, brands, tools...">
       </div>
       <div class="selectors">
-        <select class="ctrl-select" onchange="alert('Country view set to: ' + this.value)">
+        <select class="ctrl-select" id="countrySelector" onchange="handleCountryChange(this.value)" aria-label="Select Country">
           <option value="Global">🌐 Global</option>
           <option value="SA">🇸🇦 Saudi Arabia</option>
           <option value="UAE">🇦🇪 UAE</option>
@@ -48,11 +42,14 @@ function filterCatalog() {
           <option value="UK">🇬🇧 United Kingdom</option>
           <option value="EU">🇪🇺 European Union</option>
         </select>
-        <button class="lang-btn" onclick="alert('Bilingual English / العربية active across all catalog cards.')">EN / العربية</button>
+        <button class="ctrl-btn lang-btn" id="langToggleBtn" onclick="toggleLanguageDirection()" title="Toggle English / RTL Arabic layout">EN / العربية</button>
+        <button class="ctrl-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark / Light theme">
+          <span class="theme-icon">🌓</span> <span class="theme-text">Theme</span>
+        </button>
       </div>
     </div>
   </div>
-  <nav class="cat-nav">
+  <nav class="cat-nav" aria-label="Main Categories">
     <a href="../categories/electronics-tech.html">⚡ Electronics</a>
     <a href="../categories/home-kitchen.html">☕ Home & Kitchen</a>
     <a href="../categories/travel-esim.html">✈️ Travel & eSIM</a>
@@ -62,7 +59,7 @@ function filterCatalog() {
     <a href="../categories/automotive-accessories.html">🚗 Auto</a>
     <a href="../categories/top-50-global-programs.html">🏆 Top 50 Global</a>
     <a href="../products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
-    <a href="../about.html">About</a>
+    <a href="../about.html">About & Standards</a>
   </nav>
 </header>
 <main>
@@ -77,334 +74,793 @@ function filterCatalog() {
 
 <h2>Featured Global Partners & Services</h2>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Anker Innovations Direct</span>
+<div class="product-card searchable-item" id="PROG-08">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Anker Innovations Direct</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">ShareASale / Impact (#2194)</span>
+        <span class="badge badge-cat">Charging & Audio Accessories</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 6.0% - 10.0% on direct brand purchases </span>
-  </h3>
-  <p><span class="badge badge-global">ShareASale / Impact (#2194)</span> <span class="badge badge-cat">Charging & Audio Accessories</span> &middot; <em>Worldwide (US, UK, EU, GCC, Canada)</em></p>
-  <p><strong>Promotions & Content:</strong> No unauthorized discount codes, no bidding on 'Anker'/'Soundcore'</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (US, UK, EU, GCC, Canada) (Languages: English, Arabic, German, Japanese)</p>
+  <p><strong>Promotions & Restrictions:</strong> No unauthorized discount codes, no bidding on 'Anker'/'Soundcore'</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.anker.com" target="_blank" rel="nofollow noopener">Explore Anker Innovations Direct &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.anker.com" target="_blank" rel="nofollow noopener">Explore Anker Innovations Direct &rarr;</a>
+    <button class="compare-btn" data-id="PROG-08" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-08&quot;, &quot;title&quot;: &quot;Anker Innovations Direct&quot;, &quot;category&quot;: &quot;Electronics &amp; Technology&quot;, &quot;platform&quot;: &quot;ShareASale / Impact (#2194)&quot;, &quot;commission&quot;: &quot;CPS: 6.0% - 10.0% on direct brand purchases (GaN chargers, PowerCore)&quot;, &quot;url&quot;: &quot;https://www.anker.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (US, UK, EU, GCC, Canada)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 93.4/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 6.0% - 10.0% on direct brand purchases (GaN chargers, PowerCore)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No unauthorized discount codes, no bidding on &#x27;Anker&#x27;/&#x27;Soundcore&#x27;&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Lenovo Global</span>
+<div class="product-card searchable-item" id="PROG-06">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Lenovo Global</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad / CJ Affiliate</span>
+        <span class="badge badge-cat">Computers & Laptops</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 2.0% - 5.0% on ThinkPad, Legion, Yoga </span>
-  </h3>
-  <p><span class="badge badge-global">Admitad / CJ Affiliate</span> <span class="badge badge-cat">Computers & Laptops</span> &middot; <em>Worldwide (100+ Countries: US, UK, EU, Middle East, APAC)</em></p>
-  <p><strong>Promotions & Content:</strong> No direct search arbitrage on Lenovo brand trademarks</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (100+ Countries: US, UK, EU, Middle East, APAC) (Languages: English, Arabic, French, German, Japanese)</p>
+  <p><strong>Promotions & Restrictions:</strong> No direct search arbitrage on Lenovo brand trademarks</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.lenovo.com" target="_blank" rel="nofollow noopener">Explore Lenovo Global &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.lenovo.com" target="_blank" rel="nofollow noopener">Explore Lenovo Global &rarr;</a>
+    <button class="compare-btn" data-id="PROG-06" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-06&quot;, &quot;title&quot;: &quot;Lenovo Global&quot;, &quot;category&quot;: &quot;Electronics &amp; Technology&quot;, &quot;platform&quot;: &quot;Admitad / CJ Affiliate&quot;, &quot;commission&quot;: &quot;CPS: 2.0% - 5.0% on ThinkPad, Legion, Yoga ($1,200+ avg order)&quot;, &quot;url&quot;: &quot;https://www.lenovo.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (100+ Countries: US, UK, EU, Middle East, APAC)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 92.2/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 2.0% - 5.0% on ThinkPad, Legion, Yoga ($1,200+ avg order)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No direct search arbitrage on Lenovo brand trademarks&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>DJI Official Store</span>
+<div class="product-card searchable-item" id="PROG-10">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>DJI Official Store</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">ShareASale (#72049) / Direct</span>
+        <span class="badge badge-cat">Drones & Camera Gimbals</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 3.0% - 5.0% </span>
-  </h3>
-  <p><span class="badge badge-global">ShareASale (#72049) / Direct</span> <span class="badge badge-cat">Drones & Camera Gimbals</span> &middot; <em>Worldwide (100+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No search bidding on 'DJI'/'Mavic'/'Osmo'</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (100+ Countries) (Languages: English, Chinese, German, French)</p>
+  <p><strong>Promotions & Restrictions:</strong> No search bidding on 'DJI'/'Mavic'/'Osmo'</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://store.dji.com" target="_blank" rel="nofollow noopener">Explore DJI Official Store &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://store.dji.com" target="_blank" rel="nofollow noopener">Explore DJI Official Store &rarr;</a>
+    <button class="compare-btn" data-id="PROG-10" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-10&quot;, &quot;title&quot;: &quot;DJI Official Store&quot;, &quot;category&quot;: &quot;Electronics &amp; Technology&quot;, &quot;platform&quot;: &quot;ShareASale (#72049) / Direct&quot;, &quot;commission&quot;: &quot;CPS: 3.0% - 5.0% ($400 - $2,000 AOV on Mini/Air drones and Osmo)&quot;, &quot;url&quot;: &quot;https://store.dji.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (100+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 91.5/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 3.0% - 5.0% ($400 - $2,000 AOV on Mini/Air drones and Osmo)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No search bidding on &#x27;DJI&#x27;/&#x27;Mavic&#x27;/&#x27;Osmo&#x27;&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Razer Gaming & Hardware</span>
+<div class="product-card searchable-item" id="PROG-09">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Razer Gaming & Hardware</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Impact Radius (#329)</span>
+        <span class="badge badge-cat">Gaming Peripherals & Systems</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 3.0% - 10.0% </span>
-  </h3>
-  <p><span class="badge badge-global">Impact Radius (#329)</span> <span class="badge badge-cat">Gaming Peripherals & Systems</span> &middot; <em>Worldwide (US, EU, UK, Middle East, APAC)</em></p>
-  <p><strong>Promotions & Content:</strong> No trademark search bidding, clean gaming/tech content</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (US, EU, UK, Middle East, APAC) (Languages: English, French, German, Spanish)</p>
+  <p><strong>Promotions & Restrictions:</strong> No trademark search bidding, clean gaming/tech content</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.razer.com" target="_blank" rel="nofollow noopener">Explore Razer Gaming & Hardware &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.razer.com" target="_blank" rel="nofollow noopener">Explore Razer Gaming & Hardware &rarr;</a>
+    <button class="compare-btn" data-id="PROG-09" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-09&quot;, &quot;title&quot;: &quot;Razer Gaming &amp; Hardware&quot;, &quot;category&quot;: &quot;Electronics &amp; Technology&quot;, &quot;platform&quot;: &quot;Impact Radius (#329)&quot;, &quot;commission&quot;: &quot;CPS: 3.0% - 10.0% (Peripherals 10%, Systems/Laptops 3%)&quot;, &quot;url&quot;: &quot;https://www.razer.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (US, EU, UK, Middle East, APAC)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 90.7/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 3.0% - 10.0% (Peripherals 10%, Systems/Laptops 3%)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No trademark search bidding, clean gaming/tech content&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Samsung Electronics</span>
+<div class="product-card searchable-item" id="PROG-07">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Samsung Electronics</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad / Awin</span>
+        <span class="badge badge-cat">Smartphones & Displays</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 2.0% - 4.0% on Galaxy Smartphones, Tablets, OLED TVs</span>
-  </h3>
-  <p><span class="badge badge-global">Admitad / Awin</span> <span class="badge badge-cat">Smartphones & Displays</span> &middot; <em>Multi-Region (US, UK, EU, GCC, India)</em></p>
-  <p><strong>Promotions & Content:</strong> Strict brand compliance, official banners only</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Multi-Region (US, UK, EU, GCC, India) (Languages: English, Arabic, European languages)</p>
+  <p><strong>Promotions & Restrictions:</strong> Strict brand compliance, official banners only</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 14 - 30 Days)</p>
-  <a class="cta-btn" href="https://www.samsung.com" target="_blank" rel="nofollow noopener">Explore Samsung Electronics &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.samsung.com" target="_blank" rel="nofollow noopener">Explore Samsung Electronics &rarr;</a>
+    <button class="compare-btn" data-id="PROG-07" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-07&quot;, &quot;title&quot;: &quot;Samsung Electronics&quot;, &quot;category&quot;: &quot;Electronics &amp; Technology&quot;, &quot;platform&quot;: &quot;Admitad / Awin&quot;, &quot;commission&quot;: &quot;CPS: 2.0% - 4.0% on Galaxy Smartphones, Tablets, OLED TVs&quot;, &quot;url&quot;: &quot;https://www.samsung.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Multi-Region (US, UK, EU, GCC, India)&quot;, &quot;Cookie: 14 - 30 Days&quot;, &quot;Score: 90.6/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 2.0% - 4.0% on Galaxy Smartphones, Tablets, OLED TVs&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;Strict brand compliance, official banners only&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Dell Technologies</span>
+<div class="product-card searchable-item" id="PROG-11">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Dell Technologies</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">CJ Affiliate / Admitad</span>
+        <span class="badge badge-cat">Computers & Monitors</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 1.5% - 4.0% on XPS, Alienware, UltraSharp monitors</span>
-  </h3>
-  <p><span class="badge badge-global">CJ Affiliate / Admitad</span> <span class="badge badge-cat">Computers & Monitors</span> &middot; <em>Worldwide (North America, Europe, Middle East)</em></p>
-  <p><strong>Promotions & Content:</strong> Standard corporate PPC restrictions</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (North America, Europe, Middle East) (Languages: English, Spanish, French, German)</p>
+  <p><strong>Promotions & Restrictions:</strong> Standard corporate PPC restrictions</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.dell.com" target="_blank" rel="nofollow noopener">Explore Dell Technologies &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.dell.com" target="_blank" rel="nofollow noopener">Explore Dell Technologies &rarr;</a>
+    <button class="compare-btn" data-id="PROG-11" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-11&quot;, &quot;title&quot;: &quot;Dell Technologies&quot;, &quot;category&quot;: &quot;Electronics &amp; Technology&quot;, &quot;platform&quot;: &quot;CJ Affiliate / Admitad&quot;, &quot;commission&quot;: &quot;CPS: 1.5% - 4.0% on XPS, Alienware, UltraSharp monitors&quot;, &quot;url&quot;: &quot;https://www.dell.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (North America, Europe, Middle East)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 90.6/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 1.5% - 4.0% on XPS, Alienware, UltraSharp monitors&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;Standard corporate PPC restrictions&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
 
 <h2>Verified Physical Gear & Recommendations</h2>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Apple AirPods Pro (2nd Generation) with USB-C MagSafe Case</span>
+<div class="product-card searchable-item" id="AMZ-SA-007">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Apple AirPods Pro (2nd Generation) with USB-C MagSafe Case</h3>
+      <div class="meta-badges">
+        <span class="badge badge-amz">Amazon.sa</span>
+        <span class="badge badge-cat">Audio & Wearables</span>
+        <span style="color:var(--text-muted);font-size:13px;">سماعات ابل ايربودز برو الجيل الثاني بمنفذ تايب سي</span>
+      </div>
+    </div>
     <span class="price-tag">899.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-amz">Amazon.sa</span> <span class="badge badge-cat">Audio & Wearables</span> &middot; <em>سماعات ابل ايربودز برو الجيل الثاني بمنفذ تايب سي</em></p>
+  </div>
   <p><strong>Ideal For:</strong> iPhone and Apple ecosystem users demanding top-tier ANC and call quality</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Class-leading transparency mode</li><li>Seamless Apple device switching</li><li>Compact pocketable case with Find My speaker</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Full features gated to iOS ecosystem</li><li>Battery degradation over multi-year heavy use</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The undisputed default wireless earbud choice for Apple users in Saudi Arabia.</p>
-  <a class="cta-btn" href="https://www.amazon.sa/dp/B0BDHWDR12?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.amazon.sa/dp/B0BDHWDR12?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+    <button class="compare-btn" data-id="AMZ-SA-007" onclick='toggleCompare({&quot;id&quot;: &quot;AMZ-SA-007&quot;, &quot;title&quot;: &quot;Apple AirPods Pro (2nd Generation) with USB-C MagSafe Case&quot;, &quot;category&quot;: &quot;Audio &amp; Wearables&quot;, &quot;platform&quot;: &quot;Amazon.sa&quot;, &quot;price&quot;: &quot;899.00 SAR&quot;, &quot;url&quot;: &quot;https://www.amazon.sa/dp/B0BDHWDR12?tag=plainpick-21&quot;, &quot;specs&quot;: [&quot;H2 chip delivering 2x active noise cancellation&quot;, &quot;Adaptive Audio and Transparency mode with Conversation Awareness&quot;, &quot;Dust, sweat, and water resistance (IP54)&quot;, &quot;Up to 30 hours listening time with MagSafe USB-C case&quot;], &quot;pros&quot;: [&quot;Class-leading transparency mode&quot;, &quot;Seamless Apple device switching&quot;, &quot;Compact pocketable case with Find My speaker&quot;], &quot;cons&quot;: [&quot;Full features gated to iOS ecosystem&quot;, &quot;Battery degradation over multi-year heavy use&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Sony WH-1000XM5 Wireless Industry Leading Noise Canceling Headphones</span>
+<div class="product-card searchable-item" id="AMZ-SA-008">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Sony WH-1000XM5 Wireless Industry Leading Noise Canceling Headphones</h3>
+      <div class="meta-badges">
+        <span class="badge badge-amz">Amazon.sa</span>
+        <span class="badge badge-cat">Audio & Wearables</span>
+        <span style="color:var(--text-muted);font-size:13px;">سماعات سوني اللاسلكية العازلة للضوضاء WH-1000XM5</span>
+      </div>
+    </div>
     <span class="price-tag">1199.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-amz">Amazon.sa</span> <span class="badge badge-cat">Audio & Wearables</span> &middot; <em>سماعات سوني اللاسلكية العازلة للضوضاء WH-1000XM5</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Frequent flyers, remote workers, and audiophiles seeking maximum noise isolation</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Best-in-class low and mid-frequency noise cancellation</li><li>Crystal clear microphone beamforming for calls</li><li>Plush lightweight synthetic leather earcups</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Earcups do not fold inward like XM4 (larger travel case)</li><li>Touch controls can be sensitive in humid environments</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The premier over-ear ANC headphone for flights, open offices, and deep focus.</p>
-  <a class="cta-btn" href="https://www.amazon.sa/dp/B09XS7JWHH?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.amazon.sa/dp/B09XS7JWHH?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+    <button class="compare-btn" data-id="AMZ-SA-008" onclick='toggleCompare({&quot;id&quot;: &quot;AMZ-SA-008&quot;, &quot;title&quot;: &quot;Sony WH-1000XM5 Wireless Industry Leading Noise Canceling Headphones&quot;, &quot;category&quot;: &quot;Audio &amp; Wearables&quot;, &quot;platform&quot;: &quot;Amazon.sa&quot;, &quot;price&quot;: &quot;1199.00 SAR&quot;, &quot;url&quot;: &quot;https://www.amazon.sa/dp/B09XS7JWHH?tag=plainpick-21&quot;, &quot;specs&quot;: [&quot;Integrated Processor V1 + HD Noise Cancelling Processor QN1 with 8 microphones&quot;, &quot;Auto NC Optimizer based on atmospheric pressure and wearing conditions&quot;, &quot;Up to 30-hour battery life with 3-minute quick charge for 3 hours playback&quot;, &quot;LDAC high-resolution audio codec support&quot;], &quot;pros&quot;: [&quot;Best-in-class low and mid-frequency noise cancellation&quot;, &quot;Crystal clear microphone beamforming for calls&quot;, &quot;Plush lightweight synthetic leather earcups&quot;], &quot;cons&quot;: [&quot;Earcups do not fold inward like XM4 (larger travel case)&quot;, &quot;Touch controls can be sensitive in humid environments&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Anker Soundcore Space One Active Noise Cancelling Headphones</span>
+<div class="product-card searchable-item" id="AMZ-SA-009">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Anker Soundcore Space One Active Noise Cancelling Headphones</h3>
+      <div class="meta-badges">
+        <span class="badge badge-amz">Amazon.sa</span>
+        <span class="badge badge-cat">Audio & Wearables</span>
+        <span style="color:var(--text-muted);font-size:13px;">سماعات ساوندكور سبيس ون اللاسلكية العازلة للضوضاء من انكر</span>
+      </div>
+    </div>
     <span class="price-tag">349.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-amz">Amazon.sa</span> <span class="badge badge-cat">Audio & Wearables</span> &middot; <em>سماعات ساوندكور سبيس ون اللاسلكية العازلة للضوضاء من انكر</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Students and daily commuters wanting high-end ANC at an accessible price</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Unbeatable ANC performance per SAR spent</li><li>Comprehensive Soundcore EQ companion app</li><li>Foldable portable design</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Plastic hinge construction</li><li>Bass-heavy default sound signature requires EQ tuning</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The strongest budget over-ear ANC headphone under 400 SAR in the Saudi market.</p>
-  <a class="cta-btn" href="https://www.amazon.sa/dp/B0CHWR7R8P?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.amazon.sa/dp/B0CHWR7R8P?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+    <button class="compare-btn" data-id="AMZ-SA-009" onclick='toggleCompare({&quot;id&quot;: &quot;AMZ-SA-009&quot;, &quot;title&quot;: &quot;Anker Soundcore Space One Active Noise Cancelling Headphones&quot;, &quot;category&quot;: &quot;Audio &amp; Wearables&quot;, &quot;platform&quot;: &quot;Amazon.sa&quot;, &quot;price&quot;: &quot;349.00 SAR&quot;, &quot;url&quot;: &quot;https://www.amazon.sa/dp/B0CHWR7R8P?tag=plainpick-21&quot;, &quot;specs&quot;: [&quot;2x stronger voice reduction with adaptive ANC algorithm&quot;, &quot;40mm dynamic customized drivers with LDAC Hi-Res Wireless certification&quot;, &quot;40 hours playtime in ANC mode (55 hours with ANC off)&quot;, &quot;8-degree rotating earcups with soft comfort headband&quot;], &quot;pros&quot;: [&quot;Unbeatable ANC performance per SAR spent&quot;, &quot;Comprehensive Soundcore EQ companion app&quot;, &quot;Foldable portable design&quot;], &quot;cons&quot;: [&quot;Plastic hinge construction&quot;, &quot;Bass-heavy default sound signature requires EQ tuning&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Samsung Galaxy Buds FE True Wireless Earbuds</span>
+<div class="product-card searchable-item" id="AMZ-SA-010">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Samsung Galaxy Buds FE True Wireless Earbuds</h3>
+      <div class="meta-badges">
+        <span class="badge badge-amz">Amazon.sa</span>
+        <span class="badge badge-cat">Audio & Wearables</span>
+        <span style="color:var(--text-muted);font-size:13px;">سماعات سامسونج جالاكسي بودز اف اي اللاسلكية</span>
+      </div>
+    </div>
     <span class="price-tag">249.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-amz">Amazon.sa</span> <span class="badge badge-cat">Audio & Wearables</span> &middot; <em>سماعات سامسونج جالاكسي بودز اف اي اللاسلكية</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Samsung Galaxy and Android smartphone users seeking secure fit and strong ANC</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Wingtip design never falls out during workouts</li><li>Punchy deep bass response</li><li>Seamless Galaxy device auto-switch</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>No wireless charging on case (USB-C only)</li><li>Proprietary SSC codec works best on Samsung phones</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The best value true wireless earbuds for Galaxy smartphone owners in KSA.</p>
-  <a class="cta-btn" href="https://www.amazon.sa/dp/B0CD27L2YJ?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.amazon.sa/dp/B0CD27L2YJ?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+    <button class="compare-btn" data-id="AMZ-SA-010" onclick='toggleCompare({&quot;id&quot;: &quot;AMZ-SA-010&quot;, &quot;title&quot;: &quot;Samsung Galaxy Buds FE True Wireless Earbuds&quot;, &quot;category&quot;: &quot;Audio &amp; Wearables&quot;, &quot;platform&quot;: &quot;Amazon.sa&quot;, &quot;price&quot;: &quot;249.00 SAR&quot;, &quot;url&quot;: &quot;https://www.amazon.sa/dp/B0CD27L2YJ?tag=plainpick-21&quot;, &quot;specs&quot;: [&quot;Ergonomic wingtip design for rock-solid in-ear stability&quot;, &quot;Powerful Active Noise Cancellation with Ambient Sound mode&quot;, &quot;3-mic system with DNN AI background noise reduction for calls&quot;, &quot;Up to 30 hours total battery life with charging case&quot;], &quot;pros&quot;: [&quot;Wingtip design never falls out during workouts&quot;, &quot;Punchy deep bass response&quot;, &quot;Seamless Galaxy device auto-switch&quot;], &quot;cons&quot;: [&quot;No wireless charging on case (USB-C only)&quot;, &quot;Proprietary SSC codec works best on Samsung phones&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>TP-Link Tapo C210 Pan/Tilt 2K Security Camera</span>
+<div class="product-card searchable-item" id="AMZ-SA-017">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>TP-Link Tapo C210 Pan/Tilt 2K Security Camera</h3>
+      <div class="meta-badges">
+        <span class="badge badge-amz">Amazon.sa</span>
+        <span class="badge badge-cat">Smart Home & Security</span>
+        <span style="color:var(--text-muted);font-size:13px;">كاميرا مراقبة تي بي لينك تابو C210 بدقة 2K متحركة</span>
+      </div>
+    </div>
     <span class="price-tag">119.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-amz">Amazon.sa</span> <span class="badge badge-cat">Smart Home & Security</span> &middot; <em>كاميرا مراقبة تي بي لينك تابو C210 بدقة 2K متحركة</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Families, pet owners, and home monitoring in Saudi villas and apartments</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Incredible 2K clarity at an accessible price</li><li>No mandatory monthly cloud subscription required</li><li>Responsive Tapo mobile app with Arabic UI</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Indoor use only (not weatherproof)</li><li>2.4GHz Wi-Fi band only (5GHz not supported)</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The best value indoor smart camera for home security and baby/pet monitoring in KSA.</p>
-  <a class="cta-btn" href="https://www.amazon.sa/dp/B0BMQGW46G?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.amazon.sa/dp/B0BMQGW46G?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+    <button class="compare-btn" data-id="AMZ-SA-017" onclick='toggleCompare({&quot;id&quot;: &quot;AMZ-SA-017&quot;, &quot;title&quot;: &quot;TP-Link Tapo C210 Pan/Tilt 2K Security Camera&quot;, &quot;category&quot;: &quot;Smart Home &amp; Security&quot;, &quot;platform&quot;: &quot;Amazon.sa&quot;, &quot;price&quot;: &quot;119.00 SAR&quot;, &quot;url&quot;: &quot;https://www.amazon.sa/dp/B0BMQGW46G?tag=plainpick-21&quot;, &quot;specs&quot;: [&quot;2K 3MP Ultra-High Definition video capture&quot;, &quot;360-degree horizontal and 114-degree vertical pan/tilt range&quot;, &quot;Advanced night vision up to 30 feet and sound/motion detection alerts&quot;, &quot;Two-way audio with built-in mic and speaker + local microSD storage up to 512GB&quot;], &quot;pros&quot;: [&quot;Incredible 2K clarity at an accessible price&quot;, &quot;No mandatory monthly cloud subscription required&quot;, &quot;Responsive Tapo mobile app with Arabic UI&quot;], &quot;cons&quot;: [&quot;Indoor use only (not weatherproof)&quot;, &quot;2.4GHz Wi-Fi band only (5GHz not supported)&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Xiaomi Smart Air Purifier 4 (HEPA Filter, CADR 400m³/h)</span>
+<div class="product-card searchable-item" id="AMZ-SA-018">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Xiaomi Smart Air Purifier 4 (HEPA Filter, CADR 400m³/h)</h3>
+      <div class="meta-badges">
+        <span class="badge badge-amz">Amazon.sa</span>
+        <span class="badge badge-cat">Smart Home & Air Quality</span>
+        <span style="color:var(--text-muted);font-size:13px;">جهاز تنقية الهواء الذكي شاومي اير بيوريفاير 4</span>
+      </div>
+    </div>
     <span class="price-tag">599.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-amz">Amazon.sa</span> <span class="badge badge-cat">Smart Home & Air Quality</span> &middot; <em>جهاز تنقية الهواء الذكي شاومي اير بيوريفاير 4</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Saudi residents dealing with desert dust, seasonal pollen, and indoor allergens</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Essential defense against frequent Saudi dust storms</li><li>Whisper quiet night mode (32.1dB)</li><li>Affordable and readily available replacement filters</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Cylindrical footprint requires 20cm clearance from walls</li><li>Power cord length is moderate (1.5m)</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> A must-have health appliance for dust mitigation and allergen relief in Saudi homes.</p>
-  <a class="cta-btn" href="https://www.amazon.sa/dp/B0891P3FVD?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.amazon.sa/dp/B0891P3FVD?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+    <button class="compare-btn" data-id="AMZ-SA-018" onclick='toggleCompare({&quot;id&quot;: &quot;AMZ-SA-018&quot;, &quot;title&quot;: &quot;Xiaomi Smart Air Purifier 4 (HEPA Filter, CADR 400m\u00b3/h)&quot;, &quot;category&quot;: &quot;Smart Home &amp; Air Quality&quot;, &quot;platform&quot;: &quot;Amazon.sa&quot;, &quot;price&quot;: &quot;599.00 SAR&quot;, &quot;url&quot;: &quot;https://www.amazon.sa/dp/B0891P3FVD?tag=plainpick-21&quot;, &quot;specs&quot;: [&quot;High-efficiency 3-in-1 HEPA filtration capturing 99.97% of 0.3\u03bcm particles&quot;, &quot;CADR of up to 400m\u00b3/h suitable for rooms up to 48m\u00b2&quot;, &quot;High-precision laser PM2.5 dust sensor with OLED touch display&quot;, &quot;Smart Mi Home / Xiaomi Home app control + Alexa &amp; Google Assistant support&quot;], &quot;pros&quot;: [&quot;Essential defense against frequent Saudi dust storms&quot;, &quot;Whisper quiet night mode (32.1dB)&quot;, &quot;Affordable and readily available replacement filters&quot;], &quot;cons&quot;: [&quot;Cylindrical footprint requires 20cm clearance from walls&quot;, &quot;Power cord length is moderate (1.5m)&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Ring Video Doorbell Plus (Head-to-Toe 1536p HD Video)</span>
+<div class="product-card searchable-item" id="AMZ-SA-025">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Ring Video Doorbell Plus (Head-to-Toe 1536p HD Video)</h3>
+      <div class="meta-badges">
+        <span class="badge badge-amz">Amazon.sa</span>
+        <span class="badge badge-cat">Smart Home & Security</span>
+        <span style="color:var(--text-muted);font-size:13px;">جرس الباب بالفيديو رينج بلس بدقة 1536p مع رؤية كاملة</span>
+      </div>
+    </div>
     <span class="price-tag">499.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-amz">Amazon.sa</span> <span class="badge badge-cat">Smart Home & Security</span> &middot; <em>جرس الباب بالفيديو رينج بلس بدقة 1536p مع رؤية كاملة</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Villa and home owners wanting visitor visibility and package detection at the front door</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>See full body of visitors from head to toe</li><li>Live alerts on smartphone and Alexa Echo Show displays</li><li>Easy installation without rewiring</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Ring Protect subscription required for cloud video recording history</li><li>Requires decent 2.4GHz Wi-Fi signal at front gate/door</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The top-rated smart video doorbell for Saudi villas and private homes.</p>
-  <a class="cta-btn" href="https://www.amazon.sa/dp/B0797P222Y?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.amazon.sa/dp/B0797P222Y?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+    <button class="compare-btn" data-id="AMZ-SA-025" onclick='toggleCompare({&quot;id&quot;: &quot;AMZ-SA-025&quot;, &quot;title&quot;: &quot;Ring Video Doorbell Plus (Head-to-Toe 1536p HD Video)&quot;, &quot;category&quot;: &quot;Smart Home &amp; Security&quot;, &quot;platform&quot;: &quot;Amazon.sa&quot;, &quot;price&quot;: &quot;499.00 SAR&quot;, &quot;url&quot;: &quot;https://www.amazon.sa/dp/B0797P222Y?tag=plainpick-21&quot;, &quot;specs&quot;: [&quot;Expanded Head-to-Toe 1536p HD video with 150\u00b0 x 150\u00b0 field of view&quot;, &quot;Color night vision and customizable motion detection zones&quot;, &quot;Two-way talk with audio noise cancellation&quot;, &quot;Quick-release rechargeable battery pack or hardwired power&quot;], &quot;pros&quot;: [&quot;See full body of visitors from head to toe&quot;, &quot;Live alerts on smartphone and Alexa Echo Show displays&quot;, &quot;Easy installation without rewiring&quot;], &quot;cons&quot;: [&quot;Ring Protect subscription required for cloud video recording history&quot;, &quot;Requires decent 2.4GHz Wi-Fi signal at front gate/door&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Eufy RoboVac G30 Robot Vacuum with Smart Dynamic Navigation 2.0</span>
+<div class="product-card searchable-item" id="AMZ-SA-030">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Eufy RoboVac G30 Robot Vacuum with Smart Dynamic Navigation 2.0</h3>
+      <div class="meta-badges">
+        <span class="badge badge-amz">Amazon.sa</span>
+        <span class="badge badge-cat">Smart Home & Cleaning</span>
+        <span style="color:var(--text-muted);font-size:13px;">مكنسة كهربائية روبوت يوفي جيبوفاك G30 الذكية من انكر</span>
+      </div>
+    </div>
     <span class="price-tag">699.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-amz">Amazon.sa</span> <span class="badge badge-cat">Smart Home & Cleaning</span> &middot; <em>مكنسة كهربائية روبوت يوفي جيبوفاك G30 الذكية من انكر</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Apartment and villa owners wanting automated daily hard-floor and tile cleaning</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Cleans in orderly logical rows instead of random bouncing</li><li>Low height cleans under beds easily</li><li>Quiet operation (55dB)</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>No optical obstacle avoidance (small cables should be tucked away)</li><li>Does not include mop attachment</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The most cost-effective systematic robot vacuum for daily dust and hair pickup.</p>
-  <a class="cta-btn" href="https://www.amazon.sa/dp/B09B8W2K2R?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.amazon.sa/dp/B09B8W2K2R?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
+    <button class="compare-btn" data-id="AMZ-SA-030" onclick='toggleCompare({&quot;id&quot;: &quot;AMZ-SA-030&quot;, &quot;title&quot;: &quot;Eufy RoboVac G30 Robot Vacuum with Smart Dynamic Navigation 2.0&quot;, &quot;category&quot;: &quot;Smart Home &amp; Cleaning&quot;, &quot;platform&quot;: &quot;Amazon.sa&quot;, &quot;price&quot;: &quot;699.00 SAR&quot;, &quot;url&quot;: &quot;https://www.amazon.sa/dp/B09B8W2K2R?tag=plainpick-21&quot;, &quot;specs&quot;: [&quot;Smart Dynamic Navigation 2.0 with path-tracking sensor for systematic row-by-row cleaning&quot;, &quot;2000Pa strong suction power with BoostIQ automatic carpet boost&quot;, &quot;Ultra-slim 2.85-inch body glides effortlessly under sofas and low furniture&quot;, &quot;Wi-Fi app control with cleaning history, schedules, and voice assistant integration&quot;], &quot;pros&quot;: [&quot;Cleans in orderly logical rows instead of random bouncing&quot;, &quot;Low height cleans under beds easily&quot;, &quot;Quiet operation (55dB)&quot;], &quot;cons&quot;: [&quot;No optical obstacle avoidance (small cables should be tucked away)&quot;, &quot;Does not include mop attachment&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Apple iPhone 15 Pro Max 256GB Natural Titanium 5G</span>
+<div class="product-card searchable-item" id="NOON-SA-001">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Apple iPhone 15 Pro Max 256GB Natural Titanium 5G</h3>
+      <div class="meta-badges">
+        <span class="badge badge-noon">Noon.sa</span>
+        <span class="badge badge-cat">Smartphones & Tablets</span>
+        <span style="color:var(--text-muted);font-size:13px;">ابل ايفون 15 برو ماكس 256 جيجابايت تيتانيوم طبيعي</span>
+      </div>
+    </div>
     <span class="price-tag">4699.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-noon">Noon.sa</span> <span class="badge badge-cat">Smartphones & Tablets</span> &middot; <em>ابل ايفون 15 برو ماكس 256 جيجابايت تيتانيوم طبيعي</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Flagship smartphone buyers demanding the best cameras and battery life in KSA</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Lighter in hand than previous generations</li><li>Best-in-class video recording capabilities</li><li>All-day intensive battery endurance</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>High premium price</li><li>20W charging speed slower than Chinese Android flagships</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The most desirable smartphone in the Saudi market with Noon Express fast delivery.</p>
-  <a class="cta-btn" href="https://www.noon.com/saudi-en/N53346830A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.noon.com/saudi-en/N53346830A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+    <button class="compare-btn" data-id="NOON-SA-001" onclick='toggleCompare({&quot;id&quot;: &quot;NOON-SA-001&quot;, &quot;title&quot;: &quot;Apple iPhone 15 Pro Max 256GB Natural Titanium 5G&quot;, &quot;category&quot;: &quot;Smartphones &amp; Tablets&quot;, &quot;platform&quot;: &quot;Noon.sa&quot;, &quot;price&quot;: &quot;4699.00 SAR&quot;, &quot;url&quot;: &quot;https://www.noon.com/saudi-en/N53346830A/p/&quot;, &quot;specs&quot;: [&quot;Aerospace-grade titanium design with textured matte glass back&quot;, &quot;A17 Pro chip with 6-core GPU for console-level gaming&quot;, &quot;Pro camera system: 48MP Main + 5x optical telephoto lens&quot;, &quot;USB-C connector with USB 3 speeds up to 10Gbps&quot;], &quot;pros&quot;: [&quot;Lighter in hand than previous generations&quot;, &quot;Best-in-class video recording capabilities&quot;, &quot;All-day intensive battery endurance&quot;], &quot;cons&quot;: [&quot;High premium price&quot;, &quot;20W charging speed slower than Chinese Android flagships&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Samsung Galaxy S24 Ultra 5G Dual SIM 256GB Titanium Gray</span>
+<div class="product-card searchable-item" id="NOON-SA-003">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Samsung Galaxy S24 Ultra 5G Dual SIM 256GB Titanium Gray</h3>
+      <div class="meta-badges">
+        <span class="badge badge-noon">Noon.sa</span>
+        <span class="badge badge-cat">Smartphones & Tablets</span>
+        <span style="color:var(--text-muted);font-size:13px;">سامسونج جالاكسي اس 24 الترا 5G سعة 256 جيجابايت رمادي تيتانيوم</span>
+      </div>
+    </div>
     <span class="price-tag">3899.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-noon">Noon.sa</span> <span class="badge badge-cat">Smartphones & Tablets</span> &middot; <em>سامسونج جالاكسي اس 24 الترا 5G سعة 256 جيجابايت رمادي تيتانيوم</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Power Android users, business executives, and zoom photography enthusiasts</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Gorilla Armor display drastically cuts Saudi desert glare and reflections</li><li>Built-in S Pen for signing documents and sketching</li><li>7 years of guaranteed Android OS updates</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Square angular corners in hand</li><li>Heavyweight frame (232g)</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The absolute benchmark for premium Android productivity and AI features.</p>
-  <a class="cta-btn" href="https://www.noon.com/saudi-en/N53401290A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.noon.com/saudi-en/N53401290A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+    <button class="compare-btn" data-id="NOON-SA-003" onclick='toggleCompare({&quot;id&quot;: &quot;NOON-SA-003&quot;, &quot;title&quot;: &quot;Samsung Galaxy S24 Ultra 5G Dual SIM 256GB Titanium Gray&quot;, &quot;category&quot;: &quot;Smartphones &amp; Tablets&quot;, &quot;platform&quot;: &quot;Noon.sa&quot;, &quot;price&quot;: &quot;3899.00 SAR&quot;, &quot;url&quot;: &quot;https://www.noon.com/saudi-en/N53401290A/p/&quot;, &quot;specs&quot;: [&quot;Galaxy AI suite with Live Translate, Circle to Search, and Note Assist&quot;, &quot;Flat 6.8-inch Dynamic AMOLED 2X display with Corning Gorilla Armor anti-glare&quot;, &quot;Snapdragon 8 Gen 3 for Galaxy with embedded S Pen stylus&quot;, &quot;200MP quad telephoto camera system with 5x optical and 100x Space Zoom&quot;], &quot;pros&quot;: [&quot;Gorilla Armor display drastically cuts Saudi desert glare and reflections&quot;, &quot;Built-in S Pen for signing documents and sketching&quot;, &quot;7 years of guaranteed Android OS updates&quot;], &quot;cons&quot;: [&quot;Square angular corners in hand&quot;, &quot;Heavyweight frame (232g)&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Apple iPad 10th Generation 10.9-inch Wi-Fi 64GB Silver</span>
+<div class="product-card searchable-item" id="NOON-SA-004">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Apple iPad 10th Generation 10.9-inch Wi-Fi 64GB Silver</h3>
+      <div class="meta-badges">
+        <span class="badge badge-noon">Noon.sa</span>
+        <span class="badge badge-cat">Smartphones & Tablets</span>
+        <span style="color:var(--text-muted);font-size:13px;">ابل ايباد الجيل العاشر 10.9 بوصة واي فاي 64 جيجابايت</span>
+      </div>
+    </div>
     <span class="price-tag">1399.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-noon">Noon.sa</span> <span class="badge badge-cat">Smartphones & Tablets</span> &middot; <em>ابل ايباد الجيل العاشر 10.9 بوصة واي فاي 64 جيجابايت</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Students, children, and families needing a reliable tablet for study, Madrasati, and streaming</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Modern all-screen bezel design</li><li>Perfect for Saudi educational platforms (Madrasati)</li><li>Smooth performance with years of iPadOS support</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>64GB base storage fills up quickly if downloading large games</li><li>Display is not fully laminated</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The best value Apple tablet for students and family everyday multimedia.</p>
-  <a class="cta-btn" href="https://www.noon.com/saudi-en/N51287900A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.noon.com/saudi-en/N51287900A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+    <button class="compare-btn" data-id="NOON-SA-004" onclick='toggleCompare({&quot;id&quot;: &quot;NOON-SA-004&quot;, &quot;title&quot;: &quot;Apple iPad 10th Generation 10.9-inch Wi-Fi 64GB Silver&quot;, &quot;category&quot;: &quot;Smartphones &amp; Tablets&quot;, &quot;platform&quot;: &quot;Noon.sa&quot;, &quot;price&quot;: &quot;1399.00 SAR&quot;, &quot;url&quot;: &quot;https://www.noon.com/saudi-en/N51287900A/p/&quot;, &quot;specs&quot;: [&quot;10.9-inch Liquid Retina display with True Tone&quot;, &quot;A14 Bionic chip with 6-core CPU and 4-core GPU&quot;, &quot;Landscape 12MP Ultra Wide front camera with Center Stage&quot;, &quot;USB-C port and Touch ID integrated in top power button&quot;], &quot;pros&quot;: [&quot;Modern all-screen bezel design&quot;, &quot;Perfect for Saudi educational platforms (Madrasati)&quot;, &quot;Smooth performance with years of iPadOS support&quot;], &quot;cons&quot;: [&quot;64GB base storage fills up quickly if downloading large games&quot;, &quot;Display is not fully laminated&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Apple Watch Series 9 GPS 45mm Midnight Aluminum Case</span>
+<div class="product-card searchable-item" id="NOON-SA-005">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Apple Watch Series 9 GPS 45mm Midnight Aluminum Case</h3>
+      <div class="meta-badges">
+        <span class="badge badge-noon">Noon.sa</span>
+        <span class="badge badge-cat">Audio & Wearables</span>
+        <span style="color:var(--text-muted);font-size:13px;">ساعة ابل الجيل التاسع 45 ملم هيكل الومنيوم بلون سماء الليل</span>
+      </div>
+    </div>
     <span class="price-tag">1499.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-noon">Noon.sa</span> <span class="badge badge-cat">Audio & Wearables</span> &middot; <em>ساعة ابل الجيل التاسع 45 ملم هيكل الومنيوم بلون سماء الليل</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Health-conscious iPhone users tracking fitness, heart rate, and notifications</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Double Tap gesture works when your other hand is holding coffee/bags</li><li>Ultra bright screen readable in mid-day sun</li><li>Rich fitness and activity tracking ring ecosystem</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>18-hour daily battery life requires nightly charging</li><li>Exclusive to iPhone owners</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The premier smartwatch experience for iPhone users in Saudi Arabia.</p>
-  <a class="cta-btn" href="https://www.noon.com/saudi-en/N52391084A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.noon.com/saudi-en/N52391084A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+    <button class="compare-btn" data-id="NOON-SA-005" onclick='toggleCompare({&quot;id&quot;: &quot;NOON-SA-005&quot;, &quot;title&quot;: &quot;Apple Watch Series 9 GPS 45mm Midnight Aluminum Case&quot;, &quot;category&quot;: &quot;Audio &amp; Wearables&quot;, &quot;platform&quot;: &quot;Noon.sa&quot;, &quot;price&quot;: &quot;1499.00 SAR&quot;, &quot;url&quot;: &quot;https://www.noon.com/saudi-en/N52391084A/p/&quot;, &quot;specs&quot;: [&quot;S9 SiP chip with new Double Tap gesture control&quot;, &quot;2000-nit Always-On Retina display (2x brighter than Series 8)&quot;, &quot;Comprehensive health sensors: ECG, Blood Oxygen, and Temperature sensing&quot;, &quot;Crash Detection and Fall Detection with emergency SOS&quot;], &quot;pros&quot;: [&quot;Double Tap gesture works when your other hand is holding coffee/bags&quot;, &quot;Ultra bright screen readable in mid-day sun&quot;, &quot;Rich fitness and activity tracking ring ecosystem&quot;], &quot;cons&quot;: [&quot;18-hour daily battery life requires nightly charging&quot;, &quot;Exclusive to iPhone owners&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Dyson V12 Detect Slim Absolute Cordless Vacuum Cleaner</span>
+<div class="product-card searchable-item" id="NOON-SA-008">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Dyson V12 Detect Slim Absolute Cordless Vacuum Cleaner</h3>
+      <div class="meta-badges">
+        <span class="badge badge-noon">Noon.sa</span>
+        <span class="badge badge-cat">Smart Home & Cleaning</span>
+        <span style="color:var(--text-muted);font-size:13px;">مكنسة دايسون اللاسلكية V12 ديتكت سليم ابسولوت</span>
+      </div>
+    </div>
     <span class="price-tag">2499.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-noon">Noon.sa</span> <span class="badge badge-cat">Smart Home & Cleaning</span> &middot; <em>مكنسة دايسون اللاسلكية V12 ديتكت سليم ابسولوت</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Home owners demanding effortless, lightweight, deep dust extraction on hard floors and carpets</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Laser head makes floor cleaning oddly satisfying and thorough</li><li>Weighs only 2.2kg for effortless ceiling and stairs cleaning</li><li>No-touch hygienic bin emptying</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Compact 0.35L bin requires frequent emptying</li><li>High initial investment</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The finest cordless stick vacuum for Saudi tile and luxury hardwood floors.</p>
-  <a class="cta-btn" href="https://www.noon.com/saudi-en/N23891045A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.noon.com/saudi-en/N23891045A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+    <button class="compare-btn" data-id="NOON-SA-008" onclick='toggleCompare({&quot;id&quot;: &quot;NOON-SA-008&quot;, &quot;title&quot;: &quot;Dyson V12 Detect Slim Absolute Cordless Vacuum Cleaner&quot;, &quot;category&quot;: &quot;Smart Home &amp; Cleaning&quot;, &quot;platform&quot;: &quot;Noon.sa&quot;, &quot;price&quot;: &quot;2499.00 SAR&quot;, &quot;url&quot;: &quot;https://www.noon.com/saudi-en/N23891045A/p/&quot;, &quot;specs&quot;: [&quot;Illuminated Fluffy cleaner head with green laser revealing invisible floor dust&quot;, &quot;Piezo sensor continuously sizes and counts dust particles on LCD screen&quot;, &quot;Hyperdymium motor spinning at up to 125,000 RPM with 150AW suction&quot;, &quot;Single-button power control (no need to hold trigger) and 60 mins run time&quot;], &quot;pros&quot;: [&quot;Laser head makes floor cleaning oddly satisfying and thorough&quot;, &quot;Weighs only 2.2kg for effortless ceiling and stairs cleaning&quot;, &quot;No-touch hygienic bin emptying&quot;], &quot;cons&quot;: [&quot;Compact 0.35L bin requires frequent emptying&quot;, &quot;High initial investment&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Xiaomi Smart Standing Fan 2 (DC Inverter Motor & App Control)</span>
+<div class="product-card searchable-item" id="NOON-SA-016">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Xiaomi Smart Standing Fan 2 (DC Inverter Motor & App Control)</h3>
+      <div class="meta-badges">
+        <span class="badge badge-noon">Noon.sa</span>
+        <span class="badge badge-cat">Smart Home & Climate</span>
+        <span style="color:var(--text-muted);font-size:13px;">مروحة شاومي الذكية العمودية الجيل الثاني بمحرك موفر للطاقة</span>
+      </div>
+    </div>
     <span class="price-tag">279.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-noon">Noon.sa</span> <span class="badge badge-cat">Smart Home & Climate</span> &middot; <em>مروحة شاومي الذكية العمودية الجيل الثاني بمحرك موفر للطاقة</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Saudi residents seeking whisper-quiet gentle breeze circulation alongside air conditioning</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Whisper quiet on natural breeze mode for uninterrupted sleep</li><li>Evenly circulates AC coolness throughout the bedroom</li><li>Voice control via Alexa and Google Assistant</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Assembly required out of box (approx 5 mins)</li><li>No built-in battery on standard Fan 2 (requires wall cord)</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The best smart, whisper-silent bedroom fan to pair with summer air conditioning.</p>
-  <a class="cta-btn" href="https://www.noon.com/saudi-en/N40192834A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.noon.com/saudi-en/N40192834A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+    <button class="compare-btn" data-id="NOON-SA-016" onclick='toggleCompare({&quot;id&quot;: &quot;NOON-SA-016&quot;, &quot;title&quot;: &quot;Xiaomi Smart Standing Fan 2 (DC Inverter Motor &amp; App Control)&quot;, &quot;category&quot;: &quot;Smart Home &amp; Climate&quot;, &quot;platform&quot;: &quot;Noon.sa&quot;, &quot;price&quot;: &quot;279.00 SAR&quot;, &quot;url&quot;: &quot;https://www.noon.com/saudi-en/N40192834A/p/&quot;, &quot;specs&quot;: [&quot;Dual-blade design (7+5 wing-shaped blades) simulating natural gentle breeze&quot;, &quot;DC inverter motor delivering energy-efficient, ultra-quiet operation as low as 30.2dB&quot;, &quot;140-degree wide-angle oscillation with 100 fine-tuned speed levels in Mi Home app&quot;, &quot;Dual height convertible pole for table or standing floor placement&quot;], &quot;pros&quot;: [&quot;Whisper quiet on natural breeze mode for uninterrupted sleep&quot;, &quot;Evenly circulates AC coolness throughout the bedroom&quot;, &quot;Voice control via Alexa and Google Assistant&quot;], &quot;cons&quot;: [&quot;Assembly required out of box (approx 5 mins)&quot;, &quot;No built-in battery on standard Fan 2 (requires wall cord)&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Eufy HomeVac H11 Pure Cordless Handheld Vacuum with Ozone Purification</span>
+<div class="product-card searchable-item" id="NOON-SA-017">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Eufy HomeVac H11 Pure Cordless Handheld Vacuum with Ozone Purification</h3>
+      <div class="meta-badges">
+        <span class="badge badge-noon">Noon.sa</span>
+        <span class="badge badge-cat">Smart Home & Cleaning</span>
+        <span style="color:var(--text-muted);font-size:13px;">مكنسة يوفي اليدوية هوم فاك H11 بيور للسيارة والمنزل</span>
+      </div>
+    </div>
     <span class="price-tag">179.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-noon">Noon.sa</span> <span class="badge badge-cat">Smart Home & Cleaning</span> &middot; <em>مكنسة يوفي اليدوية هوم فاك H11 بيور للسيارة والمنزل</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Car owners, parents, and desk workers cleaning crumbs, sofa crevices, and vehicle interiors</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Fits in car cupholder or glovebox</li><li>Ergonomic textured non-slip grip</li><li>Includes 2-in-1 crevice tool for tight car seat gaps</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>13 minutes runtime per charge (intended for spot cleanups)</li><li>Micro-USB charging instead of Type-C</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The handiest car and desk spot-cleaning vacuum for fast pickups.</p>
-  <a class="cta-btn" href="https://www.noon.com/saudi-en/N38901245A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.noon.com/saudi-en/N38901245A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+    <button class="compare-btn" data-id="NOON-SA-017" onclick='toggleCompare({&quot;id&quot;: &quot;NOON-SA-017&quot;, &quot;title&quot;: &quot;Eufy HomeVac H11 Pure Cordless Handheld Vacuum with Ozone Purification&quot;, &quot;category&quot;: &quot;Smart Home &amp; Cleaning&quot;, &quot;platform&quot;: &quot;Noon.sa&quot;, &quot;price&quot;: &quot;179.00 SAR&quot;, &quot;url&quot;: &quot;https://www.noon.com/saudi-en/N38901245A/p/&quot;, &quot;specs&quot;: [&quot;Ultra-compact wine-bottle size weighing only 580 grams&quot;, &quot;5500Pa strong suction easily picks up crumbs, hair, and dust&quot;, &quot;Built-in Ozone air purification function deodorizes enclosed car interiors and closets&quot;, &quot;Micro USB charging with washable high-efficiency filter&quot;], &quot;pros&quot;: [&quot;Fits in car cupholder or glovebox&quot;, &quot;Ergonomic textured non-slip grip&quot;, &quot;Includes 2-in-1 crevice tool for tight car seat gaps&quot;], &quot;cons&quot;: [&quot;13 minutes runtime per charge (intended for spot cleanups)&quot;, &quot;Micro-USB charging instead of Type-C&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Philips Hue White and Color Ambiance Starter Kit (3 Bulbs + Bridge)</span>
+<div class="product-card searchable-item" id="NOON-SA-019">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Philips Hue White and Color Ambiance Starter Kit (3 Bulbs + Bridge)</h3>
+      <div class="meta-badges">
+        <span class="badge badge-noon">Noon.sa</span>
+        <span class="badge badge-cat">Smart Home & Lighting</span>
+        <span style="color:var(--text-muted);font-size:13px;">طقم اضاءة فيليبس هيو الذكية الملونة 3 لمبات مع جهاز الربط</span>
+      </div>
+    </div>
     <span class="price-tag">599.00 SAR</span>
-  </h3>
-  <p><span class="badge badge-noon">Noon.sa</span> <span class="badge badge-cat">Smart Home & Lighting</span> &middot; <em>طقم اضاءة فيليبس هيو الذكية الملونة 3 لمبات مع جهاز الربط</em></p>
+  </div>
   <p><strong>Ideal For:</strong> Smart home enthusiasts wanting 16 million colors, automated sunset lighting, and gaming sync</p>
   <div class="pros-cons">
     <div class="pros"><strong>Pros:</strong><ul><li>Unrivaled reliability with zero Wi-Fi congestion thanks to Zigbee Bridge</li><li>Instant scene switching for movie nights and relaxation</li><li>Long 25,000-hour LED lifespan</li></ul></div>
     <div class="cons"><strong>Honest Limitations:</strong><ul><li>Higher price than standalone Wi-Fi bulbs</li><li>Requires Hue Bridge connected to home router via Ethernet</li></ul></div>
   </div>
   <p><strong>Editorial Verdict:</strong> The undisputed gold standard in smart ambient lighting ecosystems.</p>
-  <a class="cta-btn" href="https://www.noon.com/saudi-en/N31098452A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.noon.com/saudi-en/N31098452A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
+    <button class="compare-btn" data-id="NOON-SA-019" onclick='toggleCompare({&quot;id&quot;: &quot;NOON-SA-019&quot;, &quot;title&quot;: &quot;Philips Hue White and Color Ambiance Starter Kit (3 Bulbs + Bridge)&quot;, &quot;category&quot;: &quot;Smart Home &amp; Lighting&quot;, &quot;platform&quot;: &quot;Noon.sa&quot;, &quot;price&quot;: &quot;599.00 SAR&quot;, &quot;url&quot;: &quot;https://www.noon.com/saudi-en/N31098452A/p/&quot;, &quot;specs&quot;: [&quot;16 million colors and 50,000 shades of warm-to-cool white light&quot;, &quot;Includes Hue Bridge for out-of-home control, schedules, and Zigbee mesh reliability&quot;, &quot;Seamless synchronization with Spotify music, TV screen colors, and gaming PC setups&quot;, &quot;Voice control with Apple HomeKit (Siri), Alexa, and Google Assistant&quot;], &quot;pros&quot;: [&quot;Unrivaled reliability with zero Wi-Fi congestion thanks to Zigbee Bridge&quot;, &quot;Instant scene switching for movie nights and relaxation&quot;, &quot;Long 25,000-hour LED lifespan&quot;], &quot;cons&quot;: [&quot;Higher price than standalone Wi-Fi bulbs&quot;, &quot;Requires Hue Bridge connected to home router via Ethernet&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
 
-<p class="updated">Last reviewed: 2026-10-09</p>
+<p class="updated">Last verified & updated: 2026-10-09 &middot; Plainpick Editorial Operations</p>
 </main>
 <footer>
   <div class="footer-grid">
     <div>
       <h4>About Plainpick</h4>
-      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We test products and verify specifications before publication.</p>
+      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We independently test products and verify specifications before publication.</p>
     </div>
     <div>
       <h4>Core Categories</h4>
-      <p><a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; <a href="../categories/software-ai-tools.html">Software & AI</a></p>
+      <p>
+        <a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; 
+        <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; 
+        <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; 
+        <a href="../categories/software-ai-tools.html">Software & AI</a> &middot; 
+        <a href="../categories/top-50-global-programs.html">Top 50 Programs</a>
+      </p>
+    </div>
+    <div>
+      <h4>Regional Hubs & Guides</h4>
+      <p>
+        <a href="../products/saudi-marketplace-catalog.html">Saudi 60 Marketplace Hub</a> &middot; 
+        <a href="../products/amazon-saudi-top-picks.html">Amazon.sa 30 Picks</a> &middot; 
+        <a href="../products/noon-saudi-top-picks.html">Noon.sa 30 Picks</a> &middot; 
+        <a href="../car-rental/index.html">Car Rental Guides</a>
+      </p>
     </div>
     <div>
       <h4>Legal & Standards</h4>
       <p><a href="../about.html">About Us</a> &middot; <a href="../about.html#disclosure">Affiliate Disclosure</a> &middot; <a href="../sitemap.xml">XML Sitemap</a></p>
     </div>
   </div>
-  <p class="disclosure-note"><strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
-  <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides</p>
+  <div class="disclosure-note">
+    <strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides. All rights reserved.</p>
+  </div>
 </footer>
+
+<!-- Interactive Comparison Dock -->
+<div id="compareDock" class="compare-dock" style="display:none;">
+  <div class="compare-dock-inner">
+    <div class="compare-dock-info">
+      <span class="compare-badge" id="compareCount">0 / 4</span>
+      <span class="compare-dock-title">Items ready to compare</span>
+      <div id="compareChips" class="compare-chips-list"></div>
+    </div>
+    <div class="compare-dock-actions">
+      <button class="btn btn-secondary btn-sm" onclick="clearCompareList()">Clear</button>
+      <button class="btn btn-primary btn-sm" onclick="openCompareModal()">Compare Now &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison Modal -->
+<div id="compareModal" class="compare-modal" style="display:none;" onclick="handleModalBackdrop(event)">
+  <div class="compare-modal-dialog">
+    <div class="compare-modal-header">
+      <h3>Interactive Side-by-Side Comparison</h3>
+      <button class="modal-close-btn" onclick="closeCompareModal()">&times;</button>
+    </div>
+    <div class="compare-modal-body" id="compareModalContent">
+      <!-- Dynamic Comparison Table Generated by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- Plainpick Core Interaction Engine -->
+<script>
+// Search Filtering
+function filterCatalog() {
+  var input = document.getElementById('globalSearchInput');
+  if (!input) return;
+  var filter = input.value.toLowerCase().trim();
+  var cards = document.getElementsByClassName('searchable-item');
+  var count = 0;
+  for (var i = 0; i < cards.length; i++) {
+    var text = cards[i].innerText.toLowerCase();
+    if (!filter || text.indexOf(filter) > -1) {
+      cards[i].style.display = "";
+      count++;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+  var countEl = document.getElementById('searchResultCount');
+  if (countEl) {
+    countEl.innerText = filter ? "Found " + count + " matching results" : "";
+  }
+}
+
+// Theme Management
+function updateThemeUI(theme) {
+  var btn = document.getElementById('themeToggleBtn');
+  if (btn) {
+    var icon = btn.querySelector('.theme-icon');
+    var text = btn.querySelector('.theme-text');
+    if (theme === 'light') {
+      if (icon) icon.innerText = '☀️';
+      if (text) text.innerText = 'Light';
+    } else {
+      if (icon) icon.innerText = '🌙';
+      if (text) text.innerText = 'Dark';
+    }
+  }
+}
+
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  var next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('plainpick_theme', next); } catch(e) {}
+  updateThemeUI(next);
+}
+
+function toggleLanguageDirection() {
+  var html = document.documentElement;
+  var currentDir = html.getAttribute('dir') || 'ltr';
+  var nextDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+  html.setAttribute('dir', nextDir);
+  var btn = document.getElementById('langToggleBtn');
+  if (btn) {
+    btn.innerText = nextDir === 'rtl' ? 'العربية (RTL)' : 'EN (LTR)';
+  }
+}
+
+function handleCountryChange(val) {
+  console.log("Country filter set to: " + val);
+}
+
+// Interactive Comparison State & Storage
+var MAX_COMPARE = 4;
+function getCompareList() {
+  try {
+    var stored = localStorage.getItem('plainpick_compare');
+    return stored ? JSON.parse(stored) : [];
+  } catch(e) {
+    return [];
+  }
+}
+
+function saveCompareList(list) {
+  try {
+    localStorage.setItem('plainpick_compare', JSON.stringify(list));
+  } catch(e) {}
+  renderCompareDock();
+  updateCompareButtons();
+}
+
+function toggleCompare(item) {
+  var list = getCompareList();
+  var idx = list.findIndex(function(x) { return x.id === item.id; });
+  if (idx > -1) {
+    list.splice(idx, 1);
+  } else {
+    if (list.length >= MAX_COMPARE) {
+      alert('You can compare up to ' + MAX_COMPARE + ' items simultaneously. Please remove an item first.');
+      return;
+    }
+    list.push(item);
+  }
+  saveCompareList(list);
+}
+
+function clearCompareList() {
+  saveCompareList([]);
+}
+
+function renderCompareDock() {
+  var list = getCompareList();
+  var dock = document.getElementById('compareDock');
+  var countEl = document.getElementById('compareCount');
+  var chipsEl = document.getElementById('compareChips');
+  if (!dock || !countEl || !chipsEl) return;
+  
+  if (list.length === 0) {
+    dock.style.display = "none";
+    return;
+  }
+  
+  dock.style.display = "block";
+  countEl.innerText = list.length + " / " + MAX_COMPARE;
+  
+  chipsEl.innerHTML = list.map(function(item) {
+    return '<span class="compare-chip">' + (item.title || item.brand || item.id) + ' <button onclick="removeFromCompare(\'' + item.id + '\')">&times;</button></span>';
+  }).join('');
+}
+
+function removeFromCompare(id) {
+  var list = getCompareList();
+  var filtered = list.filter(function(x) { return x.id !== id; });
+  saveCompareList(filtered);
+}
+
+function updateCompareButtons() {
+  var list = getCompareList();
+  var buttons = document.querySelectorAll('.compare-btn');
+  buttons.forEach(function(btn) {
+    var id = btn.getAttribute('data-id');
+    var isSelected = list.some(function(x) { return x.id === id; });
+    if (isSelected) {
+      btn.classList.add('active');
+      btn.innerText = '✓ In Compare';
+    } else {
+      btn.classList.remove('active');
+      btn.innerText = '+ Compare';
+    }
+  });
+}
+
+function openCompareModal() {
+  var list = getCompareList();
+  if (list.length === 0) return;
+  var modal = document.getElementById('compareModal');
+  var content = document.getElementById('compareModalContent');
+  if (!modal || !content) return;
+  
+  var headers = '<tr><th>Attribute</th>' + list.map(function(item) {
+    return '<th><strong>' + (item.title || item.brand) + '</strong><br><small>' + (item.platform || item.network || '') + '</small></th>';
+  }).join('') + '</tr>';
+  
+  var rowPrice = '<tr><td><strong>Price / Rate</strong></td>' + list.map(function(item) {
+    return '<td><span class="price-highlight">' + (item.price || item.commission || 'N/A') + '</span></td>';
+  }).join('') + '</tr>';
+  
+  var rowCategory = '<tr><td><strong>Category</strong></td>' + list.map(function(item) {
+    return '<td>' + (item.category || '') + '</td>';
+  }).join('') + '</tr>';
+  
+  var rowSpecs = '<tr><td><strong>Highlights & Specs</strong></td>' + list.map(function(item) {
+    var specs = item.specs || [];
+    var li = specs.map(function(s) { return '<li>' + s + '</li>'; }).join('');
+    return '<td><ul class="specs-mini">' + (li || '<li>' + (item.scope || 'Verified specifications') + '</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowPros = '<tr><td><strong>Key Advantages</strong></td>' + list.map(function(item) {
+    var pros = item.pros || [];
+    var li = pros.map(function(p) { return '<li>' + p + '</li>'; }).join('');
+    return '<td class="modal-pro-cell"><ul class="specs-mini">' + (li || '<li>Verified partner</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowCons = '<tr><td><strong>Honest Limitations</strong></td>' + list.map(function(item) {
+    var cons = item.cons || [];
+    var li = cons.map(function(c) { return '<li>' + c + '</li>'; }).join('');
+    return '<td class="modal-con-cell"><ul class="specs-mini">' + (li || '<li>Check regional terms</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowActions = '<tr><td><strong>Action</strong></td>' + list.map(function(item) {
+    return '<td><a class="btn btn-primary btn-sm" href="' + (item.url || '#') + '" target="_blank" rel="nofollow noopener">View Product &rarr;</a></td>';
+  }).join('') + '</tr>';
+  
+  content.innerHTML = '<table class="compare-table"><tbody>' + headers + rowPrice + rowCategory + rowSpecs + rowPros + rowCons + rowActions + '</tbody></table>';
+  modal.style.display = "flex";
+}
+
+function closeCompareModal() {
+  var modal = document.getElementById('compareModal');
+  if (modal) modal.style.display = "none";
+}
+
+function handleModalBackdrop(e) {
+  if (e.target.id === 'compareModal') {
+    closeCompareModal();
+  }
+}
+
+// Initialize on DOM Ready
+document.addEventListener('DOMContentLoaded', function() {
+  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  updateThemeUI(current);
+  renderCompareDock();
+  updateCompareButtons();
+});
+</script>
 </body></html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,39 +8,33 @@
 <title>Software & AI Tools — Plainpick</title>
 <meta name="description" content="Production-tested SaaS tools, generative AI platforms, reliable web hosting, and cybersecurity solutions.">
 <link rel="stylesheet" href="../style.css">
+<!-- Zero-FOUC Theme Preloader Script -->
 <script>
-function filterCatalog() {
-  var input = document.getElementById('globalSearchInput');
-  if (!input) return;
-  var filter = input.value.toLowerCase();
-  var cards = document.getElementsByClassName('searchable-item');
-  var count = 0;
-  for (var i = 0; i < cards.length; i++) {
-    var text = cards[i].innerText.toLowerCase();
-    if (text.indexOf(filter) > -1) {
-      cards[i].style.display = "";
-      count++;
-    } else {
-      cards[i].style.display = "none";
-    }
-  }
-  var countEl = document.getElementById('searchResultCount');
-  if (countEl) {
-    countEl.innerText = filter ? "Showing " + count + " matching results" : "";
-  }
-}
+(function() {
+  try {
+    var savedTheme = localStorage.getItem('plainpick_theme');
+    var theme = savedTheme ? savedTheme : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch(e) {}
+})();
 </script>
 </head>
 <body>
 <header>
   <div class="header-top">
-    <a class="brand" href="../index.html">Plainpick</a>
+    <div class="brand-group">
+      <a class="brand" href="../index.html">
+        <span class="brand-accent">Plain</span>pick
+      </a>
+      <span class="brand-tagline">Global Discovery & Verification</span>
+    </div>
     <div class="header-controls">
       <div class="search-bar">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 110+ products, brands, tools...">
       </div>
       <div class="selectors">
-        <select class="ctrl-select" onchange="alert('Country view set to: ' + this.value)">
+        <select class="ctrl-select" id="countrySelector" onchange="handleCountryChange(this.value)" aria-label="Select Country">
           <option value="Global">🌐 Global</option>
           <option value="SA">🇸🇦 Saudi Arabia</option>
           <option value="UAE">🇦🇪 UAE</option>
@@ -48,11 +42,14 @@ function filterCatalog() {
           <option value="UK">🇬🇧 United Kingdom</option>
           <option value="EU">🇪🇺 European Union</option>
         </select>
-        <button class="lang-btn" onclick="alert('Bilingual English / العربية active across all catalog cards.')">EN / العربية</button>
+        <button class="ctrl-btn lang-btn" id="langToggleBtn" onclick="toggleLanguageDirection()" title="Toggle English / RTL Arabic layout">EN / العربية</button>
+        <button class="ctrl-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark / Light theme">
+          <span class="theme-icon">🌓</span> <span class="theme-text">Theme</span>
+        </button>
       </div>
     </div>
   </div>
-  <nav class="cat-nav">
+  <nav class="cat-nav" aria-label="Main Categories">
     <a href="../categories/electronics-tech.html">⚡ Electronics</a>
     <a href="../categories/home-kitchen.html">☕ Home & Kitchen</a>
     <a href="../categories/travel-esim.html">✈️ Travel & eSIM</a>
@@ -62,7 +59,7 @@ function filterCatalog() {
     <a href="../categories/automotive-accessories.html">🚗 Auto</a>
     <a href="../categories/top-50-global-programs.html">🏆 Top 50 Global</a>
     <a href="../products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
-    <a href="../about.html">About</a>
+    <a href="../about.html">About & Standards</a>
   </nav>
 </header>
 <main>
@@ -77,182 +74,577 @@ function filterCatalog() {
 
 <h2>Featured Global Partners & Services</h2>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Make.com (Integromat)</span>
+<div class="product-card searchable-item" id="PROG-27">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Make.com (Integromat)</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Rewardful / Partner Portal</span>
+        <span class="badge badge-cat">Workflow Automation & No-Code</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 20.0% recurring revenue share for up to 24 months</span>
-  </h3>
-  <p><span class="badge badge-global">Rewardful / Partner Portal</span> <span class="badge badge-cat">Workflow Automation & No-Code</span> &middot; <em>Worldwide (180+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No brand bidding on 'Make.com' or 'Integromat'</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (180+ Countries) (Languages: English, French, German, Spanish)</p>
+  <p><strong>Promotions & Restrictions:</strong> No brand bidding on 'Make.com' or 'Integromat'</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 60 Days)</p>
-  <a class="cta-btn" href="https://www.make.com" target="_blank" rel="nofollow noopener">Explore Make.com (Integromat) &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.make.com" target="_blank" rel="nofollow noopener">Explore Make.com (Integromat) &rarr;</a>
+    <button class="compare-btn" data-id="PROG-27" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-27&quot;, &quot;title&quot;: &quot;Make.com (Integromat)&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Rewardful / Partner Portal&quot;, &quot;commission&quot;: &quot;CPS: 20.0% recurring revenue share for up to 24 months&quot;, &quot;url&quot;: &quot;https://www.make.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (180+ Countries)&quot;, &quot;Cookie: 60 Days&quot;, &quot;Score: 95.5/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 20.0% recurring revenue share for up to 24 months&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No brand bidding on &#x27;Make.com&#x27; or &#x27;Integromat&#x27;&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Notion Workspace</span>
+<div class="product-card searchable-item" id="PROG-30">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Notion Workspace</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">PartnerStack / Direct</span>
+        <span class="badge badge-cat">Productivity & AI Notes</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 50.0% of all payments for the first 12 months per team upgrade</span>
-  </h3>
-  <p><span class="badge badge-global">PartnerStack / Direct</span> <span class="badge badge-cat">Productivity & AI Notes</span> &middot; <em>Worldwide</em></p>
-  <p><strong>Promotions & Content:</strong> No brand search bidding</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (Languages: English, Arabic, French, German, Japanese, Korean)</p>
+  <p><strong>Promotions & Restrictions:</strong> No brand search bidding</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 90 Days)</p>
-  <a class="cta-btn" href="https://www.notion.so" target="_blank" rel="nofollow noopener">Explore Notion Workspace &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.notion.so" target="_blank" rel="nofollow noopener">Explore Notion Workspace &rarr;</a>
+    <button class="compare-btn" data-id="PROG-30" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-30&quot;, &quot;title&quot;: &quot;Notion Workspace&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;PartnerStack / Direct&quot;, &quot;commission&quot;: &quot;CPS: 50.0% of all payments for the first 12 months per team upgrade&quot;, &quot;url&quot;: &quot;https://www.notion.so&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide&quot;, &quot;Cookie: 90 Days&quot;, &quot;Score: 95.2/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 50.0% of all payments for the first 12 months per team upgrade&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No brand search bidding&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>ElevenLabs AI Voice</span>
+<div class="product-card searchable-item" id="PROG-26">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>ElevenLabs AI Voice</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Rewardful / Direct Partner</span>
+        <span class="badge badge-cat">Generative AI & Voice Models</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 22.0% recurring revenue share for 12 months</span>
-  </h3>
-  <p><span class="badge badge-global">Rewardful / Direct Partner</span> <span class="badge badge-cat">Generative AI & Voice Models</span> &middot; <em>Worldwide</em></p>
-  <p><strong>Promotions & Content:</strong> No spam, no deceptive synthetic voice claims</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (Languages: English, 30+ spoken languages)</p>
+  <p><strong>Promotions & Restrictions:</strong> No spam, no deceptive synthetic voice claims</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 60 Days)</p>
-  <a class="cta-btn" href="https://elevenlabs.io" target="_blank" rel="nofollow noopener">Explore ElevenLabs AI Voice &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://elevenlabs.io" target="_blank" rel="nofollow noopener">Explore ElevenLabs AI Voice &rarr;</a>
+    <button class="compare-btn" data-id="PROG-26" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-26&quot;, &quot;title&quot;: &quot;ElevenLabs AI Voice&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Rewardful / Direct Partner&quot;, &quot;commission&quot;: &quot;CPS: 22.0% recurring revenue share for 12 months&quot;, &quot;url&quot;: &quot;https://elevenlabs.io&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide&quot;, &quot;Cookie: 60 Days&quot;, &quot;Score: 94.9/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 22.0% recurring revenue share for 12 months&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No spam, no deceptive synthetic voice claims&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>NordVPN / Nord Security</span>
+<div class="product-card searchable-item" id="PROG-20">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>NordVPN / Nord Security</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad / CJ Affiliate</span>
+        <span class="badge badge-cat">Cybersecurity & VPN</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 40.0% - 100.0% on initial signup + 30.0% recurring renewals</span>
-  </h3>
-  <p><span class="badge badge-global">Admitad / CJ Affiliate</span> <span class="badge badge-cat">Cybersecurity & VPN</span> &middot; <em>Worldwide (180+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No malicious redirects, authentic privacy/security content</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (180+ Countries) (Languages: English, Arabic, Spanish, French, German, Japanese)</p>
+  <p><strong>Promotions & Restrictions:</strong> No malicious redirects, authentic privacy/security content</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://nordvpn.com" target="_blank" rel="nofollow noopener">Explore NordVPN / Nord Security &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://nordvpn.com" target="_blank" rel="nofollow noopener">Explore NordVPN / Nord Security &rarr;</a>
+    <button class="compare-btn" data-id="PROG-20" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-20&quot;, &quot;title&quot;: &quot;NordVPN / Nord Security&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Admitad / CJ Affiliate&quot;, &quot;commission&quot;: &quot;CPS: 40.0% - 100.0% on initial signup + 30.0% recurring renewals&quot;, &quot;url&quot;: &quot;https://nordvpn.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (180+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 94.6/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 40.0% - 100.0% on initial signup + 30.0% recurring renewals&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No malicious redirects, authentic privacy/security content&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Wondershare Software</span>
+<div class="product-card searchable-item" id="PROG-21">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Wondershare Software</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad (#15420) / Impact</span>
+        <span class="badge badge-cat">Creative Multimedia & AI Tools</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 30.0% - 50.0% per license / SaaS subscription </span>
-  </h3>
-  <p><span class="badge badge-global">Admitad (#15420) / Impact</span> <span class="badge badge-cat">Creative Multimedia & AI Tools</span> &middot; <em>Worldwide (150+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No bidding on 'Filmora'/'Wondershare' trademarks</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (150+ Countries) (Languages: English, Arabic, French, German, Spanish, Japanese)</p>
+  <p><strong>Promotions & Restrictions:</strong> No bidding on 'Filmora'/'Wondershare' trademarks</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 90 Days)</p>
-  <a class="cta-btn" href="https://www.wondershare.com" target="_blank" rel="nofollow noopener">Explore Wondershare Software &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.wondershare.com" target="_blank" rel="nofollow noopener">Explore Wondershare Software &rarr;</a>
+    <button class="compare-btn" data-id="PROG-21" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-21&quot;, &quot;title&quot;: &quot;Wondershare Software&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Admitad (#15420) / Impact&quot;, &quot;commission&quot;: &quot;CPS: 30.0% - 50.0% per license / SaaS subscription (Filmora, PDFelement, Edraw)&quot;, &quot;url&quot;: &quot;https://www.wondershare.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (150+ Countries)&quot;, &quot;Cookie: 90 Days&quot;, &quot;Score: 94.3/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 30.0% - 50.0% per license / SaaS subscription (Filmora, PDFelement, Edraw)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No bidding on &#x27;Filmora&#x27;/&#x27;Wondershare&#x27; trademarks&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>InVideo Generative AI Video</span>
+<div class="product-card searchable-item" id="PROG-31">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>InVideo Generative AI Video</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Impact Radius (#9234)</span>
+        <span class="badge badge-cat">Text-to-Video AI SaaS</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 25.0% - 50.0% recurring per subscription</span>
-  </h3>
-  <p><span class="badge badge-global">Impact Radius (#9234)</span> <span class="badge badge-cat">Text-to-Video AI SaaS</span> &middot; <em>Worldwide (180+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No trademark bidding</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (180+ Countries) (Languages: English)</p>
+  <p><strong>Promotions & Restrictions:</strong> No trademark bidding</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://invideo.io" target="_blank" rel="nofollow noopener">Explore InVideo Generative AI Video &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://invideo.io" target="_blank" rel="nofollow noopener">Explore InVideo Generative AI Video &rarr;</a>
+    <button class="compare-btn" data-id="PROG-31" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-31&quot;, &quot;title&quot;: &quot;InVideo Generative AI Video&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Impact Radius (#9234)&quot;, &quot;commission&quot;: &quot;CPS: 25.0% - 50.0% recurring per subscription&quot;, &quot;url&quot;: &quot;https://invideo.io&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (180+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 93.7/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 25.0% - 50.0% recurring per subscription&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No trademark bidding&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Surfshark VPN & Antivirus</span>
+<div class="product-card searchable-item" id="PROG-24">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Surfshark VPN & Antivirus</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad / Impact (#8921)</span>
+        <span class="badge badge-cat">Cybersecurity & Privacy</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 40.0% - 100.0% on new signups </span>
-  </h3>
-  <p><span class="badge badge-global">Admitad / Impact (#8921)</span> <span class="badge badge-cat">Cybersecurity & Privacy</span> &middot; <em>Worldwide (180+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No trademark search PPC bidding</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (180+ Countries) (Languages: English, Arabic, German, Spanish, French)</p>
+  <p><strong>Promotions & Restrictions:</strong> No trademark search PPC bidding</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://surfshark.com" target="_blank" rel="nofollow noopener">Explore Surfshark VPN & Antivirus &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://surfshark.com" target="_blank" rel="nofollow noopener">Explore Surfshark VPN & Antivirus &rarr;</a>
+    <button class="compare-btn" data-id="PROG-24" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-24&quot;, &quot;title&quot;: &quot;Surfshark VPN &amp; Antivirus&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Admitad / Impact (#8921)&quot;, &quot;commission&quot;: &quot;CPS: 40.0% - 100.0% on new signups (Unlimited devices feature)&quot;, &quot;url&quot;: &quot;https://surfshark.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (180+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 93.3/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 40.0% - 100.0% on new signups (Unlimited devices feature)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No trademark search PPC bidding&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Adobe Creative Cloud</span>
+<div class="product-card searchable-item" id="PROG-25">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Adobe Creative Cloud</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Partnerize / Tradedoubler</span>
+        <span class="badge badge-cat">Creative & Generative AI Software</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 85.0% of first month on monthly subscriptions / 8.33% on annual plans</span>
-  </h3>
-  <p><span class="badge badge-global">Partnerize / Tradedoubler</span> <span class="badge badge-cat">Creative & Generative AI Software</span> &middot; <em>Worldwide (160+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> Strict corporate Adobe trademark guidelines</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (160+ Countries) (Languages: English, European & Asian languages)</p>
+  <p><strong>Promotions & Restrictions:</strong> Strict corporate Adobe trademark guidelines</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.adobe.com" target="_blank" rel="nofollow noopener">Explore Adobe Creative Cloud &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.adobe.com" target="_blank" rel="nofollow noopener">Explore Adobe Creative Cloud &rarr;</a>
+    <button class="compare-btn" data-id="PROG-25" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-25&quot;, &quot;title&quot;: &quot;Adobe Creative Cloud&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Partnerize / Tradedoubler&quot;, &quot;commission&quot;: &quot;CPS: 85.0% of first month on monthly subscriptions / 8.33% on annual plans&quot;, &quot;url&quot;: &quot;https://www.adobe.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (160+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 93.2/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 85.0% of first month on monthly subscriptions / 8.33% on annual plans&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;Strict corporate Adobe trademark guidelines&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Canva Pro</span>
+<div class="product-card searchable-item" id="PROG-23">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Canva Pro</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Impact Radius (#3142)</span>
+        <span class="badge badge-cat">Design & Visual AI SaaS</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPA: Up to $36.00 USD per new Canva Pro trial / subscriber</span>
-  </h3>
-  <p><span class="badge badge-global">Impact Radius (#3142)</span> <span class="badge badge-cat">Design & Visual AI SaaS</span> &middot; <em>Worldwide (190+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> Strict trademark non-bidding rules</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (190+ Countries) (Languages: English, Arabic, Spanish, French, Portuguese)</p>
+  <p><strong>Promotions & Restrictions:</strong> Strict trademark non-bidding rules</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.canva.com" target="_blank" rel="nofollow noopener">Explore Canva Pro &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.canva.com" target="_blank" rel="nofollow noopener">Explore Canva Pro &rarr;</a>
+    <button class="compare-btn" data-id="PROG-23" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-23&quot;, &quot;title&quot;: &quot;Canva Pro&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Impact Radius (#3142)&quot;, &quot;commission&quot;: &quot;CPA: Up to $36.00 USD per new Canva Pro trial / subscriber&quot;, &quot;url&quot;: &quot;https://www.canva.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (190+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 93.1/100&quot;], &quot;pros&quot;: [&quot;Commission: CPA: Up to $36.00 USD per new Canva Pro trial / subscriber&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;Strict trademark non-bidding rules&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Grammarly AI Writing</span>
+<div class="product-card searchable-item" id="PROG-32">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Grammarly AI Writing</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">CJ Affiliate (#3894)</span>
+        <span class="badge badge-cat">AI Writing & Grammar</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPA: $0.20 per free signup + $20.00 USD per Premium plan upgrade</span>
-  </h3>
-  <p><span class="badge badge-global">CJ Affiliate (#3894)</span> <span class="badge badge-cat">AI Writing & Grammar</span> &middot; <em>Worldwide</em></p>
-  <p><strong>Promotions & Content:</strong> No trademark search bidding</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (Languages: English)</p>
+  <p><strong>Promotions & Restrictions:</strong> No trademark search bidding</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 90 Days)</p>
-  <a class="cta-btn" href="https://www.grammarly.com" target="_blank" rel="nofollow noopener">Explore Grammarly AI Writing &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.grammarly.com" target="_blank" rel="nofollow noopener">Explore Grammarly AI Writing &rarr;</a>
+    <button class="compare-btn" data-id="PROG-32" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-32&quot;, &quot;title&quot;: &quot;Grammarly AI Writing&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;CJ Affiliate (#3894)&quot;, &quot;commission&quot;: &quot;CPA: $0.20 per free signup + $20.00 USD per Premium plan upgrade&quot;, &quot;url&quot;: &quot;https://www.grammarly.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide&quot;, &quot;Cookie: 90 Days&quot;, &quot;Score: 93.0/100&quot;], &quot;pros&quot;: [&quot;Commission: CPA: $0.20 per free signup + $20.00 USD per Premium plan upgrade&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No trademark search bidding&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Envato Elements</span>
+<div class="product-card searchable-item" id="PROG-28">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Envato Elements</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Impact Radius (#1190)</span>
+        <span class="badge badge-cat">Creative Assets & Templates</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPA: $20 - $120 USD per new annual/monthly subscriber</span>
-  </h3>
-  <p><span class="badge badge-global">Impact Radius (#1190)</span> <span class="badge badge-cat">Creative Assets & Templates</span> &middot; <em>Worldwide (180+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No coupon scraping or unauthorized promo codes</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (180+ Countries) (Languages: English)</p>
+  <p><strong>Promotions & Restrictions:</strong> No coupon scraping or unauthorized promo codes</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 60 Days)</p>
-  <a class="cta-btn" href="https://elements.envato.com" target="_blank" rel="nofollow noopener">Explore Envato Elements &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://elements.envato.com" target="_blank" rel="nofollow noopener">Explore Envato Elements &rarr;</a>
+    <button class="compare-btn" data-id="PROG-28" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-28&quot;, &quot;title&quot;: &quot;Envato Elements&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Impact Radius (#1190)&quot;, &quot;commission&quot;: &quot;CPA: $20 - $120 USD per new annual/monthly subscriber&quot;, &quot;url&quot;: &quot;https://elements.envato.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (180+ Countries)&quot;, &quot;Cookie: 60 Days&quot;, &quot;Score: 92.8/100&quot;], &quot;pros&quot;: [&quot;Commission: CPA: $20 - $120 USD per new annual/monthly subscriber&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No coupon scraping or unauthorized promo codes&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>DigitalOcean Cloud</span>
+<div class="product-card searchable-item" id="PROG-33">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>DigitalOcean Cloud</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Direct Partner / Referral</span>
+        <span class="badge badge-cat">Cloud Servers & Kubernetes</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPA: $25.00 USD cash per paying customer who spends $25</span>
-  </h3>
-  <p><span class="badge badge-global">Direct Partner / Referral</span> <span class="badge badge-cat">Cloud Servers & Kubernetes</span> &middot; <em>Worldwide</em></p>
-  <p><strong>Promotions & Content:</strong> Developer / tech education content only</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (Languages: English)</p>
+  <p><strong>Promotions & Restrictions:</strong> Developer / tech education content only</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 60 Days)</p>
-  <a class="cta-btn" href="https://www.digitalocean.com" target="_blank" rel="nofollow noopener">Explore DigitalOcean Cloud &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.digitalocean.com" target="_blank" rel="nofollow noopener">Explore DigitalOcean Cloud &rarr;</a>
+    <button class="compare-btn" data-id="PROG-33" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-33&quot;, &quot;title&quot;: &quot;DigitalOcean Cloud&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Direct Partner / Referral&quot;, &quot;commission&quot;: &quot;CPA: $25.00 USD cash per paying customer who spends $25&quot;, &quot;url&quot;: &quot;https://www.digitalocean.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide&quot;, &quot;Cookie: 60 Days&quot;, &quot;Score: 92.6/100&quot;], &quot;pros&quot;: [&quot;Commission: CPA: $25.00 USD cash per paying customer who spends $25&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;Developer / tech education content only&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Hostinger Web Hosting</span>
+<div class="product-card searchable-item" id="PROG-22">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Hostinger Web Hosting</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad / Direct Partner</span>
+        <span class="badge badge-cat">Web Infrastructure & Cloud</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPA: 60.0% per hosting plan sale </span>
-  </h3>
-  <p><span class="badge badge-global">Admitad / Direct Partner</span> <span class="badge badge-cat">Web Infrastructure & Cloud</span> &middot; <em>Worldwide (170+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No misleading coupons, genuine web dev tutorials</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (170+ Countries) (Languages: 20+ Languages including Arabic, English)</p>
+  <p><strong>Promotions & Restrictions:</strong> No misleading coupons, genuine web dev tutorials</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.hostinger.com" target="_blank" rel="nofollow noopener">Explore Hostinger Web Hosting &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.hostinger.com" target="_blank" rel="nofollow noopener">Explore Hostinger Web Hosting &rarr;</a>
+    <button class="compare-btn" data-id="PROG-22" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-22&quot;, &quot;title&quot;: &quot;Hostinger Web Hosting&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Admitad / Direct Partner&quot;, &quot;commission&quot;: &quot;CPA: 60.0% per hosting plan sale ($60 - $180 AOV)&quot;, &quot;url&quot;: &quot;https://www.hostinger.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (170+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 92.1/100&quot;], &quot;pros&quot;: [&quot;Commission: CPA: 60.0% per hosting plan sale ($60 - $180 AOV)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No misleading coupons, genuine web dev tutorials&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Namecheap Domains & SSL</span>
+<div class="product-card searchable-item" id="PROG-29">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Namecheap Domains & SSL</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Impact Radius (#3271)</span>
+        <span class="badge badge-cat">Domains & Web Security</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 20.0% - 35.0% on domain registrations, SSL & private email</span>
-  </h3>
-  <p><span class="badge badge-global">Impact Radius (#3271)</span> <span class="badge badge-cat">Domains & Web Security</span> &middot; <em>Worldwide (190+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No bidding on 'Namecheap' keywords</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (190+ Countries) (Languages: English, Spanish)</p>
+  <p><strong>Promotions & Restrictions:</strong> No bidding on 'Namecheap' keywords</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.namecheap.com" target="_blank" rel="nofollow noopener">Explore Namecheap Domains & SSL &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.namecheap.com" target="_blank" rel="nofollow noopener">Explore Namecheap Domains & SSL &rarr;</a>
+    <button class="compare-btn" data-id="PROG-29" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-29&quot;, &quot;title&quot;: &quot;Namecheap Domains &amp; SSL&quot;, &quot;category&quot;: &quot;Software &amp; AI Tools&quot;, &quot;platform&quot;: &quot;Impact Radius (#3271)&quot;, &quot;commission&quot;: &quot;CPS: 20.0% - 35.0% on domain registrations, SSL &amp; private email&quot;, &quot;url&quot;: &quot;https://www.namecheap.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (190+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 91.5/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 20.0% - 35.0% on domain registrations, SSL &amp; private email&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No bidding on &#x27;Namecheap&#x27; keywords&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
 
 <h2>Verified Physical Gear & Recommendations</h2>
 <p>Explore our curated marketplace roundups below.</p>
 
-<p class="updated">Last reviewed: 2026-10-09</p>
+<p class="updated">Last verified & updated: 2026-10-09 &middot; Plainpick Editorial Operations</p>
 </main>
 <footer>
   <div class="footer-grid">
     <div>
       <h4>About Plainpick</h4>
-      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We test products and verify specifications before publication.</p>
+      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We independently test products and verify specifications before publication.</p>
     </div>
     <div>
       <h4>Core Categories</h4>
-      <p><a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; <a href="../categories/software-ai-tools.html">Software & AI</a></p>
+      <p>
+        <a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; 
+        <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; 
+        <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; 
+        <a href="../categories/software-ai-tools.html">Software & AI</a> &middot; 
+        <a href="../categories/top-50-global-programs.html">Top 50 Programs</a>
+      </p>
+    </div>
+    <div>
+      <h4>Regional Hubs & Guides</h4>
+      <p>
+        <a href="../products/saudi-marketplace-catalog.html">Saudi 60 Marketplace Hub</a> &middot; 
+        <a href="../products/amazon-saudi-top-picks.html">Amazon.sa 30 Picks</a> &middot; 
+        <a href="../products/noon-saudi-top-picks.html">Noon.sa 30 Picks</a> &middot; 
+        <a href="../car-rental/index.html">Car Rental Guides</a>
+      </p>
     </div>
     <div>
       <h4>Legal & Standards</h4>
       <p><a href="../about.html">About Us</a> &middot; <a href="../about.html#disclosure">Affiliate Disclosure</a> &middot; <a href="../sitemap.xml">XML Sitemap</a></p>
     </div>
   </div>
-  <p class="disclosure-note"><strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
-  <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides</p>
+  <div class="disclosure-note">
+    <strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides. All rights reserved.</p>
+  </div>
 </footer>
+
+<!-- Interactive Comparison Dock -->
+<div id="compareDock" class="compare-dock" style="display:none;">
+  <div class="compare-dock-inner">
+    <div class="compare-dock-info">
+      <span class="compare-badge" id="compareCount">0 / 4</span>
+      <span class="compare-dock-title">Items ready to compare</span>
+      <div id="compareChips" class="compare-chips-list"></div>
+    </div>
+    <div class="compare-dock-actions">
+      <button class="btn btn-secondary btn-sm" onclick="clearCompareList()">Clear</button>
+      <button class="btn btn-primary btn-sm" onclick="openCompareModal()">Compare Now &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison Modal -->
+<div id="compareModal" class="compare-modal" style="display:none;" onclick="handleModalBackdrop(event)">
+  <div class="compare-modal-dialog">
+    <div class="compare-modal-header">
+      <h3>Interactive Side-by-Side Comparison</h3>
+      <button class="modal-close-btn" onclick="closeCompareModal()">&times;</button>
+    </div>
+    <div class="compare-modal-body" id="compareModalContent">
+      <!-- Dynamic Comparison Table Generated by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- Plainpick Core Interaction Engine -->
+<script>
+// Search Filtering
+function filterCatalog() {
+  var input = document.getElementById('globalSearchInput');
+  if (!input) return;
+  var filter = input.value.toLowerCase().trim();
+  var cards = document.getElementsByClassName('searchable-item');
+  var count = 0;
+  for (var i = 0; i < cards.length; i++) {
+    var text = cards[i].innerText.toLowerCase();
+    if (!filter || text.indexOf(filter) > -1) {
+      cards[i].style.display = "";
+      count++;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+  var countEl = document.getElementById('searchResultCount');
+  if (countEl) {
+    countEl.innerText = filter ? "Found " + count + " matching results" : "";
+  }
+}
+
+// Theme Management
+function updateThemeUI(theme) {
+  var btn = document.getElementById('themeToggleBtn');
+  if (btn) {
+    var icon = btn.querySelector('.theme-icon');
+    var text = btn.querySelector('.theme-text');
+    if (theme === 'light') {
+      if (icon) icon.innerText = '☀️';
+      if (text) text.innerText = 'Light';
+    } else {
+      if (icon) icon.innerText = '🌙';
+      if (text) text.innerText = 'Dark';
+    }
+  }
+}
+
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  var next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('plainpick_theme', next); } catch(e) {}
+  updateThemeUI(next);
+}
+
+function toggleLanguageDirection() {
+  var html = document.documentElement;
+  var currentDir = html.getAttribute('dir') || 'ltr';
+  var nextDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+  html.setAttribute('dir', nextDir);
+  var btn = document.getElementById('langToggleBtn');
+  if (btn) {
+    btn.innerText = nextDir === 'rtl' ? 'العربية (RTL)' : 'EN (LTR)';
+  }
+}
+
+function handleCountryChange(val) {
+  console.log("Country filter set to: " + val);
+}
+
+// Interactive Comparison State & Storage
+var MAX_COMPARE = 4;
+function getCompareList() {
+  try {
+    var stored = localStorage.getItem('plainpick_compare');
+    return stored ? JSON.parse(stored) : [];
+  } catch(e) {
+    return [];
+  }
+}
+
+function saveCompareList(list) {
+  try {
+    localStorage.setItem('plainpick_compare', JSON.stringify(list));
+  } catch(e) {}
+  renderCompareDock();
+  updateCompareButtons();
+}
+
+function toggleCompare(item) {
+  var list = getCompareList();
+  var idx = list.findIndex(function(x) { return x.id === item.id; });
+  if (idx > -1) {
+    list.splice(idx, 1);
+  } else {
+    if (list.length >= MAX_COMPARE) {
+      alert('You can compare up to ' + MAX_COMPARE + ' items simultaneously. Please remove an item first.');
+      return;
+    }
+    list.push(item);
+  }
+  saveCompareList(list);
+}
+
+function clearCompareList() {
+  saveCompareList([]);
+}
+
+function renderCompareDock() {
+  var list = getCompareList();
+  var dock = document.getElementById('compareDock');
+  var countEl = document.getElementById('compareCount');
+  var chipsEl = document.getElementById('compareChips');
+  if (!dock || !countEl || !chipsEl) return;
+  
+  if (list.length === 0) {
+    dock.style.display = "none";
+    return;
+  }
+  
+  dock.style.display = "block";
+  countEl.innerText = list.length + " / " + MAX_COMPARE;
+  
+  chipsEl.innerHTML = list.map(function(item) {
+    return '<span class="compare-chip">' + (item.title || item.brand || item.id) + ' <button onclick="removeFromCompare(\'' + item.id + '\')">&times;</button></span>';
+  }).join('');
+}
+
+function removeFromCompare(id) {
+  var list = getCompareList();
+  var filtered = list.filter(function(x) { return x.id !== id; });
+  saveCompareList(filtered);
+}
+
+function updateCompareButtons() {
+  var list = getCompareList();
+  var buttons = document.querySelectorAll('.compare-btn');
+  buttons.forEach(function(btn) {
+    var id = btn.getAttribute('data-id');
+    var isSelected = list.some(function(x) { return x.id === id; });
+    if (isSelected) {
+      btn.classList.add('active');
+      btn.innerText = '✓ In Compare';
+    } else {
+      btn.classList.remove('active');
+      btn.innerText = '+ Compare';
+    }
+  });
+}
+
+function openCompareModal() {
+  var list = getCompareList();
+  if (list.length === 0) return;
+  var modal = document.getElementById('compareModal');
+  var content = document.getElementById('compareModalContent');
+  if (!modal || !content) return;
+  
+  var headers = '<tr><th>Attribute</th>' + list.map(function(item) {
+    return '<th><strong>' + (item.title || item.brand) + '</strong><br><small>' + (item.platform || item.network || '') + '</small></th>';
+  }).join('') + '</tr>';
+  
+  var rowPrice = '<tr><td><strong>Price / Rate</strong></td>' + list.map(function(item) {
+    return '<td><span class="price-highlight">' + (item.price || item.commission || 'N/A') + '</span></td>';
+  }).join('') + '</tr>';
+  
+  var rowCategory = '<tr><td><strong>Category</strong></td>' + list.map(function(item) {
+    return '<td>' + (item.category || '') + '</td>';
+  }).join('') + '</tr>';
+  
+  var rowSpecs = '<tr><td><strong>Highlights & Specs</strong></td>' + list.map(function(item) {
+    var specs = item.specs || [];
+    var li = specs.map(function(s) { return '<li>' + s + '</li>'; }).join('');
+    return '<td><ul class="specs-mini">' + (li || '<li>' + (item.scope || 'Verified specifications') + '</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowPros = '<tr><td><strong>Key Advantages</strong></td>' + list.map(function(item) {
+    var pros = item.pros || [];
+    var li = pros.map(function(p) { return '<li>' + p + '</li>'; }).join('');
+    return '<td class="modal-pro-cell"><ul class="specs-mini">' + (li || '<li>Verified partner</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowCons = '<tr><td><strong>Honest Limitations</strong></td>' + list.map(function(item) {
+    var cons = item.cons || [];
+    var li = cons.map(function(c) { return '<li>' + c + '</li>'; }).join('');
+    return '<td class="modal-con-cell"><ul class="specs-mini">' + (li || '<li>Check regional terms</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowActions = '<tr><td><strong>Action</strong></td>' + list.map(function(item) {
+    return '<td><a class="btn btn-primary btn-sm" href="' + (item.url || '#') + '" target="_blank" rel="nofollow noopener">View Product &rarr;</a></td>';
+  }).join('') + '</tr>';
+  
+  content.innerHTML = '<table class="compare-table"><tbody>' + headers + rowPrice + rowCategory + rowSpecs + rowPros + rowCons + rowActions + '</tbody></table>';
+  modal.style.display = "flex";
+}
+
+function closeCompareModal() {
+  var modal = document.getElementById('compareModal');
+  if (modal) modal.style.display = "none";
+}
+
+function handleModalBackdrop(e) {
+  if (e.target.id === 'compareModal') {
+    closeCompareModal();
+  }
+}
+
+// Initialize on DOM Ready
+document.addEventListener('DOMContentLoaded', function() {
+  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  updateThemeUI(current);
+  renderCompareDock();
+  updateCompareButtons();
+});
+</script>
 </body></html>

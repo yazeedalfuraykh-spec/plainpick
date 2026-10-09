@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,39 +8,33 @@
 <title>Fashion & Lifestyle — Plainpick</title>
 <meta name="description" content="Curated international fashion retailers, verified luxury designer collections, and athletic lifestyle gear.">
 <link rel="stylesheet" href="../style.css">
+<!-- Zero-FOUC Theme Preloader Script -->
 <script>
-function filterCatalog() {
-  var input = document.getElementById('globalSearchInput');
-  if (!input) return;
-  var filter = input.value.toLowerCase();
-  var cards = document.getElementsByClassName('searchable-item');
-  var count = 0;
-  for (var i = 0; i < cards.length; i++) {
-    var text = cards[i].innerText.toLowerCase();
-    if (text.indexOf(filter) > -1) {
-      cards[i].style.display = "";
-      count++;
-    } else {
-      cards[i].style.display = "none";
-    }
-  }
-  var countEl = document.getElementById('searchResultCount');
-  if (countEl) {
-    countEl.innerText = filter ? "Showing " + count + " matching results" : "";
-  }
-}
+(function() {
+  try {
+    var savedTheme = localStorage.getItem('plainpick_theme');
+    var theme = savedTheme ? savedTheme : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch(e) {}
+})();
 </script>
 </head>
 <body>
 <header>
   <div class="header-top">
-    <a class="brand" href="../index.html">Plainpick</a>
+    <div class="brand-group">
+      <a class="brand" href="../index.html">
+        <span class="brand-accent">Plain</span>pick
+      </a>
+      <span class="brand-tagline">Global Discovery & Verification</span>
+    </div>
     <div class="header-controls">
       <div class="search-bar">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 110+ products, brands, tools...">
       </div>
       <div class="selectors">
-        <select class="ctrl-select" onchange="alert('Country view set to: ' + this.value)">
+        <select class="ctrl-select" id="countrySelector" onchange="handleCountryChange(this.value)" aria-label="Select Country">
           <option value="Global">🌐 Global</option>
           <option value="SA">🇸🇦 Saudi Arabia</option>
           <option value="UAE">🇦🇪 UAE</option>
@@ -48,11 +42,14 @@ function filterCatalog() {
           <option value="UK">🇬🇧 United Kingdom</option>
           <option value="EU">🇪🇺 European Union</option>
         </select>
-        <button class="lang-btn" onclick="alert('Bilingual English / العربية active across all catalog cards.')">EN / العربية</button>
+        <button class="ctrl-btn lang-btn" id="langToggleBtn" onclick="toggleLanguageDirection()" title="Toggle English / RTL Arabic layout">EN / العربية</button>
+        <button class="ctrl-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark / Light theme">
+          <span class="theme-icon">🌓</span> <span class="theme-text">Theme</span>
+        </button>
       </div>
     </div>
   </div>
-  <nav class="cat-nav">
+  <nav class="cat-nav" aria-label="Main Categories">
     <a href="../categories/electronics-tech.html">⚡ Electronics</a>
     <a href="../categories/home-kitchen.html">☕ Home & Kitchen</a>
     <a href="../categories/travel-esim.html">✈️ Travel & eSIM</a>
@@ -62,7 +59,7 @@ function filterCatalog() {
     <a href="../categories/automotive-accessories.html">🚗 Auto</a>
     <a href="../categories/top-50-global-programs.html">🏆 Top 50 Global</a>
     <a href="../products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
-    <a href="../about.html">About</a>
+    <a href="../about.html">About & Standards</a>
   </nav>
 </header>
 <main>
@@ -77,61 +74,346 @@ function filterCatalog() {
 
 <h2>Featured Global Partners & Services</h2>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>SHEIN Global</span>
+<div class="product-card searchable-item" id="PROG-46">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>SHEIN Global</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad (#8923) / ArabClicks</span>
+        <span class="badge badge-cat">Fast Fashion & Apparel</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 5.0% - 10.0% on fashion orders</span>
-  </h3>
-  <p><span class="badge badge-global">Admitad (#8923) / ArabClicks</span> <span class="badge badge-cat">Fast Fashion & Apparel</span> &middot; <em>Worldwide (150+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No coupon scraping or unauthorized coupon codes</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (150+ Countries) (Languages: English, Arabic, Spanish, French, German)</p>
+  <p><strong>Promotions & Restrictions:</strong> No coupon scraping or unauthorized coupon codes</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.shein.com" target="_blank" rel="nofollow noopener">Explore SHEIN Global &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.shein.com" target="_blank" rel="nofollow noopener">Explore SHEIN Global &rarr;</a>
+    <button class="compare-btn" data-id="PROG-46" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-46&quot;, &quot;title&quot;: &quot;SHEIN Global&quot;, &quot;category&quot;: &quot;Fashion &amp; Lifestyle&quot;, &quot;platform&quot;: &quot;Admitad (#8923) / ArabClicks&quot;, &quot;commission&quot;: &quot;CPS: 5.0% - 10.0% on fashion orders&quot;, &quot;url&quot;: &quot;https://www.shein.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (150+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 91.2/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 5.0% - 10.0% on fashion orders&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No coupon scraping or unauthorized coupon codes&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Ounass Luxury Fashion</span>
+<div class="product-card searchable-item" id="PROG-48">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Ounass Luxury Fashion</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Partnerize (#3124)</span>
+        <span class="badge badge-cat">Luxury Designer Brands</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 5.0% - 8.0% </span>
-  </h3>
-  <p><span class="badge badge-global">Partnerize (#3124)</span> <span class="badge badge-cat">Luxury Designer Brands</span> &middot; <em>GCC & International (KSA, UAE, Kuwait, Qatar, UK, US)</em></p>
-  <p><strong>Promotions & Content:</strong> Luxury brand guidelines strictly enforced</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> GCC & International (KSA, UAE, Kuwait, Qatar, UK, US) (Languages: Arabic, English)</p>
+  <p><strong>Promotions & Restrictions:</strong> Luxury brand guidelines strictly enforced</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.ounass.ae" target="_blank" rel="nofollow noopener">Explore Ounass Luxury Fashion &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.ounass.ae" target="_blank" rel="nofollow noopener">Explore Ounass Luxury Fashion &rarr;</a>
+    <button class="compare-btn" data-id="PROG-48" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-48&quot;, &quot;title&quot;: &quot;Ounass Luxury Fashion&quot;, &quot;category&quot;: &quot;Fashion &amp; Lifestyle&quot;, &quot;platform&quot;: &quot;Partnerize (#3124)&quot;, &quot;commission&quot;: &quot;CPS: 5.0% - 8.0% (High AOV: $600 - $3,500 on Gucci, Prada, Balenciaga)&quot;, &quot;url&quot;: &quot;https://www.ounass.ae&quot;, &quot;specs&quot;: [&quot;Geographic Scope: GCC &amp; International (KSA, UAE, Kuwait, Qatar, UK, US)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 89.0/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 5.0% - 8.0% (High AOV: $600 - $3,500 on Gucci, Prada, Balenciaga)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;Luxury brand guidelines strictly enforced&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Namshi Fashion</span>
+<div class="product-card searchable-item" id="PROG-47">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Namshi Fashion</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">DCMnetwork / ArabClicks</span>
+        <span class="badge badge-cat">Apparel & Sportswear</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 6.0% - 9.0% on branded fashion and footwear</span>
-  </h3>
-  <p><span class="badge badge-global">DCMnetwork / ArabClicks</span> <span class="badge badge-cat">Apparel & Sportswear</span> &middot; <em>Middle East (Saudi Arabia, UAE, Kuwait, Bahrain, Oman)</em></p>
-  <p><strong>Promotions & Content:</strong> No search trademark bidding</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Middle East (Saudi Arabia, UAE, Kuwait, Bahrain, Oman) (Languages: Arabic, English)</p>
+  <p><strong>Promotions & Restrictions:</strong> No search trademark bidding</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.namshi.com" target="_blank" rel="nofollow noopener">Explore Namshi Fashion &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.namshi.com" target="_blank" rel="nofollow noopener">Explore Namshi Fashion &rarr;</a>
+    <button class="compare-btn" data-id="PROG-47" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-47&quot;, &quot;title&quot;: &quot;Namshi Fashion&quot;, &quot;category&quot;: &quot;Fashion &amp; Lifestyle&quot;, &quot;platform&quot;: &quot;DCMnetwork / ArabClicks&quot;, &quot;commission&quot;: &quot;CPS: 6.0% - 9.0% on branded fashion and footwear&quot;, &quot;url&quot;: &quot;https://www.namshi.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Middle East (Saudi Arabia, UAE, Kuwait, Bahrain, Oman)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 85.3/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 6.0% - 9.0% on branded fashion and footwear&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No search trademark bidding&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
 
 <h2>Verified Physical Gear & Recommendations</h2>
 <p>Explore our curated marketplace roundups below.</p>
 
-<p class="updated">Last reviewed: 2026-10-09</p>
+<p class="updated">Last verified & updated: 2026-10-09 &middot; Plainpick Editorial Operations</p>
 </main>
 <footer>
   <div class="footer-grid">
     <div>
       <h4>About Plainpick</h4>
-      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We test products and verify specifications before publication.</p>
+      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We independently test products and verify specifications before publication.</p>
     </div>
     <div>
       <h4>Core Categories</h4>
-      <p><a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; <a href="../categories/software-ai-tools.html">Software & AI</a></p>
+      <p>
+        <a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; 
+        <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; 
+        <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; 
+        <a href="../categories/software-ai-tools.html">Software & AI</a> &middot; 
+        <a href="../categories/top-50-global-programs.html">Top 50 Programs</a>
+      </p>
+    </div>
+    <div>
+      <h4>Regional Hubs & Guides</h4>
+      <p>
+        <a href="../products/saudi-marketplace-catalog.html">Saudi 60 Marketplace Hub</a> &middot; 
+        <a href="../products/amazon-saudi-top-picks.html">Amazon.sa 30 Picks</a> &middot; 
+        <a href="../products/noon-saudi-top-picks.html">Noon.sa 30 Picks</a> &middot; 
+        <a href="../car-rental/index.html">Car Rental Guides</a>
+      </p>
     </div>
     <div>
       <h4>Legal & Standards</h4>
       <p><a href="../about.html">About Us</a> &middot; <a href="../about.html#disclosure">Affiliate Disclosure</a> &middot; <a href="../sitemap.xml">XML Sitemap</a></p>
     </div>
   </div>
-  <p class="disclosure-note"><strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
-  <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides</p>
+  <div class="disclosure-note">
+    <strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides. All rights reserved.</p>
+  </div>
 </footer>
+
+<!-- Interactive Comparison Dock -->
+<div id="compareDock" class="compare-dock" style="display:none;">
+  <div class="compare-dock-inner">
+    <div class="compare-dock-info">
+      <span class="compare-badge" id="compareCount">0 / 4</span>
+      <span class="compare-dock-title">Items ready to compare</span>
+      <div id="compareChips" class="compare-chips-list"></div>
+    </div>
+    <div class="compare-dock-actions">
+      <button class="btn btn-secondary btn-sm" onclick="clearCompareList()">Clear</button>
+      <button class="btn btn-primary btn-sm" onclick="openCompareModal()">Compare Now &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison Modal -->
+<div id="compareModal" class="compare-modal" style="display:none;" onclick="handleModalBackdrop(event)">
+  <div class="compare-modal-dialog">
+    <div class="compare-modal-header">
+      <h3>Interactive Side-by-Side Comparison</h3>
+      <button class="modal-close-btn" onclick="closeCompareModal()">&times;</button>
+    </div>
+    <div class="compare-modal-body" id="compareModalContent">
+      <!-- Dynamic Comparison Table Generated by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- Plainpick Core Interaction Engine -->
+<script>
+// Search Filtering
+function filterCatalog() {
+  var input = document.getElementById('globalSearchInput');
+  if (!input) return;
+  var filter = input.value.toLowerCase().trim();
+  var cards = document.getElementsByClassName('searchable-item');
+  var count = 0;
+  for (var i = 0; i < cards.length; i++) {
+    var text = cards[i].innerText.toLowerCase();
+    if (!filter || text.indexOf(filter) > -1) {
+      cards[i].style.display = "";
+      count++;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+  var countEl = document.getElementById('searchResultCount');
+  if (countEl) {
+    countEl.innerText = filter ? "Found " + count + " matching results" : "";
+  }
+}
+
+// Theme Management
+function updateThemeUI(theme) {
+  var btn = document.getElementById('themeToggleBtn');
+  if (btn) {
+    var icon = btn.querySelector('.theme-icon');
+    var text = btn.querySelector('.theme-text');
+    if (theme === 'light') {
+      if (icon) icon.innerText = '☀️';
+      if (text) text.innerText = 'Light';
+    } else {
+      if (icon) icon.innerText = '🌙';
+      if (text) text.innerText = 'Dark';
+    }
+  }
+}
+
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  var next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('plainpick_theme', next); } catch(e) {}
+  updateThemeUI(next);
+}
+
+function toggleLanguageDirection() {
+  var html = document.documentElement;
+  var currentDir = html.getAttribute('dir') || 'ltr';
+  var nextDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+  html.setAttribute('dir', nextDir);
+  var btn = document.getElementById('langToggleBtn');
+  if (btn) {
+    btn.innerText = nextDir === 'rtl' ? 'العربية (RTL)' : 'EN (LTR)';
+  }
+}
+
+function handleCountryChange(val) {
+  console.log("Country filter set to: " + val);
+}
+
+// Interactive Comparison State & Storage
+var MAX_COMPARE = 4;
+function getCompareList() {
+  try {
+    var stored = localStorage.getItem('plainpick_compare');
+    return stored ? JSON.parse(stored) : [];
+  } catch(e) {
+    return [];
+  }
+}
+
+function saveCompareList(list) {
+  try {
+    localStorage.setItem('plainpick_compare', JSON.stringify(list));
+  } catch(e) {}
+  renderCompareDock();
+  updateCompareButtons();
+}
+
+function toggleCompare(item) {
+  var list = getCompareList();
+  var idx = list.findIndex(function(x) { return x.id === item.id; });
+  if (idx > -1) {
+    list.splice(idx, 1);
+  } else {
+    if (list.length >= MAX_COMPARE) {
+      alert('You can compare up to ' + MAX_COMPARE + ' items simultaneously. Please remove an item first.');
+      return;
+    }
+    list.push(item);
+  }
+  saveCompareList(list);
+}
+
+function clearCompareList() {
+  saveCompareList([]);
+}
+
+function renderCompareDock() {
+  var list = getCompareList();
+  var dock = document.getElementById('compareDock');
+  var countEl = document.getElementById('compareCount');
+  var chipsEl = document.getElementById('compareChips');
+  if (!dock || !countEl || !chipsEl) return;
+  
+  if (list.length === 0) {
+    dock.style.display = "none";
+    return;
+  }
+  
+  dock.style.display = "block";
+  countEl.innerText = list.length + " / " + MAX_COMPARE;
+  
+  chipsEl.innerHTML = list.map(function(item) {
+    return '<span class="compare-chip">' + (item.title || item.brand || item.id) + ' <button onclick="removeFromCompare(\'' + item.id + '\')">&times;</button></span>';
+  }).join('');
+}
+
+function removeFromCompare(id) {
+  var list = getCompareList();
+  var filtered = list.filter(function(x) { return x.id !== id; });
+  saveCompareList(filtered);
+}
+
+function updateCompareButtons() {
+  var list = getCompareList();
+  var buttons = document.querySelectorAll('.compare-btn');
+  buttons.forEach(function(btn) {
+    var id = btn.getAttribute('data-id');
+    var isSelected = list.some(function(x) { return x.id === id; });
+    if (isSelected) {
+      btn.classList.add('active');
+      btn.innerText = '✓ In Compare';
+    } else {
+      btn.classList.remove('active');
+      btn.innerText = '+ Compare';
+    }
+  });
+}
+
+function openCompareModal() {
+  var list = getCompareList();
+  if (list.length === 0) return;
+  var modal = document.getElementById('compareModal');
+  var content = document.getElementById('compareModalContent');
+  if (!modal || !content) return;
+  
+  var headers = '<tr><th>Attribute</th>' + list.map(function(item) {
+    return '<th><strong>' + (item.title || item.brand) + '</strong><br><small>' + (item.platform || item.network || '') + '</small></th>';
+  }).join('') + '</tr>';
+  
+  var rowPrice = '<tr><td><strong>Price / Rate</strong></td>' + list.map(function(item) {
+    return '<td><span class="price-highlight">' + (item.price || item.commission || 'N/A') + '</span></td>';
+  }).join('') + '</tr>';
+  
+  var rowCategory = '<tr><td><strong>Category</strong></td>' + list.map(function(item) {
+    return '<td>' + (item.category || '') + '</td>';
+  }).join('') + '</tr>';
+  
+  var rowSpecs = '<tr><td><strong>Highlights & Specs</strong></td>' + list.map(function(item) {
+    var specs = item.specs || [];
+    var li = specs.map(function(s) { return '<li>' + s + '</li>'; }).join('');
+    return '<td><ul class="specs-mini">' + (li || '<li>' + (item.scope || 'Verified specifications') + '</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowPros = '<tr><td><strong>Key Advantages</strong></td>' + list.map(function(item) {
+    var pros = item.pros || [];
+    var li = pros.map(function(p) { return '<li>' + p + '</li>'; }).join('');
+    return '<td class="modal-pro-cell"><ul class="specs-mini">' + (li || '<li>Verified partner</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowCons = '<tr><td><strong>Honest Limitations</strong></td>' + list.map(function(item) {
+    var cons = item.cons || [];
+    var li = cons.map(function(c) { return '<li>' + c + '</li>'; }).join('');
+    return '<td class="modal-con-cell"><ul class="specs-mini">' + (li || '<li>Check regional terms</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowActions = '<tr><td><strong>Action</strong></td>' + list.map(function(item) {
+    return '<td><a class="btn btn-primary btn-sm" href="' + (item.url || '#') + '" target="_blank" rel="nofollow noopener">View Product &rarr;</a></td>';
+  }).join('') + '</tr>';
+  
+  content.innerHTML = '<table class="compare-table"><tbody>' + headers + rowPrice + rowCategory + rowSpecs + rowPros + rowCons + rowActions + '</tbody></table>';
+  modal.style.display = "flex";
+}
+
+function closeCompareModal() {
+  var modal = document.getElementById('compareModal');
+  if (modal) modal.style.display = "none";
+}
+
+function handleModalBackdrop(e) {
+  if (e.target.id === 'compareModal') {
+    closeCompareModal();
+  }
+}
+
+// Initialize on DOM Ready
+document.addEventListener('DOMContentLoaded', function() {
+  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  updateThemeUI(current);
+  renderCompareDock();
+  updateCompareButtons();
+});
+</script>
 </body></html>

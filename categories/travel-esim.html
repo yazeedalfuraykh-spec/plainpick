@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,39 +8,33 @@
 <title>Travel & eSIM — Plainpick</title>
 <meta name="description" content="Independent travel guides, instant international eSIM connectivity, verified car rentals, and booking advice.">
 <link rel="stylesheet" href="../style.css">
+<!-- Zero-FOUC Theme Preloader Script -->
 <script>
-function filterCatalog() {
-  var input = document.getElementById('globalSearchInput');
-  if (!input) return;
-  var filter = input.value.toLowerCase();
-  var cards = document.getElementsByClassName('searchable-item');
-  var count = 0;
-  for (var i = 0; i < cards.length; i++) {
-    var text = cards[i].innerText.toLowerCase();
-    if (text.indexOf(filter) > -1) {
-      cards[i].style.display = "";
-      count++;
-    } else {
-      cards[i].style.display = "none";
-    }
-  }
-  var countEl = document.getElementById('searchResultCount');
-  if (countEl) {
-    countEl.innerText = filter ? "Showing " + count + " matching results" : "";
-  }
-}
+(function() {
+  try {
+    var savedTheme = localStorage.getItem('plainpick_theme');
+    var theme = savedTheme ? savedTheme : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch(e) {}
+})();
 </script>
 </head>
 <body>
 <header>
   <div class="header-top">
-    <a class="brand" href="../index.html">Plainpick</a>
+    <div class="brand-group">
+      <a class="brand" href="../index.html">
+        <span class="brand-accent">Plain</span>pick
+      </a>
+      <span class="brand-tagline">Global Discovery & Verification</span>
+    </div>
     <div class="header-controls">
       <div class="search-bar">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 110+ products, brands, tools...">
       </div>
       <div class="selectors">
-        <select class="ctrl-select" onchange="alert('Country view set to: ' + this.value)">
+        <select class="ctrl-select" id="countrySelector" onchange="handleCountryChange(this.value)" aria-label="Select Country">
           <option value="Global">🌐 Global</option>
           <option value="SA">🇸🇦 Saudi Arabia</option>
           <option value="UAE">🇦🇪 UAE</option>
@@ -48,11 +42,14 @@ function filterCatalog() {
           <option value="UK">🇬🇧 United Kingdom</option>
           <option value="EU">🇪🇺 European Union</option>
         </select>
-        <button class="lang-btn" onclick="alert('Bilingual English / العربية active across all catalog cards.')">EN / العربية</button>
+        <button class="ctrl-btn lang-btn" id="langToggleBtn" onclick="toggleLanguageDirection()" title="Toggle English / RTL Arabic layout">EN / العربية</button>
+        <button class="ctrl-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark / Light theme">
+          <span class="theme-icon">🌓</span> <span class="theme-text">Theme</span>
+        </button>
       </div>
     </div>
   </div>
-  <nav class="cat-nav">
+  <nav class="cat-nav" aria-label="Main Categories">
     <a href="../categories/electronics-tech.html">⚡ Electronics</a>
     <a href="../categories/home-kitchen.html">☕ Home & Kitchen</a>
     <a href="../categories/travel-esim.html">✈️ Travel & eSIM</a>
@@ -62,7 +59,7 @@ function filterCatalog() {
     <a href="../categories/automotive-accessories.html">🚗 Auto</a>
     <a href="../categories/top-50-global-programs.html">🏆 Top 50 Global</a>
     <a href="../products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
-    <a href="../about.html">About</a>
+    <a href="../about.html">About & Standards</a>
   </nav>
 </header>
 <main>
@@ -77,116 +74,451 @@ function filterCatalog() {
 
 <h2>Featured Global Partners & Services</h2>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>DiscoverCars</span>
+<div class="product-card searchable-item" id="PROG-13">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>DiscoverCars</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Impact Radius (#6593)</span>
+        <span class="badge badge-cat">Car Rental</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 70.0% profit share on car rental margin </span>
-  </h3>
-  <p><span class="badge badge-global">Impact Radius (#6593)</span> <span class="badge badge-cat">Car Rental</span> &middot; <em>Worldwide (150+ Countries, 10,000+ Locations)</em></p>
-  <p><strong>Promotions & Content:</strong> No brand bidding on 'DiscoverCars'</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (150+ Countries, 10,000+ Locations) (Languages: English, Arabic, French, German, Italian, Spanish)</p>
+  <p><strong>Promotions & Restrictions:</strong> No brand bidding on 'DiscoverCars'</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.discovercars.com" target="_blank" rel="nofollow noopener">Explore DiscoverCars &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.discovercars.com" target="_blank" rel="nofollow noopener">Explore DiscoverCars &rarr;</a>
+    <button class="compare-btn" data-id="PROG-13" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-13&quot;, &quot;title&quot;: &quot;DiscoverCars&quot;, &quot;category&quot;: &quot;Travel &amp; eSIM&quot;, &quot;platform&quot;: &quot;Impact Radius (#6593)&quot;, &quot;commission&quot;: &quot;CPS: 70.0% profit share on car rental margin ($20 - $45 USD avg per booking)&quot;, &quot;url&quot;: &quot;https://www.discovercars.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (150+ Countries, 10,000+ Locations)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 95.3/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 70.0% profit share on car rental margin ($20 - $45 USD avg per booking)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No brand bidding on &#x27;DiscoverCars&#x27;&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Airalo eSIM</span>
+<div class="product-card searchable-item" id="PROG-12">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Airalo eSIM</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Impact Radius (#11902)</span>
+        <span class="badge badge-cat">eSIM & Mobile Data</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 10.0% - 20.0% on all new customer eSIM purchases</span>
-  </h3>
-  <p><span class="badge badge-global">Impact Radius (#11902)</span> <span class="badge badge-cat">eSIM & Mobile Data</span> &middot; <em>Worldwide (200+ Destinations)</em></p>
-  <p><strong>Promotions & Content:</strong> No PPC bidding on 'Airalo' trademarks or variations</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (200+ Destinations) (Languages: English, Arabic, Spanish, French, German, Japanese)</p>
+  <p><strong>Promotions & Restrictions:</strong> No PPC bidding on 'Airalo' trademarks or variations</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.airalo.com" target="_blank" rel="nofollow noopener">Explore Airalo eSIM &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.airalo.com" target="_blank" rel="nofollow noopener">Explore Airalo eSIM &rarr;</a>
+    <button class="compare-btn" data-id="PROG-12" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-12&quot;, &quot;title&quot;: &quot;Airalo eSIM&quot;, &quot;category&quot;: &quot;Travel &amp; eSIM&quot;, &quot;platform&quot;: &quot;Impact Radius (#11902)&quot;, &quot;commission&quot;: &quot;CPS: 10.0% - 20.0% on all new customer eSIM purchases&quot;, &quot;url&quot;: &quot;https://www.airalo.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (200+ Destinations)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 94.8/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 10.0% - 20.0% on all new customer eSIM purchases&quot;, &quot;Status: PENDING&quot;], &quot;cons&quot;: [&quot;No PPC bidding on &#x27;Airalo&#x27; trademarks or variations&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Booking.com Global</span>
+<div class="product-card searchable-item" id="PROG-14">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Booking.com Global</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad / Awin / Direct Partner</span>
+        <span class="badge badge-cat">Hotels & Stays</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 25.0% - 40.0% share of Booking.com commission </span>
-  </h3>
-  <p><span class="badge badge-global">Admitad / Awin / Direct Partner</span> <span class="badge badge-cat">Hotels & Stays</span> &middot; <em>Worldwide (220+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> Strictly no brand bidding or domain typosquatting</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (220+ Countries) (Languages: 40+ Languages)</p>
+  <p><strong>Promotions & Restrictions:</strong> Strictly no brand bidding or domain typosquatting</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: Session-based / 24 Hours)</p>
-  <a class="cta-btn" href="https://www.booking.com" target="_blank" rel="nofollow noopener">Explore Booking.com Global &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.booking.com" target="_blank" rel="nofollow noopener">Explore Booking.com Global &rarr;</a>
+    <button class="compare-btn" data-id="PROG-14" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-14&quot;, &quot;title&quot;: &quot;Booking.com Global&quot;, &quot;category&quot;: &quot;Travel &amp; eSIM&quot;, &quot;platform&quot;: &quot;Admitad / Awin / Direct Partner&quot;, &quot;commission&quot;: &quot;CPS: 25.0% - 40.0% share of Booking.com commission (~3-5% total booking value)&quot;, &quot;url&quot;: &quot;https://www.booking.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (220+ Countries)&quot;, &quot;Cookie: Session-based / 24 Hours&quot;, &quot;Score: 93.8/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 25.0% - 40.0% share of Booking.com commission (~3-5% total booking value)&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;Strictly no brand bidding or domain typosquatting&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Holafly Unlimited eSIM</span>
+<div class="product-card searchable-item" id="PROG-18">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Holafly Unlimited eSIM</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Impact Radius (#14205)</span>
+        <span class="badge badge-cat">Unlimited Data eSIMs</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 15.0% - 20.0% per unlimited data plan sale</span>
-  </h3>
-  <p><span class="badge badge-global">Impact Radius (#14205)</span> <span class="badge badge-cat">Unlimited Data eSIMs</span> &middot; <em>Worldwide (160+ Destinations)</em></p>
-  <p><strong>Promotions & Content:</strong> No trademark PPC</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (160+ Destinations) (Languages: English, Spanish, French, German)</p>
+  <p><strong>Promotions & Restrictions:</strong> No trademark PPC</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://esim.holafly.com" target="_blank" rel="nofollow noopener">Explore Holafly Unlimited eSIM &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://esim.holafly.com" target="_blank" rel="nofollow noopener">Explore Holafly Unlimited eSIM &rarr;</a>
+    <button class="compare-btn" data-id="PROG-18" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-18&quot;, &quot;title&quot;: &quot;Holafly Unlimited eSIM&quot;, &quot;category&quot;: &quot;Travel &amp; eSIM&quot;, &quot;platform&quot;: &quot;Impact Radius (#14205)&quot;, &quot;commission&quot;: &quot;CPS: 15.0% - 20.0% per unlimited data plan sale&quot;, &quot;url&quot;: &quot;https://esim.holafly.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (160+ Destinations)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 92.7/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 15.0% - 20.0% per unlimited data plan sale&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No trademark PPC&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Rentalcars.com</span>
+<div class="product-card searchable-item" id="PROG-19">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Rentalcars.com</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad / Booking Holdings</span>
+        <span class="badge badge-cat">Car Rental</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 4.0% - 6.0% on confirmed car rentals</span>
-  </h3>
-  <p><span class="badge badge-global">Admitad / Booking Holdings</span> <span class="badge badge-cat">Car Rental</span> &middot; <em>Worldwide (160+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No search trademark bidding</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (160+ Countries) (Languages: 40+ Languages)</p>
+  <p><strong>Promotions & Restrictions:</strong> No search trademark bidding</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.rentalcars.com" target="_blank" rel="nofollow noopener">Explore Rentalcars.com &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.rentalcars.com" target="_blank" rel="nofollow noopener">Explore Rentalcars.com &rarr;</a>
+    <button class="compare-btn" data-id="PROG-19" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-19&quot;, &quot;title&quot;: &quot;Rentalcars.com&quot;, &quot;category&quot;: &quot;Travel &amp; eSIM&quot;, &quot;platform&quot;: &quot;Admitad / Booking Holdings&quot;, &quot;commission&quot;: &quot;CPS: 4.0% - 6.0% on confirmed car rentals&quot;, &quot;url&quot;: &quot;https://www.rentalcars.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (160+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 92.6/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 4.0% - 6.0% on confirmed car rentals&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No search trademark bidding&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Trip.com Global</span>
+<div class="product-card searchable-item" id="PROG-15">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Trip.com Global</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad (#18932)</span>
+        <span class="badge badge-cat">Flights, Trains & Hotels</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 3.0% - 7.0% on hotels, $4 - $12 USD flat per flight ticket</span>
-  </h3>
-  <p><span class="badge badge-global">Admitad (#18932)</span> <span class="badge badge-cat">Flights, Trains & Hotels</span> &middot; <em>Worldwide (200+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No trademark PPC bidding</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (200+ Countries) (Languages: 20+ Languages including English, Arabic)</p>
+  <p><strong>Promotions & Restrictions:</strong> No trademark PPC bidding</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days (Hotels) / 7 Days (Flights))</p>
-  <a class="cta-btn" href="https://www.trip.com" target="_blank" rel="nofollow noopener">Explore Trip.com Global &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.trip.com" target="_blank" rel="nofollow noopener">Explore Trip.com Global &rarr;</a>
+    <button class="compare-btn" data-id="PROG-15" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-15&quot;, &quot;title&quot;: &quot;Trip.com Global&quot;, &quot;category&quot;: &quot;Travel &amp; eSIM&quot;, &quot;platform&quot;: &quot;Admitad (#18932)&quot;, &quot;commission&quot;: &quot;CPS: 3.0% - 7.0% on hotels, $4 - $12 USD flat per flight ticket&quot;, &quot;url&quot;: &quot;https://www.trip.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (200+ Countries)&quot;, &quot;Cookie: 30 Days (Hotels) / 7 Days (Flights)&quot;, &quot;Score: 92.4/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 3.0% - 7.0% on hotels, $4 - $12 USD flat per flight ticket&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No trademark PPC bidding&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>Klook Travel & Tours</span>
+<div class="product-card searchable-item" id="PROG-16">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>Klook Travel & Tours</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Admitad (#14194) / Impact</span>
+        <span class="badge badge-cat">Tours, Attractions & Passes</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 2.0% - 5.0% on theme parks, airport transfers, day tours</span>
-  </h3>
-  <p><span class="badge badge-global">Admitad (#14194) / Impact</span> <span class="badge badge-cat">Tours, Attractions & Passes</span> &middot; <em>Worldwide (Asia, Europe, Middle East, US)</em></p>
-  <p><strong>Promotions & Content:</strong> No search arbitrage</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (Asia, Europe, Middle East, US) (Languages: English, Arabic, Chinese, Japanese, Korean)</p>
+  <p><strong>Promotions & Restrictions:</strong> No search arbitrage</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.klook.com" target="_blank" rel="nofollow noopener">Explore Klook Travel & Tours &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.klook.com" target="_blank" rel="nofollow noopener">Explore Klook Travel & Tours &rarr;</a>
+    <button class="compare-btn" data-id="PROG-16" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-16&quot;, &quot;title&quot;: &quot;Klook Travel &amp; Tours&quot;, &quot;category&quot;: &quot;Travel &amp; eSIM&quot;, &quot;platform&quot;: &quot;Admitad (#14194) / Impact&quot;, &quot;commission&quot;: &quot;CPS: 2.0% - 5.0% on theme parks, airport transfers, day tours&quot;, &quot;url&quot;: &quot;https://www.klook.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (Asia, Europe, Middle East, US)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 91.4/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 2.0% - 5.0% on theme parks, airport transfers, day tours&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No search arbitrage&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
-<div class="product-card searchable-item">
-  <h3>
-    <span>GetYourGuide</span>
+<div class="product-card searchable-item" id="PROG-17">
+  <div class="product-card-header">
+    <div class="product-title-group">
+      <h3>GetYourGuide</h3>
+      <div class="meta-badges">
+        <span class="badge badge-global">Awin / Partnerize</span>
+        <span class="badge badge-cat">City Tours & Museum Tickets</span>
+        <span class="badge badge-pending">Application Ready</span>
+      </div>
+    </div>
     <span class="price-tag">CPS: 8.0% - 10.0% on completed tour bookings</span>
-  </h3>
-  <p><span class="badge badge-global">Awin / Partnerize</span> <span class="badge badge-cat">City Tours & Museum Tickets</span> &middot; <em>Worldwide (150+ Countries)</em></p>
-  <p><strong>Promotions & Content:</strong> No bidding on 'GetYourGuide' keywords</p>
+  </div>
+  <p><strong>Geographic Scope:</strong> Worldwide (150+ Countries) (Languages: English, French, German, Spanish, Italian)</p>
+  <p><strong>Promotions & Restrictions:</strong> No bidding on 'GetYourGuide' keywords</p>
   <p><strong>Tracking Method:</strong> Direct Tracking Links & Cookies (Cookie: 30 Days)</p>
-  <a class="cta-btn" href="https://www.getyourguide.com" target="_blank" rel="nofollow noopener">Explore GetYourGuide &rarr;</a>
+  <div class="card-actions">
+    <a class="btn btn-primary btn-sm" href="https://www.getyourguide.com" target="_blank" rel="nofollow noopener">Explore GetYourGuide &rarr;</a>
+    <button class="compare-btn" data-id="PROG-17" onclick='toggleCompare({&quot;id&quot;: &quot;PROG-17&quot;, &quot;title&quot;: &quot;GetYourGuide&quot;, &quot;category&quot;: &quot;Travel &amp; eSIM&quot;, &quot;platform&quot;: &quot;Awin / Partnerize&quot;, &quot;commission&quot;: &quot;CPS: 8.0% - 10.0% on completed tour bookings&quot;, &quot;url&quot;: &quot;https://www.getyourguide.com&quot;, &quot;specs&quot;: [&quot;Geographic Scope: Worldwide (150+ Countries)&quot;, &quot;Cookie: 30 Days&quot;, &quot;Score: 91.0/100&quot;], &quot;pros&quot;: [&quot;Commission: CPS: 8.0% - 10.0% on completed tour bookings&quot;, &quot;Status: APPLICATION_READY&quot;], &quot;cons&quot;: [&quot;No bidding on &#x27;GetYourGuide&#x27; keywords&quot;]})'>+ Compare</button>
+  </div>
 </div>
 
 
 <h2>Verified Physical Gear & Recommendations</h2>
 <p>Explore our curated marketplace roundups below.</p>
 
-<p class="updated">Last reviewed: 2026-10-09</p>
+<p class="updated">Last verified & updated: 2026-10-09 &middot; Plainpick Editorial Operations</p>
 </main>
 <footer>
   <div class="footer-grid">
     <div>
       <h4>About Plainpick</h4>
-      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We test products and verify specifications before publication.</p>
+      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We independently test products and verify specifications before publication.</p>
     </div>
     <div>
       <h4>Core Categories</h4>
-      <p><a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; <a href="../categories/software-ai-tools.html">Software & AI</a></p>
+      <p>
+        <a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; 
+        <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; 
+        <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; 
+        <a href="../categories/software-ai-tools.html">Software & AI</a> &middot; 
+        <a href="../categories/top-50-global-programs.html">Top 50 Programs</a>
+      </p>
+    </div>
+    <div>
+      <h4>Regional Hubs & Guides</h4>
+      <p>
+        <a href="../products/saudi-marketplace-catalog.html">Saudi 60 Marketplace Hub</a> &middot; 
+        <a href="../products/amazon-saudi-top-picks.html">Amazon.sa 30 Picks</a> &middot; 
+        <a href="../products/noon-saudi-top-picks.html">Noon.sa 30 Picks</a> &middot; 
+        <a href="../car-rental/index.html">Car Rental Guides</a>
+      </p>
     </div>
     <div>
       <h4>Legal & Standards</h4>
       <p><a href="../about.html">About Us</a> &middot; <a href="../about.html#disclosure">Affiliate Disclosure</a> &middot; <a href="../sitemap.xml">XML Sitemap</a></p>
     </div>
   </div>
-  <p class="disclosure-note"><strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
-  <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides</p>
+  <div class="disclosure-note">
+    <strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides. All rights reserved.</p>
+  </div>
 </footer>
+
+<!-- Interactive Comparison Dock -->
+<div id="compareDock" class="compare-dock" style="display:none;">
+  <div class="compare-dock-inner">
+    <div class="compare-dock-info">
+      <span class="compare-badge" id="compareCount">0 / 4</span>
+      <span class="compare-dock-title">Items ready to compare</span>
+      <div id="compareChips" class="compare-chips-list"></div>
+    </div>
+    <div class="compare-dock-actions">
+      <button class="btn btn-secondary btn-sm" onclick="clearCompareList()">Clear</button>
+      <button class="btn btn-primary btn-sm" onclick="openCompareModal()">Compare Now &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison Modal -->
+<div id="compareModal" class="compare-modal" style="display:none;" onclick="handleModalBackdrop(event)">
+  <div class="compare-modal-dialog">
+    <div class="compare-modal-header">
+      <h3>Interactive Side-by-Side Comparison</h3>
+      <button class="modal-close-btn" onclick="closeCompareModal()">&times;</button>
+    </div>
+    <div class="compare-modal-body" id="compareModalContent">
+      <!-- Dynamic Comparison Table Generated by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- Plainpick Core Interaction Engine -->
+<script>
+// Search Filtering
+function filterCatalog() {
+  var input = document.getElementById('globalSearchInput');
+  if (!input) return;
+  var filter = input.value.toLowerCase().trim();
+  var cards = document.getElementsByClassName('searchable-item');
+  var count = 0;
+  for (var i = 0; i < cards.length; i++) {
+    var text = cards[i].innerText.toLowerCase();
+    if (!filter || text.indexOf(filter) > -1) {
+      cards[i].style.display = "";
+      count++;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+  var countEl = document.getElementById('searchResultCount');
+  if (countEl) {
+    countEl.innerText = filter ? "Found " + count + " matching results" : "";
+  }
+}
+
+// Theme Management
+function updateThemeUI(theme) {
+  var btn = document.getElementById('themeToggleBtn');
+  if (btn) {
+    var icon = btn.querySelector('.theme-icon');
+    var text = btn.querySelector('.theme-text');
+    if (theme === 'light') {
+      if (icon) icon.innerText = '☀️';
+      if (text) text.innerText = 'Light';
+    } else {
+      if (icon) icon.innerText = '🌙';
+      if (text) text.innerText = 'Dark';
+    }
+  }
+}
+
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  var next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('plainpick_theme', next); } catch(e) {}
+  updateThemeUI(next);
+}
+
+function toggleLanguageDirection() {
+  var html = document.documentElement;
+  var currentDir = html.getAttribute('dir') || 'ltr';
+  var nextDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+  html.setAttribute('dir', nextDir);
+  var btn = document.getElementById('langToggleBtn');
+  if (btn) {
+    btn.innerText = nextDir === 'rtl' ? 'العربية (RTL)' : 'EN (LTR)';
+  }
+}
+
+function handleCountryChange(val) {
+  console.log("Country filter set to: " + val);
+}
+
+// Interactive Comparison State & Storage
+var MAX_COMPARE = 4;
+function getCompareList() {
+  try {
+    var stored = localStorage.getItem('plainpick_compare');
+    return stored ? JSON.parse(stored) : [];
+  } catch(e) {
+    return [];
+  }
+}
+
+function saveCompareList(list) {
+  try {
+    localStorage.setItem('plainpick_compare', JSON.stringify(list));
+  } catch(e) {}
+  renderCompareDock();
+  updateCompareButtons();
+}
+
+function toggleCompare(item) {
+  var list = getCompareList();
+  var idx = list.findIndex(function(x) { return x.id === item.id; });
+  if (idx > -1) {
+    list.splice(idx, 1);
+  } else {
+    if (list.length >= MAX_COMPARE) {
+      alert('You can compare up to ' + MAX_COMPARE + ' items simultaneously. Please remove an item first.');
+      return;
+    }
+    list.push(item);
+  }
+  saveCompareList(list);
+}
+
+function clearCompareList() {
+  saveCompareList([]);
+}
+
+function renderCompareDock() {
+  var list = getCompareList();
+  var dock = document.getElementById('compareDock');
+  var countEl = document.getElementById('compareCount');
+  var chipsEl = document.getElementById('compareChips');
+  if (!dock || !countEl || !chipsEl) return;
+  
+  if (list.length === 0) {
+    dock.style.display = "none";
+    return;
+  }
+  
+  dock.style.display = "block";
+  countEl.innerText = list.length + " / " + MAX_COMPARE;
+  
+  chipsEl.innerHTML = list.map(function(item) {
+    return '<span class="compare-chip">' + (item.title || item.brand || item.id) + ' <button onclick="removeFromCompare(\'' + item.id + '\')">&times;</button></span>';
+  }).join('');
+}
+
+function removeFromCompare(id) {
+  var list = getCompareList();
+  var filtered = list.filter(function(x) { return x.id !== id; });
+  saveCompareList(filtered);
+}
+
+function updateCompareButtons() {
+  var list = getCompareList();
+  var buttons = document.querySelectorAll('.compare-btn');
+  buttons.forEach(function(btn) {
+    var id = btn.getAttribute('data-id');
+    var isSelected = list.some(function(x) { return x.id === id; });
+    if (isSelected) {
+      btn.classList.add('active');
+      btn.innerText = '✓ In Compare';
+    } else {
+      btn.classList.remove('active');
+      btn.innerText = '+ Compare';
+    }
+  });
+}
+
+function openCompareModal() {
+  var list = getCompareList();
+  if (list.length === 0) return;
+  var modal = document.getElementById('compareModal');
+  var content = document.getElementById('compareModalContent');
+  if (!modal || !content) return;
+  
+  var headers = '<tr><th>Attribute</th>' + list.map(function(item) {
+    return '<th><strong>' + (item.title || item.brand) + '</strong><br><small>' + (item.platform || item.network || '') + '</small></th>';
+  }).join('') + '</tr>';
+  
+  var rowPrice = '<tr><td><strong>Price / Rate</strong></td>' + list.map(function(item) {
+    return '<td><span class="price-highlight">' + (item.price || item.commission || 'N/A') + '</span></td>';
+  }).join('') + '</tr>';
+  
+  var rowCategory = '<tr><td><strong>Category</strong></td>' + list.map(function(item) {
+    return '<td>' + (item.category || '') + '</td>';
+  }).join('') + '</tr>';
+  
+  var rowSpecs = '<tr><td><strong>Highlights & Specs</strong></td>' + list.map(function(item) {
+    var specs = item.specs || [];
+    var li = specs.map(function(s) { return '<li>' + s + '</li>'; }).join('');
+    return '<td><ul class="specs-mini">' + (li || '<li>' + (item.scope || 'Verified specifications') + '</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowPros = '<tr><td><strong>Key Advantages</strong></td>' + list.map(function(item) {
+    var pros = item.pros || [];
+    var li = pros.map(function(p) { return '<li>' + p + '</li>'; }).join('');
+    return '<td class="modal-pro-cell"><ul class="specs-mini">' + (li || '<li>Verified partner</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowCons = '<tr><td><strong>Honest Limitations</strong></td>' + list.map(function(item) {
+    var cons = item.cons || [];
+    var li = cons.map(function(c) { return '<li>' + c + '</li>'; }).join('');
+    return '<td class="modal-con-cell"><ul class="specs-mini">' + (li || '<li>Check regional terms</li>') + '</ul></td>';
+  }).join('') + '</tr>';
+  
+  var rowActions = '<tr><td><strong>Action</strong></td>' + list.map(function(item) {
+    return '<td><a class="btn btn-primary btn-sm" href="' + (item.url || '#') + '" target="_blank" rel="nofollow noopener">View Product &rarr;</a></td>';
+  }).join('') + '</tr>';
+  
+  content.innerHTML = '<table class="compare-table"><tbody>' + headers + rowPrice + rowCategory + rowSpecs + rowPros + rowCons + rowActions + '</tbody></table>';
+  modal.style.display = "flex";
+}
+
+function closeCompareModal() {
+  var modal = document.getElementById('compareModal');
+  if (modal) modal.style.display = "none";
+}
+
+function handleModalBackdrop(e) {
+  if (e.target.id === 'compareModal') {
+    closeCompareModal();
+  }
+}
+
+// Initialize on DOM Ready
+document.addEventListener('DOMContentLoaded', function() {
+  var current = document.documentElement.getAttribute('data-theme') || 'dark';
+  updateThemeUI(current);
+  renderCompareDock();
+  updateCompareButtons();
+});
+</script>
 </body></html>
