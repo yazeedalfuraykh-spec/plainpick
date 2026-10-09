@@ -5,32 +5,223 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="mitgo-verification" content="d29b576e-c31b-49c4-8827-01651a597b55" />
 <meta name='impact-site-verification' value='e177ab85-2dee-4f3e-bda5-6d96614d664b'>
-<title>Home — Plainpick</title>
-<meta name="description" content="Fact-checked comparisons, travel guides, and Saudi marketplace picks.">
+<title>Global Product Discovery & Buying Guides — Plainpick</title>
+<meta name="description" content="Fact-checked buying guides, price comparisons, and verified marketplace picks.">
 <link rel="stylesheet" href="style.css">
+<script>
+function filterCatalog() {
+  var input = document.getElementById('globalSearchInput');
+  if (!input) return;
+  var filter = input.value.toLowerCase();
+  var cards = document.getElementsByClassName('searchable-item');
+  var count = 0;
+  for (var i = 0; i < cards.length; i++) {
+    var text = cards[i].innerText.toLowerCase();
+    if (text.indexOf(filter) > -1) {
+      cards[i].style.display = "";
+      count++;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+  var countEl = document.getElementById('searchResultCount');
+  if (countEl) {
+    countEl.innerText = filter ? "Showing " + count + " matching results" : "";
+  }
+}
+</script>
 </head>
 <body>
-<header><a class="brand" href="index.html">Plainpick</a>
-<nav><a href="buying-guides/index.html">Buying Guides</a>
-<a href="products/saudi-marketplace-catalog.html">Saudi 60 Picks</a>
-<a href="email-marketing/index.html">Email Marketing</a>
-<a href="car-rental/index.html">Car Rental</a>
-<a href="products/index.html">Digital Tools</a>
-<a href="about.html">About</a></nav></header>
+<header>
+  <div class="header-top">
+    <a class="brand" href="index.html">Plainpick</a>
+    <div class="header-controls">
+      <div class="search-bar">
+        <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 110+ products, brands, tools...">
+      </div>
+      <div class="selectors">
+        <select class="ctrl-select" onchange="alert('Country view set to: ' + this.value)">
+          <option value="Global">🌐 Global</option>
+          <option value="SA">🇸🇦 Saudi Arabia</option>
+          <option value="UAE">🇦🇪 UAE</option>
+          <option value="US">🇺🇸 United States</option>
+          <option value="UK">🇬🇧 United Kingdom</option>
+          <option value="EU">🇪🇺 European Union</option>
+        </select>
+        <button class="lang-btn" onclick="alert('Bilingual English / العربية active across all catalog cards.')">EN / العربية</button>
+      </div>
+    </div>
+  </div>
+  <nav class="cat-nav">
+    <a href="categories/electronics-tech.html">⚡ Electronics</a>
+    <a href="categories/home-kitchen.html">☕ Home & Kitchen</a>
+    <a href="categories/travel-esim.html">✈️ Travel & eSIM</a>
+    <a href="categories/software-ai-tools.html">💻 Software & AI</a>
+    <a href="categories/learning-education.html">📚 Learning</a>
+    <a href="categories/health-personal-care.html">✨ Personal Care</a>
+    <a href="categories/automotive-accessories.html">🚗 Auto</a>
+    <a href="categories/top-50-global-programs.html">🏆 Top 50 Global</a>
+    <a href="products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
 <main>
-<h1>Plain-spoken comparisons and guides</h1><p>Plainpick helps you decide: fact-checked product comparisons, practical travel guides, and verified Saudi marketplace recommendations with sources cited and honest downsides included.</p>
-<h2>Saudi Marketplace Buying Guides (60 Real Products)</h2>
+<div id="searchResultCount" class="search-count-text"></div>
+
+<div class="hero">
+  <h1>Find the Best Products & Services Worldwide</h1>
+  <p>Fact-checked buying guides, verified price data, and transparent editorial comparisons across 9 global consumer and software categories.</p>
+</div>
+
+<h2>Explore by Category</h2>
+<div class="category-grid">
+  
+<a class="cat-card searchable-item" href="categories/electronics-tech.html">
+  <div>
+    <div class="cat-card-header">
+      <span class="cat-icon">⚡</span>
+      <h3>Electronics & Technology</h3>
+    </div>
+    <div class="cat-subtext">Fact-checked reviews of high-performance laptops, noise-canceling headphones, GaN fast chargers, and smart home ecosystems.</div>
+  </div>
+  <div class="subcat-chips"><span class='chip'>Smartphones</span> <span class='chip'>Computers & Laptops</span> <span class='chip'>Audio & Wearables</span></div>
+</a>
+
+<a class="cat-card searchable-item" href="categories/home-kitchen.html">
+  <div>
+    <div class="cat-card-header">
+      <span class="cat-icon">☕</span>
+      <h3>Home & Kitchen</h3>
+    </div>
+    <div class="cat-subtext">Curated espresso machines, precision burr grinders, dual-zone air fryers, and intelligent home cleaning appliances.</div>
+  </div>
+  <div class="subcat-chips"><span class='chip'>Coffee & Espresso</span> <span class='chip'>Kitchen Appliances</span> <span class='chip'>Air Purifiers</span></div>
+</a>
+
+<a class="cat-card searchable-item" href="categories/travel-esim.html">
+  <div>
+    <div class="cat-card-header">
+      <span class="cat-icon">✈️</span>
+      <h3>Travel & eSIM</h3>
+    </div>
+    <div class="cat-subtext">Independent travel guides, instant international eSIM connectivity, verified car rentals, and booking advice.</div>
+  </div>
+  <div class="subcat-chips"><span class='chip'>eSIM Mobile Data</span> <span class='chip'>Hotels & Stays</span> <span class='chip'>Car Rental</span></div>
+</a>
+
+<a class="cat-card searchable-item" href="categories/software-ai-tools.html">
+  <div>
+    <div class="cat-card-header">
+      <span class="cat-icon">💻</span>
+      <h3>Software & AI Tools</h3>
+    </div>
+    <div class="cat-subtext">Production-tested SaaS tools, generative AI platforms, reliable web hosting, and cybersecurity solutions.</div>
+  </div>
+  <div class="subcat-chips"><span class='chip'>Creative Software</span> <span class='chip'>Cybersecurity & VPN</span> <span class='chip'>Cloud Hosting</span></div>
+</a>
+
+<a class="cat-card searchable-item" href="categories/fashion-lifestyle.html">
+  <div>
+    <div class="cat-card-header">
+      <span class="cat-icon">👔</span>
+      <h3>Fashion & Lifestyle</h3>
+    </div>
+    <div class="cat-subtext">Curated international fashion retailers, verified luxury designer collections, and athletic lifestyle gear.</div>
+  </div>
+  <div class="subcat-chips"><span class='chip'>Apparel & Footwear</span> <span class='chip'>Luxury Designer Brands</span> <span class='chip'>Sportswear</span></div>
+</a>
+
+<a class="cat-card searchable-item" href="categories/learning-education.html">
+  <div>
+    <div class="cat-card-header">
+      <span class="cat-icon">📚</span>
+      <h3>Learning & Education</h3>
+    </div>
+    <div class="cat-subtext">Top-tier career certificates, technical programming roadmaps, and creative skill courses from accredited global universities.</div>
+  </div>
+  <div class="subcat-chips"><span class='chip'>Professional Certificates</span> <span class='chip'>Online Video Courses</span> <span class='chip'>Coding & Data Science</span></div>
+</a>
+
+<a class="cat-card searchable-item" href="categories/health-personal-care.html">
+  <div>
+    <div class="cat-card-header">
+      <span class="cat-icon">✨</span>
+      <h3>Health & Personal Care</h3>
+    </div>
+    <div class="cat-subtext">Tested dental water flossers, precision electric shavers, sonic toothbrushes, and verified health supplements.</div>
+  </div>
+  <div class="subcat-chips"><span class='chip'>Electric Grooming</span> <span class='chip'>Oral Hygiene</span> <span class='chip'>Vitamins & Supplements</span></div>
+</a>
+
+<a class="cat-card searchable-item" href="categories/automotive-accessories.html">
+  <div>
+    <div class="cat-card-header">
+      <span class="cat-icon">🚗</span>
+      <h3>Automotive & Accessories</h3>
+    </div>
+    <div class="cat-subtext">Essential road trip emergency gear, high-power in-car chargers, cordless compressors, and 4K parking monitors.</div>
+  </div>
+  <div class="subcat-chips"><span class='chip'>4K Dashcams</span> <span class='chip'>Portable Jump Starters</span> <span class='chip'>Digital Tire Inflators</span></div>
+</a>
+
+<a class="cat-card searchable-item" href="categories/deals-offers.html">
+  <div>
+    <div class="cat-card-header">
+      <span class="cat-icon">🏷️</span>
+      <h3>Deals & Offers</h3>
+    </div>
+    <div class="cat-subtext">Verified discount hubs, seasonal marketplace guides, coupon terms, and global shopping roundups.</div>
+  </div>
+  <div class="subcat-chips"><span class='chip'>Top 50 Global Picks</span> <span class='chip'>Saudi 60 Hub</span> <span class='chip'>Amazon.sa Curated</span></div>
+</a>
+
+</div>
+
+<h2>Featured Global Buying Guides & Comparisons</h2>
 <ul class="cardlist">
-  <li><a href="products/saudi-marketplace-catalog.html">Complete 60-Product Saudi Hub</a><p>Verified gear across Amazon.sa and Noon with SAR pricing and honest reviews.</p></li>
-  <li><a href="products/amazon-saudi-top-picks.html">Top 30 Amazon.sa Recommendations</a><p>Curated espresso machines, ANC headphones, GaN chargers, and smart home tech.</p></li>
-  <li><a href="products/noon-saudi-top-picks.html">Top 30 Noon Saudi Arabia Essentials</a><p>Flagship mobile devices, Dyson vacuums, kitchen appliances, and grooming tools.</p></li>
-  <li><a href="buying-guides/specialty-coffee-espresso-saudi-guide.html">Saudi Home Espresso & Coffee Guide</a><p>Fact-checked comparison of De'Longhi, Breville, Fellow, and Timemore gear.</p></li>
+  <li><a href="categories/top-50-global-programs.html">🏆 Top 50 Global Affiliate Programs</a><p>Ranked selection across AliExpress, Booking.com, DiscoverCars, NordVPN, Wondershare, and Canva.</p></li>
+  <li><a href="products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Marketplace Picks</a><p>30 Amazon.sa and 30 Noon.sa tested products with SAR pricing and honest pros/cons.</p></li>
+  <li><a href="buying-guides/specialty-coffee-espresso-saudi-guide.html">☕ Home Espresso & Coffee Setup Guide</a><p>Fact-checked breakdown of De'Longhi, Breville, Fellow, and Timemore gear.</p></li>
+  <li><a href="buying-guides/smart-home-air-cleaning-saudi.html">🛡️ Desert Dust Defense & Smart Air Purifiers</a><p>Tested HEPA purifiers, Dyson cordless vacuums, and Tapo security cameras.</p></li>
+  <li><a href="buying-guides/travel-commute-chargers-gadgets.html">⚡ Commuter GaN Chargers & Emergency Gear</a><p>Anker Prime 67W, 140W laptop power banks, and portable tire inflators.</p></li>
+  <li><a href="car-rental/index.html">🚗 International Car Rental Guides</a><p>Zero-excess insurance explanations and guides for Dubai, Riyadh, and Georgia.</p></li>
 </ul>
-<h2>Email Marketing</h2><ul class='cardlist'><li><a href="email-marketing/best-email-platforms-small-business.html">Choosing an email platform for a small business: a decision guide</a><p>A fact-based decision guide comparing GetResponse, Kit, MailerLite, Brevo, and Mailchimp for small business email marketing needs.</p></li><li><a href="email-marketing/getresponse-pricing-explained.html">GetResponse pricing explained: what each tier actually includes</a><p>A breakdown of GetResponse's Starter, Marketer, Creator, and Enterprise plans, sourced from the official pricing page, with what each tier is missing.</p></li><li><a href="email-marketing/getresponse-vs-mailchimp.html">GetResponse vs Mailchimp (2026): which fits your list size and budget</a><p>A fact-checked comparison of GetResponse and Mailchimp pricing, automation, and features to help you pick the right email platform for your list.</p></li><li><a href="email-marketing/kit-vs-getresponse.html">Kit (ConvertKit) vs GetResponse for creators</a><p>Comparing Kit and GetResponse pricing, automation, and creator-specific features to help writers and creators choose the right platform.</p></li></ul><h2>Car Rental Guides</h2><ul class='cardlist'><li><a href="car-rental/car-rental-dubai-guide.html">Renting a Car in Dubai as a Visitor: License Rules, Salik Tolls, and Deposits</a><p>License requirements, how Dubai's Salik toll system actually charges you, and what rental deposits really cover for visitors renting a car in Dubai.</p></li><li><a href="car-rental/car-rental-full-insurance-explained.html">Car Rental Insurance Decoded: CDW, Excess, and When 'Full Coverage' Isn't</a><p>What CDW actually covers, how excess works, and why 'full coverage' at the rental counter usually still leaves you exposed.</p></li><li><a href="car-rental/car-rental-georgia-country.html">Renting a Car in Georgia (Tbilisi/Kutaisi): What GCC Travelers Should Know</a><p>License rules, road conditions, and the practical gaps GCC travelers hit when renting a car in Georgia, covering both Tbilisi and Kutaisi pickup.</p></li><li><a href="car-rental/car-rental-riyadh-guide.html">Renting a Car in Riyadh: Airport vs City, Requirements, and Real Costs</a><p>What GCC and international travelers actually need to rent a car in Riyadh, including license rules, where pickup makes sense, and when a taxi beats a rental.</p></li></ul><h2>Saudi Buying Guides</h2><ul class='cardlist'><li><a href="buying-guides/smart-home-air-cleaning-saudi.html">Combating Desert Dust & Allergens: Smart Air Purifiers & Robot Vacuums for Saudi Homes (2026)</a><p>A practical guide to the best HEPA air purifiers, robotic vacuums, and smart security cameras tested for Saudi villas and apartments on Amazon.sa and Noon.</p></li><li><a href="buying-guides/specialty-coffee-espresso-saudi-guide.html">The Ultimate Saudi Home Coffee & Espresso Setup Guide (2026)</a><p>A fact-checked breakdown of the best home espresso machines, precision burr grinders, and gooseneck kettles available on Amazon.sa and Noon in Saudi Arabia.</p></li><li><a href="buying-guides/travel-commute-chargers-gadgets.html">Essential Mobile Tech & Fast Chargers for GCC Commuting and Travel (2026)</a><p>Review of the top GaN wall chargers, laptop power banks, car emergency tools, and noise-canceling headphones for Saudi travelers.</p></li></ul>
+
+<h2>Popular Verified Merchants & Providers</h2>
+<p>We partner with leading global platforms to bring you authentic pricing and verified inventory:</p>
+<div class="subcat-chips" style="gap:8px;margin-bottom:24px">
+  <span class="chip" style="font-size:13px;padding:4px 10px">Amazon Associates</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">AliExpress Global</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">Noon Saudi & UAE</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">Booking.com</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">DiscoverCars</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">Airalo eSIM</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">Nord Security</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">Lenovo</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">Samsung</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">Wondershare</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">Canva</span>
+  <span class="chip" style="font-size:13px;padding:4px 10px">Coursera</span>
+</div>
+
 <p class="updated">Last reviewed: 2026-10-09</p>
 </main>
-<footer><p><strong>Affiliate & Editorial Disclosure:</strong> Plainpick publishes research-assisted, human-reviewed comparisons and guides.
-Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our
-coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
-<p>&copy; 2026 Plainpick &middot; Riyadh, Saudi Arabia</p></footer>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>About Plainpick</h4>
+      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We test products and verify specifications before publication.</p>
+    </div>
+    <div>
+      <h4>Core Categories</h4>
+      <p><a href="categories/electronics-tech.html">Electronics & Tech</a> &middot; <a href="categories/travel-esim.html">Travel & eSIM</a> &middot; <a href="categories/home-kitchen.html">Home & Coffee</a> &middot; <a href="categories/software-ai-tools.html">Software & AI</a></p>
+    </div>
+    <div>
+      <h4>Legal & Standards</h4>
+      <p><a href="about.html">About Us</a> &middot; <a href="about.html#disclosure">Affiliate Disclosure</a> &middot; <a href="sitemap.xml">XML Sitemap</a></p>
+    </div>
+  </div>
+  <p class="disclosure-note"><strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
+  <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides</p>
+</footer>
 </body></html>

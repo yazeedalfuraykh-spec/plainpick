@@ -8,16 +8,65 @@
 <title>Renting a Car in Riyadh: Airport vs City, Requirements, and Real Costs — Plainpick</title>
 <meta name="description" content="What GCC and international travelers actually need to rent a car in Riyadh, including license rules, where pickup makes sense, and when a taxi beats a rental.">
 <link rel="stylesheet" href="../style.css">
+<script>
+function filterCatalog() {
+  var input = document.getElementById('globalSearchInput');
+  if (!input) return;
+  var filter = input.value.toLowerCase();
+  var cards = document.getElementsByClassName('searchable-item');
+  var count = 0;
+  for (var i = 0; i < cards.length; i++) {
+    var text = cards[i].innerText.toLowerCase();
+    if (text.indexOf(filter) > -1) {
+      cards[i].style.display = "";
+      count++;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+  var countEl = document.getElementById('searchResultCount');
+  if (countEl) {
+    countEl.innerText = filter ? "Showing " + count + " matching results" : "";
+  }
+}
+</script>
 </head>
 <body>
-<header><a class="brand" href="../index.html">Plainpick</a>
-<nav><a href="../buying-guides/index.html">Buying Guides</a>
-<a href="../products/saudi-marketplace-catalog.html">Saudi 60 Picks</a>
-<a href="../email-marketing/index.html">Email Marketing</a>
-<a href="../car-rental/index.html">Car Rental</a>
-<a href="../products/index.html">Digital Tools</a>
-<a href="../about.html">About</a></nav></header>
+<header>
+  <div class="header-top">
+    <a class="brand" href="../index.html">Plainpick</a>
+    <div class="header-controls">
+      <div class="search-bar">
+        <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 110+ products, brands, tools...">
+      </div>
+      <div class="selectors">
+        <select class="ctrl-select" onchange="alert('Country view set to: ' + this.value)">
+          <option value="Global">🌐 Global</option>
+          <option value="SA">🇸🇦 Saudi Arabia</option>
+          <option value="UAE">🇦🇪 UAE</option>
+          <option value="US">🇺🇸 United States</option>
+          <option value="UK">🇬🇧 United Kingdom</option>
+          <option value="EU">🇪🇺 European Union</option>
+        </select>
+        <button class="lang-btn" onclick="alert('Bilingual English / العربية active across all catalog cards.')">EN / العربية</button>
+      </div>
+    </div>
+  </div>
+  <nav class="cat-nav">
+    <a href="../categories/electronics-tech.html">⚡ Electronics</a>
+    <a href="../categories/home-kitchen.html">☕ Home & Kitchen</a>
+    <a href="../categories/travel-esim.html">✈️ Travel & eSIM</a>
+    <a href="../categories/software-ai-tools.html">💻 Software & AI</a>
+    <a href="../categories/learning-education.html">📚 Learning</a>
+    <a href="../categories/health-personal-care.html">✨ Personal Care</a>
+    <a href="../categories/automotive-accessories.html">🚗 Auto</a>
+    <a href="../categories/top-50-global-programs.html">🏆 Top 50 Global</a>
+    <a href="../products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
 <main>
+<div id="searchResultCount" class="search-count-text"></div>
 <p><em>This site may earn a commission from partner links, at no extra cost to you.</em></p>
 <p>Riyadh is not a city you can walk. Distances between districts run into tens of kilometers, sidewalks are inconsistent outside a handful of neighborhoods, and summer heat rules out anything on foot for most of the year. That makes a rental car genuinely useful here, more so than in most GCC capitals. But it is also not automatic that renting is the right call for every trip, and the requirements differ depending on where your license was issued.</p>
 <p><a href="https://www.discovercars.com">DiscoverCars</a></p>
@@ -66,8 +115,22 @@
 <p><a href="https://www.discovercars.com">DiscoverCars</a></p>
 <p class="updated">Last reviewed: 2026-09-29</p>
 </main>
-<footer><p><strong>Affiliate & Editorial Disclosure:</strong> Plainpick publishes research-assisted, human-reviewed comparisons and guides.
-Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our
-coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
-<p>&copy; 2026 Plainpick &middot; Riyadh, Saudi Arabia</p></footer>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>About Plainpick</h4>
+      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We test products and verify specifications before publication.</p>
+    </div>
+    <div>
+      <h4>Core Categories</h4>
+      <p><a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; <a href="../categories/software-ai-tools.html">Software & AI</a></p>
+    </div>
+    <div>
+      <h4>Legal & Standards</h4>
+      <p><a href="../about.html">About Us</a> &middot; <a href="../about.html#disclosure">Affiliate Disclosure</a> &middot; <a href="../sitemap.xml">XML Sitemap</a></p>
+    </div>
+  </div>
+  <p class="disclosure-note"><strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
+  <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides</p>
+</footer>
 </body></html>

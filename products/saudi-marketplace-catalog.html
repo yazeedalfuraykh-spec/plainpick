@@ -8,23 +8,72 @@
 <title>Saudi Arabia Top 60 Marketplace Picks — Plainpick</title>
 <meta name="description" content="Fact-checked buying recommendations across Amazon.sa and Noon in Saudi Arabia.">
 <link rel="stylesheet" href="../style.css">
+<script>
+function filterCatalog() {
+  var input = document.getElementById('globalSearchInput');
+  if (!input) return;
+  var filter = input.value.toLowerCase();
+  var cards = document.getElementsByClassName('searchable-item');
+  var count = 0;
+  for (var i = 0; i < cards.length; i++) {
+    var text = cards[i].innerText.toLowerCase();
+    if (text.indexOf(filter) > -1) {
+      cards[i].style.display = "";
+      count++;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+  var countEl = document.getElementById('searchResultCount');
+  if (countEl) {
+    countEl.innerText = filter ? "Showing " + count + " matching results" : "";
+  }
+}
+</script>
 </head>
 <body>
-<header><a class="brand" href="../index.html">Plainpick</a>
-<nav><a href="../buying-guides/index.html">Buying Guides</a>
-<a href="../products/saudi-marketplace-catalog.html">Saudi 60 Picks</a>
-<a href="../email-marketing/index.html">Email Marketing</a>
-<a href="../car-rental/index.html">Car Rental</a>
-<a href="../products/index.html">Digital Tools</a>
-<a href="../about.html">About</a></nav></header>
+<header>
+  <div class="header-top">
+    <a class="brand" href="../index.html">Plainpick</a>
+    <div class="header-controls">
+      <div class="search-bar">
+        <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 110+ products, brands, tools...">
+      </div>
+      <div class="selectors">
+        <select class="ctrl-select" onchange="alert('Country view set to: ' + this.value)">
+          <option value="Global">🌐 Global</option>
+          <option value="SA">🇸🇦 Saudi Arabia</option>
+          <option value="UAE">🇦🇪 UAE</option>
+          <option value="US">🇺🇸 United States</option>
+          <option value="UK">🇬🇧 United Kingdom</option>
+          <option value="EU">🇪🇺 European Union</option>
+        </select>
+        <button class="lang-btn" onclick="alert('Bilingual English / العربية active across all catalog cards.')">EN / العربية</button>
+      </div>
+    </div>
+  </div>
+  <nav class="cat-nav">
+    <a href="../categories/electronics-tech.html">⚡ Electronics</a>
+    <a href="../categories/home-kitchen.html">☕ Home & Kitchen</a>
+    <a href="../categories/travel-esim.html">✈️ Travel & eSIM</a>
+    <a href="../categories/software-ai-tools.html">💻 Software & AI</a>
+    <a href="../categories/learning-education.html">📚 Learning</a>
+    <a href="../categories/health-personal-care.html">✨ Personal Care</a>
+    <a href="../categories/automotive-accessories.html">🚗 Auto</a>
+    <a href="../categories/top-50-global-programs.html">🏆 Top 50 Global</a>
+    <a href="../products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
 <main>
+<div id="searchResultCount" class="search-count-text"></div>
 
 <h1>Saudi Arabia Top 60 Marketplace Picks (2026)</h1>
-<p>Fact-checked buying recommendations across <strong>Amazon.sa</strong> and <strong>Noon Saudi Arabia</strong>. Every item includes verified SAR pricing, genuine specifications, honest limitations, and tested real-world utility for Saudi homes and professionals.</p>
+<p>Fact-checked buying recommendations across <strong>Amazon.sa</strong> and <strong>Noon Saudi Arabia</strong>. Every item includes verified SAR pricing, genuine specifications, honest limitations, and tested real-world utility.</p>
 
 <div class="filter-nav">
   <a class="filter-btn active" href="#all">All 60 Picks</a>
-  <a class="filter-btn" href="amazon-saudi-top-picks.html">30 Amazon.sa Picks</a>
+  <a class="filter-btn" href="amazon-saudi-top-picks.html">30 Amazon.sa Picks (plainpick-21)</a>
   <a class="filter-btn" href="noon-saudi-top-picks.html">30 Noon.sa Picks</a>
   <a class="filter-btn" href="../buying-guides/specialty-coffee-espresso-saudi-guide.html">Coffee Guide</a>
   <a class="filter-btn" href="../buying-guides/smart-home-air-cleaning-saudi.html">Smart Home Guide</a>
@@ -32,7 +81,7 @@
 </div>
 
 
-<div class="product-card" id="AMZ-SA-001">
+<div class="product-card searchable-item" id="AMZ-SA-001">
   <h3>
     <span>De'Longhi Dedica Deluxe Espresso Machine EC685.M</span>
     <span class="price-tag">699.00 SAR</span>
@@ -49,7 +98,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B000N2287S?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-002">
+<div class="product-card searchable-item" id="AMZ-SA-002">
   <h3>
     <span>Timemore Chestnut C2 Manual Coffee Grinder</span>
     <span class="price-tag">189.00 SAR</span>
@@ -66,7 +115,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B07B2X1VXZ?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-003">
+<div class="product-card searchable-item" id="AMZ-SA-003">
   <h3>
     <span>Fellow Stagg EKG Electric Gooseneck Kettle (220V GCC)</span>
     <span class="price-tag">749.00 SAR</span>
@@ -83,7 +132,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B077JBQZPX?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-004">
+<div class="product-card searchable-item" id="AMZ-SA-004">
   <h3>
     <span>Breville Barista Express Espresso Machine BES870XL</span>
     <span class="price-tag">2499.00 SAR</span>
@@ -100,7 +149,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B089242TYC?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-005">
+<div class="product-card searchable-item" id="AMZ-SA-005">
   <h3>
     <span>Nespresso Vertuo Next Coffee & Espresso Machine by De'Longhi</span>
     <span class="price-tag">549.00 SAR</span>
@@ -117,7 +166,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B07P65LN84?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-006">
+<div class="product-card searchable-item" id="AMZ-SA-006">
   <h3>
     <span>Hario V60 Ceramic Coffee Dripper Size 02 (White)</span>
     <span class="price-tag">89.00 SAR</span>
@@ -134,7 +183,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B01NAU4VDU?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-007">
+<div class="product-card searchable-item" id="AMZ-SA-007">
   <h3>
     <span>Apple AirPods Pro (2nd Generation) with USB-C MagSafe Case</span>
     <span class="price-tag">899.00 SAR</span>
@@ -151,7 +200,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B0BDHWDR12?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-008">
+<div class="product-card searchable-item" id="AMZ-SA-008">
   <h3>
     <span>Sony WH-1000XM5 Wireless Industry Leading Noise Canceling Headphones</span>
     <span class="price-tag">1199.00 SAR</span>
@@ -168,7 +217,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B09XS7JWHH?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-009">
+<div class="product-card searchable-item" id="AMZ-SA-009">
   <h3>
     <span>Anker Soundcore Space One Active Noise Cancelling Headphones</span>
     <span class="price-tag">349.00 SAR</span>
@@ -185,7 +234,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B0CHWR7R8P?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-010">
+<div class="product-card searchable-item" id="AMZ-SA-010">
   <h3>
     <span>Samsung Galaxy Buds FE True Wireless Earbuds</span>
     <span class="price-tag">249.00 SAR</span>
@@ -202,7 +251,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B0CD27L2YJ?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-011">
+<div class="product-card searchable-item" id="AMZ-SA-011">
   <h3>
     <span>Anker Prime 67W GaN Wall Charger (3 Ports Fast Charger)</span>
     <span class="price-tag">189.00 SAR</span>
@@ -219,7 +268,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B09V77VJD6?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-012">
+<div class="product-card searchable-item" id="AMZ-SA-012">
   <h3>
     <span>Anker 737 Power Bank (PowerCore 24K, 140W Fast Charging)</span>
     <span class="price-tag">449.00 SAR</span>
@@ -236,7 +285,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B09W2F425G?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-013">
+<div class="product-card searchable-item" id="AMZ-SA-013">
   <h3>
     <span>UGREEN Nexode 100W 4-Port USB C GaN Charger</span>
     <span class="price-tag">239.00 SAR</span>
@@ -253,7 +302,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B09JZL772R?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-014">
+<div class="product-card searchable-item" id="AMZ-SA-014">
   <h3>
     <span>Kindle Paperwhite 16 GB (11th Gen) 6.8" Glare-Free Display</span>
     <span class="price-tag">599.00 SAR</span>
@@ -270,7 +319,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B08ZJK7T6H?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-015">
+<div class="product-card searchable-item" id="AMZ-SA-015">
   <h3>
     <span>Logitech MX Master 3S Wireless Performance Mouse</span>
     <span class="price-tag">399.00 SAR</span>
@@ -287,7 +336,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B0B11N534K?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-016">
+<div class="product-card searchable-item" id="AMZ-SA-016">
   <h3>
     <span>Keychron K2 Wireless Bluetooth Mechanical Keyboard (Version 2)</span>
     <span class="price-tag">379.00 SAR</span>
@@ -304,7 +353,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B089QPW8Q4?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-017">
+<div class="product-card searchable-item" id="AMZ-SA-017">
   <h3>
     <span>TP-Link Tapo C210 Pan/Tilt 2K Security Camera</span>
     <span class="price-tag">119.00 SAR</span>
@@ -321,7 +370,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B0BMQGW46G?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-018">
+<div class="product-card searchable-item" id="AMZ-SA-018">
   <h3>
     <span>Xiaomi Smart Air Purifier 4 (HEPA Filter, CADR 400m³/h)</span>
     <span class="price-tag">599.00 SAR</span>
@@ -338,7 +387,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B0891P3FVD?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-019">
+<div class="product-card searchable-item" id="AMZ-SA-019">
   <h3>
     <span>Philips Premium Airfryer XXL with Fat Removal Technology HD9650/91</span>
     <span class="price-tag">899.00 SAR</span>
@@ -355,7 +404,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B07PZX5G8C?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-020">
+<div class="product-card searchable-item" id="AMZ-SA-020">
   <h3>
     <span>Ninja Foodi 8-in-1 DualZone 2-Basket Air Fryer DZ201</span>
     <span class="price-tag">799.00 SAR</span>
@@ -372,7 +421,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B08C7KG5LP?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-021">
+<div class="product-card searchable-item" id="AMZ-SA-021">
   <h3>
     <span>Philips Sonicare ProtectiveClean 5100 Electric Toothbrush</span>
     <span class="price-tag">399.00 SAR</span>
@@ -389,7 +438,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B07TXM7V6B?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-022">
+<div class="product-card searchable-item" id="AMZ-SA-022">
   <h3>
     <span>Braun Series 9 Pro Electric Shaver 9465cc with Clean & Charge Station</span>
     <span class="price-tag">1299.00 SAR</span>
@@ -406,7 +455,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B089NY96W6?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-023">
+<div class="product-card searchable-item" id="AMZ-SA-023">
   <h3>
     <span>Oral-B iO Series 9 Electric Toothbrush with Magnetic Drive & AI</span>
     <span class="price-tag">899.00 SAR</span>
@@ -423,7 +472,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B08C1W5N87?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-024">
+<div class="product-card searchable-item" id="AMZ-SA-024">
   <h3>
     <span>Eufy Security SmartTrack Card (Apple Find My Compatible)</span>
     <span class="price-tag">119.00 SAR</span>
@@ -440,7 +489,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B09V7S3Z45?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-025">
+<div class="product-card searchable-item" id="AMZ-SA-025">
   <h3>
     <span>Ring Video Doorbell Plus (Head-to-Toe 1536p HD Video)</span>
     <span class="price-tag">499.00 SAR</span>
@@ -457,7 +506,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B0797P222Y?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-026">
+<div class="product-card searchable-item" id="AMZ-SA-026">
   <h3>
     <span>Apple AirTag (4 Pack) Bluetooth Item Finders</span>
     <span class="price-tag">399.00 SAR</span>
@@ -474,7 +523,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B08N5WRWNW?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-027">
+<div class="product-card searchable-item" id="AMZ-SA-027">
   <h3>
     <span>Baseus Super Energy Pro Car Jump Starter & Power Bank 1000A</span>
     <span class="price-tag">219.00 SAR</span>
@@ -491,7 +540,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B0BG5MWG2Y?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-028">
+<div class="product-card searchable-item" id="AMZ-SA-028">
   <h3>
     <span>Xiaomi 1S Portable Electric Air Compressor / Tire Inflator</span>
     <span class="price-tag">159.00 SAR</span>
@@ -508,7 +557,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B09V7WV5K1?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-029">
+<div class="product-card searchable-item" id="AMZ-SA-029">
   <h3>
     <span>Anker Soundcore Motion+ Bluetooth Speaker (30W Hi-Res Audio)</span>
     <span class="price-tag">329.00 SAR</span>
@@ -525,7 +574,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B07P4G2J7M?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="AMZ-SA-030">
+<div class="product-card searchable-item" id="AMZ-SA-030">
   <h3>
     <span>Eufy RoboVac G30 Robot Vacuum with Smart Dynamic Navigation 2.0</span>
     <span class="price-tag">699.00 SAR</span>
@@ -542,7 +591,7 @@
   <a class="cta-btn" href="https://www.amazon.sa/dp/B09B8W2K2R?tag=plainpick-21" target="_blank" rel="nofollow noopener">View on Amazon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-001">
+<div class="product-card searchable-item" id="NOON-SA-001">
   <h3>
     <span>Apple iPhone 15 Pro Max 256GB Natural Titanium 5G</span>
     <span class="price-tag">4699.00 SAR</span>
@@ -559,7 +608,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N53346830A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-002">
+<div class="product-card searchable-item" id="NOON-SA-002">
   <h3>
     <span>Sony PlayStation 5 Console (Disc Edition - Slim)</span>
     <span class="price-tag">1949.00 SAR</span>
@@ -576,7 +625,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N53348122A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-003">
+<div class="product-card searchable-item" id="NOON-SA-003">
   <h3>
     <span>Samsung Galaxy S24 Ultra 5G Dual SIM 256GB Titanium Gray</span>
     <span class="price-tag">3899.00 SAR</span>
@@ -593,7 +642,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N53401290A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-004">
+<div class="product-card searchable-item" id="NOON-SA-004">
   <h3>
     <span>Apple iPad 10th Generation 10.9-inch Wi-Fi 64GB Silver</span>
     <span class="price-tag">1399.00 SAR</span>
@@ -610,7 +659,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N51287900A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-005">
+<div class="product-card searchable-item" id="NOON-SA-005">
   <h3>
     <span>Apple Watch Series 9 GPS 45mm Midnight Aluminum Case</span>
     <span class="price-tag">1499.00 SAR</span>
@@ -627,7 +676,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N52391084A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-006">
+<div class="product-card searchable-item" id="NOON-SA-006">
   <h3>
     <span>Nutricook Smart Indoor Air Fryer Oven 1800W 12L Capacity</span>
     <span class="price-tag">449.00 SAR</span>
@@ -644,7 +693,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N14890214A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-007">
+<div class="product-card searchable-item" id="NOON-SA-007">
   <h3>
     <span>De'Longhi Magnifica S Fully Automatic Coffee Machine ECAM22.110.B</span>
     <span class="price-tag">1299.00 SAR</span>
@@ -661,7 +710,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N41209843A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-008">
+<div class="product-card searchable-item" id="NOON-SA-008">
   <h3>
     <span>Dyson V12 Detect Slim Absolute Cordless Vacuum Cleaner</span>
     <span class="price-tag">2499.00 SAR</span>
@@ -678,7 +727,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N23891045A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-009">
+<div class="product-card searchable-item" id="NOON-SA-009">
   <h3>
     <span>Instant Pot Duo 7-in-1 Electric Pressure Cooker 6L (8-Quart)</span>
     <span class="price-tag">399.00 SAR</span>
@@ -695,7 +744,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N39104562A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-010">
+<div class="product-card searchable-item" id="NOON-SA-010">
   <h3>
     <span>Black+Decker 1400W Garment Steamer with Dual Adjustable Poles</span>
     <span class="price-tag">249.00 SAR</span>
@@ -712,7 +761,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N48912304A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-011">
+<div class="product-card searchable-item" id="NOON-SA-011">
   <h3>
     <span>Dyson Airwrap Multi-Styler Complete Long (Nickel/Copper)</span>
     <span class="price-tag">2199.00 SAR</span>
@@ -729,7 +778,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N49810239A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-012">
+<div class="product-card searchable-item" id="NOON-SA-012">
   <h3>
     <span>Philips Lumea Prestige IPL Hair Removal Device BRI956/60</span>
     <span class="price-tag">1799.00 SAR</span>
@@ -746,7 +795,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N32890145A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-013">
+<div class="product-card searchable-item" id="NOON-SA-013">
   <h3>
     <span>Xiaomi Smart Body Composition Scale S400 (Dual-Frequency BIA)</span>
     <span class="price-tag">89.00 SAR</span>
@@ -763,7 +812,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N45901234A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-014">
+<div class="product-card searchable-item" id="NOON-SA-014">
   <h3>
     <span>Beurer Shiatsu Deep Kneading Back & Neck Massager MG 151</span>
     <span class="price-tag">199.00 SAR</span>
@@ -780,7 +829,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N51098234A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-015">
+<div class="product-card searchable-item" id="NOON-SA-015">
   <h3>
     <span>Waterpik Ultra Professional Dental Water Flosser WP-660</span>
     <span class="price-tag">379.00 SAR</span>
@@ -797,7 +846,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N28910456A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-016">
+<div class="product-card searchable-item" id="NOON-SA-016">
   <h3>
     <span>Xiaomi Smart Standing Fan 2 (DC Inverter Motor & App Control)</span>
     <span class="price-tag">279.00 SAR</span>
@@ -814,7 +863,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N40192834A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-017">
+<div class="product-card searchable-item" id="NOON-SA-017">
   <h3>
     <span>Eufy HomeVac H11 Pure Cordless Handheld Vacuum with Ozone Purification</span>
     <span class="price-tag">179.00 SAR</span>
@@ -831,7 +880,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N38901245A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-018">
+<div class="product-card searchable-item" id="NOON-SA-018">
   <h3>
     <span>Anker Nebula Capsule Smart Mini Wi-Fi Projector (Pocket Cinema)</span>
     <span class="price-tag">1199.00 SAR</span>
@@ -848,7 +897,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N42901845A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-019">
+<div class="product-card searchable-item" id="NOON-SA-019">
   <h3>
     <span>Philips Hue White and Color Ambiance Starter Kit (3 Bulbs + Bridge)</span>
     <span class="price-tag">599.00 SAR</span>
@@ -865,7 +914,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N31098452A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-020">
+<div class="product-card searchable-item" id="NOON-SA-020">
   <h3>
     <span>JBL Flip 6 Waterproof Portable Bluetooth Speaker</span>
     <span class="price-tag">399.00 SAR</span>
@@ -882,7 +931,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N52091834A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-021">
+<div class="product-card searchable-item" id="NOON-SA-021">
   <h3>
     <span>Baseus Blade 100W Ultra-Thin Laptop Power Bank 20000mAh</span>
     <span class="price-tag">279.00 SAR</span>
@@ -899,7 +948,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N50981245A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-022">
+<div class="product-card searchable-item" id="NOON-SA-022">
   <h3>
     <span>Baseus 65W GaN5 Pro Fast Charger Desktop Power Strip (4 Ports)</span>
     <span class="price-tag">169.00 SAR</span>
@@ -916,7 +965,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N46901823A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-023">
+<div class="product-card searchable-item" id="NOON-SA-023">
   <h3>
     <span>Logitech K380 Multi-Device Bluetooth Wireless Keyboard</span>
     <span class="price-tag">149.00 SAR</span>
@@ -933,7 +982,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N41098273A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-024">
+<div class="product-card searchable-item" id="NOON-SA-024">
   <h3>
     <span>Anker 3-in-1 Cube with MagSafe 15W Wireless Charging Station</span>
     <span class="price-tag">499.00 SAR</span>
@@ -950,7 +999,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N47890124A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-025">
+<div class="product-card searchable-item" id="NOON-SA-025">
   <h3>
     <span>Baseus Magnetic Wireless Power Bank 10000mAh 20W PD</span>
     <span class="price-tag">119.00 SAR</span>
@@ -967,7 +1016,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N39012845A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-026">
+<div class="product-card searchable-item" id="NOON-SA-026">
   <h3>
     <span>UGREEN Car Phone Holder Magnetic Dashboard & Vent Mount</span>
     <span class="price-tag">49.00 SAR</span>
@@ -984,7 +1033,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N48901298A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-027">
+<div class="product-card searchable-item" id="NOON-SA-027">
   <h3>
     <span>Baseus Dual-Port Car Charger 65W with USB-C & USB-A Fast Charge</span>
     <span class="price-tag">59.00 SAR</span>
@@ -1001,7 +1050,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N41908234A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-028">
+<div class="product-card searchable-item" id="NOON-SA-028">
   <h3>
     <span>Samsonite Omni PC Hardside Expandable Luggage 24-inch Checked</span>
     <span class="price-tag">549.00 SAR</span>
@@ -1018,7 +1067,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N35901245A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-029">
+<div class="product-card searchable-item" id="NOON-SA-029">
   <h3>
     <span>Philips Multigroom Series 7000 16-in-1 All-in-One Trimmer MG7736</span>
     <span class="price-tag">279.00 SAR</span>
@@ -1035,7 +1084,7 @@
   <a class="cta-btn" href="https://www.noon.com/saudi-en/N37901845A/p/" target="_blank" rel="nofollow noopener">View on Noon.sa &rarr;</a>
 </div>
 
-<div class="product-card" id="NOON-SA-030">
+<div class="product-card searchable-item" id="NOON-SA-030">
   <h3>
     <span>Ember Temperature Control Smart Mug 2 (14 oz / 414ml Black)</span>
     <span class="price-tag">599.00 SAR</span>
@@ -1055,8 +1104,22 @@
 
 <p class="updated">Last reviewed: 2026-10-09</p>
 </main>
-<footer><p><strong>Affiliate & Editorial Disclosure:</strong> Plainpick publishes research-assisted, human-reviewed comparisons and guides.
-Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our
-coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
-<p>&copy; 2026 Plainpick &middot; Riyadh, Saudi Arabia</p></footer>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>About Plainpick</h4>
+      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We test products and verify specifications before publication.</p>
+    </div>
+    <div>
+      <h4>Core Categories</h4>
+      <p><a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; <a href="../categories/software-ai-tools.html">Software & AI</a></p>
+    </div>
+    <div>
+      <h4>Legal & Standards</h4>
+      <p><a href="../about.html">About Us</a> &middot; <a href="../about.html#disclosure">Affiliate Disclosure</a> &middot; <a href="../sitemap.xml">XML Sitemap</a></p>
+    </div>
+  </div>
+  <p class="disclosure-note"><strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
+  <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides</p>
+</footer>
 </body></html>

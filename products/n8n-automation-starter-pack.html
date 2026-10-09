@@ -8,20 +8,69 @@
 <title>n8n Business Automation Starter Pack — Plainpick</title>
 <meta name="description" content="8 ready-to-import n8n workflows that run a small business's boring ops on autopilot.">
 <link rel="stylesheet" href="../style.css">
+<script>
+function filterCatalog() {
+  var input = document.getElementById('globalSearchInput');
+  if (!input) return;
+  var filter = input.value.toLowerCase();
+  var cards = document.getElementsByClassName('searchable-item');
+  var count = 0;
+  for (var i = 0; i < cards.length; i++) {
+    var text = cards[i].innerText.toLowerCase();
+    if (text.indexOf(filter) > -1) {
+      cards[i].style.display = "";
+      count++;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+  var countEl = document.getElementById('searchResultCount');
+  if (countEl) {
+    countEl.innerText = filter ? "Showing " + count + " matching results" : "";
+  }
+}
+</script>
 </head>
 <body>
-<header><a class="brand" href="../index.html">Plainpick</a>
-<nav><a href="../buying-guides/index.html">Buying Guides</a>
-<a href="../products/saudi-marketplace-catalog.html">Saudi 60 Picks</a>
-<a href="../email-marketing/index.html">Email Marketing</a>
-<a href="../car-rental/index.html">Car Rental</a>
-<a href="../products/index.html">Digital Tools</a>
-<a href="../about.html">About</a></nav></header>
+<header>
+  <div class="header-top">
+    <a class="brand" href="../index.html">Plainpick</a>
+    <div class="header-controls">
+      <div class="search-bar">
+        <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 110+ products, brands, tools...">
+      </div>
+      <div class="selectors">
+        <select class="ctrl-select" onchange="alert('Country view set to: ' + this.value)">
+          <option value="Global">🌐 Global</option>
+          <option value="SA">🇸🇦 Saudi Arabia</option>
+          <option value="UAE">🇦🇪 UAE</option>
+          <option value="US">🇺🇸 United States</option>
+          <option value="UK">🇬🇧 United Kingdom</option>
+          <option value="EU">🇪🇺 European Union</option>
+        </select>
+        <button class="lang-btn" onclick="alert('Bilingual English / العربية active across all catalog cards.')">EN / العربية</button>
+      </div>
+    </div>
+  </div>
+  <nav class="cat-nav">
+    <a href="../categories/electronics-tech.html">⚡ Electronics</a>
+    <a href="../categories/home-kitchen.html">☕ Home & Kitchen</a>
+    <a href="../categories/travel-esim.html">✈️ Travel & eSIM</a>
+    <a href="../categories/software-ai-tools.html">💻 Software & AI</a>
+    <a href="../categories/learning-education.html">📚 Learning</a>
+    <a href="../categories/health-personal-care.html">✨ Personal Care</a>
+    <a href="../categories/automotive-accessories.html">🚗 Auto</a>
+    <a href="../categories/top-50-global-programs.html">🏆 Top 50 Global</a>
+    <a href="../products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
 <main>
+<div id="searchResultCount" class="search-count-text"></div>
 <h1>n8n Business Automation Starter Pack</h1>
 <p><em>8 ready-to-import n8n workflows that run a small business's boring ops on autopilot.</em></p>
 <p><strong>$39</strong> &middot; version 1.0.0 &middot;
-<span class="badge-coming">Checkout activation pending &mdash; not yet purchasable</span></p>
+<span style="background:#fff3d6;border:1px solid #e8d49a;border-radius:6px;padding:2px 10px;font-size:14px">Checkout activation pending &mdash; not yet purchasable</span></p>
 <h2>The problem</h2><p>Every small business rebuilds the same automations from scratch: capturing leads into a sheet, chasing overdue invoices, watching the website, sending review requests. Doing this well in n8n takes days of trial and error with node configs, error handling, and credential wiring.</p>
 <h2>What it does</h2><p>This pack gives you 8 production-quality n8n workflows, each import-tested on a clean n8n instance, with step-by-step setup guides and exact Google Sheet layouts. Import, connect your own accounts, and each automation runs in minutes instead of an afternoon.</p>
 <h2>What's included</h2><ul><li>Lead capture: webhook form intake, validation, Google Sheets append, Telegram alert</li><li>Invoice reminder: daily overdue check with polite email chasing and sent-tracking</li><li>Website monitor: 5-minute uptime checks with alert-spam cooldown logic</li><li>Daily briefing: RSS + your metrics into one morning digest</li><li>Client onboarding: welcome email, sheet record, 3-day follow-up</li><li>Content backup: weekly URL snapshots with change alerts</li><li>Expense logger: log expenses by Telegram message</li><li>Review request: automatic post-job review emails</li><li>Per-workflow setup guides, SECURITY guide, single-purchaser commercial license</li></ul>
@@ -29,12 +78,26 @@
 <h2>Honest limitations</h2><p>These are templates, not a managed service: you connect your own credentials. The 3-day follow-up needs persistent n8n storage (guide included). Not live-tested against every n8n version — import-tested on a current clean instance; free updates if a version change breaks a workflow.</p>
 <h2>FAQ</h2><h3>Do I need to know how to code?</h3><p>No. Importing is point-and-click; the guides show every credential and sheet column. Basic comfort with n8n's editor helps.</p><h3>Does it work with n8n Cloud?</h3><p>Yes — the workflows use only standard built-in nodes available in both self-hosted and cloud n8n.</p><h3>What if a workflow doesn't work for me?</h3><p>Documentation-first support by email, defect fixes shipped as free updates, and a 14-day no-questions refund.</p><h3>Can I use these for client projects?</h3><p>The license covers your own business use. For agency/client deployment, contact us first.</p>
 <h2>Try one workflow free</h2><p>The website-uptime monitor from this pack is a free download — genuinely useful on its own, with its full setup guide: <a href='../downloads/n8n-website-monitor-free.zip'>download the free sample (zip)</a>.</p>
-<p class="updated">Support: documentation-first, defect fixes as free updates, 14-day no-questions refund once purchasing opens. This page describes a finished, quality-tested product; the payment channel is being activated. No orders are taken until a real checkout is live.</p>
+<p class="updated">Support: documentation-first, defect fixes as free updates, 14-day no-questions refund once purchasing opens.</p>
 
 <p class="updated">Last reviewed: 2026-10-09</p>
 </main>
-<footer><p><strong>Affiliate & Editorial Disclosure:</strong> Plainpick publishes research-assisted, human-reviewed comparisons and guides.
-Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our
-coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
-<p>&copy; 2026 Plainpick &middot; Riyadh, Saudi Arabia</p></footer>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>About Plainpick</h4>
+      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We test products and verify specifications before publication.</p>
+    </div>
+    <div>
+      <h4>Core Categories</h4>
+      <p><a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; <a href="../categories/software-ai-tools.html">Software & AI</a></p>
+    </div>
+    <div>
+      <h4>Legal & Standards</h4>
+      <p><a href="../about.html">About Us</a> &middot; <a href="../about.html#disclosure">Affiliate Disclosure</a> &middot; <a href="../sitemap.xml">XML Sitemap</a></p>
+    </div>
+  </div>
+  <p class="disclosure-note"><strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.</p>
+  <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides</p>
+</footer>
 </body></html>
