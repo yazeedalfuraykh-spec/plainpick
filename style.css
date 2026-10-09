@@ -31,6 +31,10 @@
   --tag-global-fg: #0369a1;
   --tag-global-border: #bae6fd;
   
+  --tag-saudi-bg: #dcfce7;
+  --tag-saudi-fg: #15803d;
+  --tag-saudi-border: #86efac;
+  
   --success-bg: #dcfce7;
   --success-fg: #15803d;
   --warning-bg: #fef9c3;
@@ -72,6 +76,10 @@
   --tag-global-bg: rgba(56, 189, 248, 0.15);
   --tag-global-fg: #38bdf8;
   --tag-global-border: rgba(56, 189, 248, 0.3);
+  
+  --tag-saudi-bg: rgba(34, 197, 94, 0.15);
+  --tag-saudi-fg: #4ade80;
+  --tag-saudi-border: rgba(34, 197, 94, 0.3);
   
   --success-bg: rgba(34, 197, 94, 0.15);
   --success-fg: #4ade80;
@@ -267,6 +275,24 @@ main {
   margin-bottom: 16px;
 }
 
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.breadcrumbs a {
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
 /* Hero Section */
 .hero {
   background: linear-gradient(135deg, #0284c7 0%, #034861 60%, #081d28 100%);
@@ -428,6 +454,7 @@ main {
 .badge-amz { background: var(--tag-amz-bg); color: var(--tag-amz-fg); border: 1px solid var(--tag-amz-border); }
 .badge-noon { background: var(--tag-noon-bg); color: var(--tag-noon-fg); border: 1px solid var(--tag-noon-border); }
 .badge-global { background: var(--tag-global-bg); color: var(--tag-global-fg); border: 1px solid var(--tag-global-border); }
+.badge-saudi { background: var(--tag-saudi-bg); color: var(--tag-saudi-fg); border: 1px solid var(--tag-saudi-border); }
 .badge-cat { background: var(--bg-surface-alt); color: var(--text-secondary); border: 1px solid var(--border-color); }
 .badge-status { background: var(--success-bg); color: var(--success-fg); border: 1px solid var(--success-fg); }
 .badge-pending { background: var(--warning-bg); color: var(--warning-fg); border: 1px solid var(--warning-fg); }
@@ -631,6 +658,21 @@ th {
   margin: 6px 0 0;
   color: var(--text-secondary);
   font-size: 13.5px;
+}
+
+/* Legal & Static Content Styling */
+.legal-content {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 32px;
+  margin-top: 20px;
+}
+.legal-content h2 {
+  font-size: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-top: 28px;
 }
 
 /* Comparison Dock */
