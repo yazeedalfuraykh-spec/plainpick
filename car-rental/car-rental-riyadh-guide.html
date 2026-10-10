@@ -85,6 +85,7 @@
     <a href="../categories/worldwide-affiliate-hub.html">🌐 Worldwide Hub</a>
     <a href="../categories/top-50-global-programs.html">🏆 Top 50 Global</a>
     <a href="../products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
+    <a href="../analytics-dashboard.html">📊 Analytics</a>
     <a href="../about.html">About & Standards</a>
   </nav>
 </header>
@@ -162,8 +163,9 @@
       <h4>Regional Hubs & Guides</h4>
       <p>
         <a href="../products/saudi-marketplace-catalog.html">Saudi 60 Marketplace Hub</a> &middot; 
-        <a href="../products/amazon-saudi-top-picks.html">Amazon.sa 30 Picks</a> &middot; 
+        <a href="../products/amazon-saudi-top-picks.html">Amazon.sa 100 Picks</a> &middot; 
         <a href="../products/noon-saudi-top-picks.html">Noon.sa 30 Picks</a> &middot; 
+        <a href="../buying-guides/index.html">10 Saudi Buying Guides</a> &middot; 
         <a href="../car-rental/index.html">Car Rental Guides</a>
       </p>
     </div>
@@ -174,6 +176,7 @@
         <a href="../privacy.html">Privacy Policy</a> &middot; 
         <a href="../terms.html">Terms of Service</a> &middot; 
         <a href="../contact.html">Contact Us</a> &middot; 
+        <a href="../analytics-dashboard.html">📊 Telemetry Dashboard</a> &middot; 
         <a href="../about.html#disclosure">Affiliate Disclosure</a> &middot; 
         <a href="../sitemap.xml">XML Sitemap</a>
       </p>
@@ -442,6 +445,48 @@ function handleModalBackdrop(e) {
     closeCompareModal();
   }
 }
+
+// Outbound Affiliate Link & Pageview Telemetry Engine
+(function() {
+  try {
+    var pvKey = 'plainpick_pv_count';
+    var pvs = parseInt(localStorage.getItem(pvKey) || '0', 10) + 1;
+    localStorage.setItem(pvKey, pvs);
+    
+    document.addEventListener('click', function(e) {
+      var target = e.target.closest('a');
+      if (!target || !target.href) return;
+      var href = target.href;
+      
+      if (href.indexOf('amazon.sa') > -1 || href.indexOf('noon.com') > -1 || href.indexOf('admitad') > -1 || href.indexOf('impact.com') > -1) {
+        var asinMatch = href.match(/\/dp\/([A-Z0-9]{10})/i) || href.match(/asin=([A-Z0-9]{10})/i);
+        var asin = asinMatch ? asinMatch[1] : 'GENERAL_LINK';
+        var merchant = href.indexOf('amazon.sa') > -1 ? 'Amazon.sa' : (href.indexOf('noon.com') > -1 ? 'Noon.sa' : 'PartnerNetwork');
+        var tagMatch = href.match(/tag=([a-zA-Z0-9_-]+)/);
+        var tag = tagMatch ? tagMatch[1] : (merchant === 'Amazon.sa' ? 'plainpick-21' : 'direct');
+        
+        var clickEvent = {
+          timestamp: new Date().toISOString(),
+          merchant: merchant,
+          asin: asin,
+          tag: tag,
+          url: href,
+          page: window.location.pathname,
+          referrer: document.referrer || 'direct'
+        };
+        
+        var events = JSON.parse(localStorage.getItem('plainpick_telemetry_events') || '[]');
+        events.push(clickEvent);
+        if (events.length > 200) events = events.slice(-200);
+        localStorage.setItem('plainpick_telemetry_events', JSON.stringify(events));
+        
+        var clkKey = 'plainpick_outbound_clicks';
+        var clks = parseInt(localStorage.getItem(clkKey) || '0', 10) + 1;
+        localStorage.setItem(clkKey, clks);
+      }
+    }, true);
+  } catch(e) {}
+})();
 
 // Initialize on DOM Ready
 document.addEventListener('DOMContentLoaded', function() {
