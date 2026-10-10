@@ -35,6 +35,10 @@
   --tag-saudi-fg: #15803d;
   --tag-saudi-border: #86efac;
   
+  --tag-coupon-bg: #fdf2f8;
+  --tag-coupon-fg: #be185d;
+  --tag-coupon-border: #fbcfe8;
+  
   --success-bg: #dcfce7;
   --success-fg: #15803d;
   --warning-bg: #fef9c3;
@@ -80,6 +84,10 @@
   --tag-saudi-bg: rgba(34, 197, 94, 0.15);
   --tag-saudi-fg: #4ade80;
   --tag-saudi-border: rgba(34, 197, 94, 0.3);
+  
+  --tag-coupon-bg: rgba(244, 114, 182, 0.15);
+  --tag-coupon-fg: #f472b6;
+  --tag-coupon-border: rgba(244, 114, 182, 0.3);
   
   --success-bg: rgba(34, 197, 94, 0.15);
   --success-fg: #4ade80;
@@ -398,7 +406,7 @@ main {
   font-weight: 500;
 }
 
-/* Product Cards */
+/* Product & Program Cards */
 .product-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-color);
@@ -455,9 +463,49 @@ main {
 .badge-noon { background: var(--tag-noon-bg); color: var(--tag-noon-fg); border: 1px solid var(--tag-noon-border); }
 .badge-global { background: var(--tag-global-bg); color: var(--tag-global-fg); border: 1px solid var(--tag-global-border); }
 .badge-saudi { background: var(--tag-saudi-bg); color: var(--tag-saudi-fg); border: 1px solid var(--tag-saudi-border); }
+.badge-coupon { background: var(--tag-coupon-bg); color: var(--tag-coupon-fg); border: 1px solid var(--tag-coupon-border); }
 .badge-cat { background: var(--bg-surface-alt); color: var(--text-secondary); border: 1px solid var(--border-color); }
 .badge-status { background: var(--success-bg); color: var(--success-fg); border: 1px solid var(--success-fg); }
 .badge-pending { background: var(--warning-bg); color: var(--warning-fg); border: 1px solid var(--warning-fg); }
+
+/* Promo Code Box */
+.coupon-box {
+  background: var(--bg-surface-alt);
+  border: 2px dashed var(--accent-primary);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.coupon-code-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.coupon-code {
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent-primary);
+  letter-spacing: 1.5px;
+  background: var(--bg-surface);
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+.coupon-discount {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--tag-coupon-fg);
+}
+.btn-copied {
+  background: var(--success-fg) !important;
+  color: #fff !important;
+}
 
 .specs-list {
   font-size: 14px;

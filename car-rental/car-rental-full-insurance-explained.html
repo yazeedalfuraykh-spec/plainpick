@@ -45,21 +45,25 @@
       <a class="brand" href="../index.html">
         <span class="brand-accent">Plain</span>pick
       </a>
-      <span class="brand-tagline">Global Discovery & Verification</span>
+      <span class="brand-tagline">Global Affiliate Discovery, Deals & Verification</span>
     </div>
     <div class="header-controls">
       <div class="search-bar">
         <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 110+ products, brands, tools...">
+        <input type="text" id="globalSearchInput" onkeyup="filterCatalog()" placeholder="Search 150+ products, promo codes, brands...">
       </div>
       <div class="selectors">
         <select class="ctrl-select" id="countrySelector" onchange="handleCountryChange(this.value)" aria-label="Select Country">
           <option value="Global">🌐 Global</option>
-          <option value="SA">🇸🇦 Saudi Arabia</option>
-          <option value="UAE">🇦🇪 UAE</option>
-          <option value="US">🇺🇸 United States</option>
-          <option value="UK">🇬🇧 United Kingdom</option>
-          <option value="EU">🇪🇺 European Union</option>
+          <option value="SA">🇸🇦 Saudi Arabia (SAR)</option>
+          <option value="UAE">🇦🇪 UAE (AED)</option>
+          <option value="US">🇺🇸 United States (USD)</option>
+          <option value="UK">🇬🇧 United Kingdom (GBP)</option>
+          <option value="EU">🇪🇺 European Union (EUR)</option>
+          <option value="JP">🇯🇵 Japan (JPY)</option>
+          <option value="AU">🇦🇺 Australia (AUD)</option>
+          <option value="BR">🇧🇷 Brazil (BRL)</option>
+          <option value="IN">🇮🇳 India (INR)</option>
         </select>
         <button class="ctrl-btn lang-btn" id="langToggleBtn" onclick="toggleLanguageDirection()" title="Toggle English / RTL Arabic layout">EN / العربية</button>
         <button class="ctrl-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark / Light theme">
@@ -73,9 +77,10 @@
     <a href="../categories/home-kitchen.html">☕ Home & Kitchen</a>
     <a href="../categories/travel-esim.html">✈️ Travel & eSIM</a>
     <a href="../categories/software-ai-tools.html">💻 Software & AI</a>
-    <a href="../categories/learning-education.html">📚 Learning</a>
-    <a href="../categories/health-personal-care.html">✨ Personal Care</a>
-    <a href="../categories/automotive-accessories.html">🚗 Auto</a>
+    <a href="../categories/promo-code-programs.html">🏷️ Promo Codes & Coupons</a>
+    <a href="../categories/affiliate-programs.html">🔗 Affiliate Programs</a>
+    <a href="../categories/partner-network-programs.html">🤝 Partner Offers</a>
+    <a href="../categories/worldwide-affiliate-hub.html">🌐 Worldwide Hub</a>
     <a href="../categories/top-50-global-programs.html">🏆 Top 50 Global</a>
     <a href="../products/saudi-marketplace-catalog.html">🇸🇦 Saudi 60 Hub</a>
     <a href="../about.html">About & Standards</a>
@@ -136,22 +141,21 @@
 </ol>
 <p>None of this requires the most expensive option at the counter to be the right one. It requires knowing which number (excess) and which list (exclusions) actually determine your exposure, since those are the two things "full coverage" as a phrase does not reliably tell you.</p>
 <p><a href="https://www.discovercars.com">DiscoverCars</a></p>
-<p class="updated">Last verified & updated: 2026-09-29 &middot; Plainpick Editorial Operations</p>
+<p class="updated">Last verified & updated: 2026-09-29 &middot; Plainpick Editorial & Brokerage Operations</p>
 </main>
 <footer>
   <div class="footer-grid">
     <div>
       <h4>About Plainpick</h4>
-      <p>Plainpick publishes research-assisted, human-reviewed comparisons and buying guides worldwide. We independently test products and verify specifications before publication.</p>
+      <p>Plainpick is an independent, global shopping discovery, product comparison, and verified coupon portal operating across 11 world regions.</p>
     </div>
     <div>
-      <h4>Core Categories</h4>
+      <h4>Admitad & Network Channels</h4>
       <p>
-        <a href="../categories/electronics-tech.html">Electronics & Tech</a> &middot; 
-        <a href="../categories/travel-esim.html">Travel & eSIM</a> &middot; 
-        <a href="../categories/home-kitchen.html">Home & Coffee</a> &middot; 
-        <a href="../categories/software-ai-tools.html">Software & AI</a> &middot; 
-        <a href="../categories/top-50-global-programs.html">Top 50 Programs</a>
+        <a href="../categories/promo-code-programs.html">🏷️ Promo Code Programs</a> &middot; 
+        <a href="../categories/affiliate-programs.html">🔗 Affiliate Programs</a> &middot; 
+        <a href="../categories/partner-network-programs.html">🤝 Partner Network Offers</a> &middot; 
+        <a href="../categories/worldwide-affiliate-hub.html">🌐 Worldwide Opportunity Hub</a>
       </p>
     </div>
     <div>
@@ -176,7 +180,7 @@
     </div>
   </div>
   <div class="disclosure-note">
-    <strong>Affiliate & Editorial Disclosure:</strong> Some outbound product links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes products that pay us nothing, and recommendations are based solely on factual performance, specifications, and honest utility.
+    <strong>Affiliate & Editorial Disclosure:</strong> Some outbound product and coupon links may earn us a qualifying affiliate commission at zero additional cost to you. Our coverage includes programs that pay us nothing, and recommendations are based solely on factual performance, specifications, and verified utility.
   </div>
   <div class="footer-bottom">
     <p>&copy; 2026 Plainpick &middot; Global Discovery & Shopping Guides. All rights reserved.</p>
@@ -233,6 +237,35 @@ function filterCatalog() {
   if (countEl) {
     countEl.innerText = filter ? "Found " + count + " matching results" : "";
   }
+}
+
+// Promo Code Copy to Clipboard
+function copyPromoCode(code, btn) {
+  if (!navigator.clipboard) {
+    var textArea = document.createElement("textarea");
+    textArea.value = code;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      showCopiedFeedback(btn);
+    } catch (err) {}
+    document.body.removeChild(textArea);
+    return;
+  }
+  navigator.clipboard.writeText(code).then(function() {
+    showCopiedFeedback(btn);
+  });
+}
+
+function showCopiedFeedback(btn) {
+  var origText = btn.innerHTML;
+  btn.innerHTML = "✓ Code Copied!";
+  btn.classList.add("btn-copied");
+  setTimeout(function() {
+    btn.innerHTML = origText;
+    btn.classList.remove("btn-copied");
+  }, 2500);
 }
 
 // Theme Management
