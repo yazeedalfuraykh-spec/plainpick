@@ -141,6 +141,49 @@
   </div>
 </div>
 
+
+<div style="background:var(--bg-surface);border:1px solid var(--border-color);border-radius:10px;padding:24px;margin-bottom:24px;">
+  <h2>📱 Social Referral Traffic & Channel Attribution (2026 Campaign)</h2>
+  <p style="color:var(--text-muted);font-size:14px;margin-top:4px;">Real-time attribution matching incoming social traffic from TikTok, Instagram, YouTube, and Snapchat to outbound Amazon.sa <code>plainpick-21</code> clicks.</p>
+  
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:16px;">
+    <div style="background:var(--bg-surface-alt);border:1px solid var(--border-color);border-radius:8px;padding:16px;text-align:center;">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);">🎵 TikTok Referral</div>
+      <div id="clicksTiktok" style="font-size:24px;font-weight:800;color:#38bdf8;margin:6px 0;">0</div>
+      <div style="font-size:11px;color:var(--text-muted);">Outbound Amazon Clicks</div>
+    </div>
+    <div style="background:var(--bg-surface-alt);border:1px solid var(--border-color);border-radius:8px;padding:16px;text-align:center;">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);">📸 Instagram (Reels & Bio)</div>
+      <div id="clicksInstagram" style="font-size:24px;font-weight:800;color:#f472b6;margin:6px 0;">0</div>
+      <div style="font-size:11px;color:var(--text-muted);">Outbound Amazon Clicks</div>
+    </div>
+    <div style="background:var(--bg-surface-alt);border:1px solid var(--border-color);border-radius:8px;padding:16px;text-align:center;">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);">▶️ YouTube Shorts</div>
+      <div id="clicksYoutube" style="font-size:24px;font-weight:800;color:#ef4444;margin:6px 0;">0</div>
+      <div style="font-size:11px;color:var(--text-muted);">Outbound Amazon Clicks</div>
+    </div>
+    <div style="background:var(--bg-surface-alt);border:1px solid var(--border-color);border-radius:8px;padding:16px;text-align:center;">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);">👻 Snapchat Spotlight</div>
+      <div id="clicksSnapchat" style="font-size:24px;font-weight:800;color:#facc15;margin:6px 0;">0</div>
+      <div style="font-size:11px;color:var(--text-muted);">Outbound Amazon Clicks</div>
+    </div>
+    <div style="background:var(--bg-surface-alt);border:1px solid var(--border-color);border-radius:8px;padding:16px;text-align:center;">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);">🔍 Google Organic Search</div>
+      <div id="clicksGoogle" style="font-size:24px;font-weight:800;color:#10b981;margin:6px 0;">0</div>
+      <div style="font-size:11px;color:var(--text-muted);">Outbound Amazon Clicks</div>
+    </div>
+    <div style="background:var(--bg-surface-alt);border:1px solid var(--border-color);border-radius:8px;padding:16px;text-align:center;">
+      <div style="font-size:12px;font-weight:700;color:var(--text-muted);">🌐 Direct / Other</div>
+      <div id="clicksDirect" style="font-size:24px;font-weight:800;color:var(--text-primary);margin:6px 0;">0</div>
+      <div style="font-size:11px;color:var(--text-muted);">Outbound Amazon Clicks</div>
+    </div>
+  </div>
+
+  <div style="background:var(--card-bg);border-left:4px solid #f59e0b;padding:12px 16px;border-radius:6px;margin-top:16px;font-size:13px;line-height:1.5;">
+    ⚠️ <strong>ملاحظة محاسبية وإفصاح التحويلات:</strong> الأرقام أعلاه تمثل نقرات المشترين المهتمين المتجهين إلى أمازون السعودية (Outbound Clicks). يتم تسجيل المبيعات والعمولات المؤكدة حصرياً عبر لوحة تحكم <strong>Amazon Associates KSA</strong> الرسمية بعد إتمام الشراء والتوصيل الفعلي للمنتج.
+  </div>
+</div>
+
 <h2>Recent Outbound Click Events Stream</h2>
 <div style="overflow-x:auto;">
   <table style="width:100%;border-collapse:collapse;margin:16px 0;">
@@ -177,6 +220,17 @@ function refreshDashboardUI() {
   if (pvEl) pvEl.innerText = pvs.toLocaleString();
   if (clkEl) clkEl.innerText = clks.toLocaleString();
   if (ctrEl) ctrEl.innerText = ctr + '%';
+
+  var setVal = function(id, key) {
+    var el = document.getElementById(id);
+    if (el) el.innerText = (parseInt(localStorage.getItem(key) || '0', 10)).toLocaleString();
+  };
+  setVal('clicksTiktok', 'plainpick_clicks_tiktok');
+  setVal('clicksInstagram', 'plainpick_clicks_instagram');
+  setVal('clicksYoutube', 'plainpick_clicks_youtube');
+  setVal('clicksSnapchat', 'plainpick_clicks_snapchat');
+  setVal('clicksGoogle', 'plainpick_clicks_google_search');
+  setVal('clicksDirect', 'plainpick_clicks_Direct / Organic');
   
   var events = JSON.parse(localStorage.getItem('plainpick_telemetry_events') || '[]');
   var tbody = document.getElementById('telemetryEventRows');
@@ -187,7 +241,7 @@ function refreshDashboardUI() {
         '<td style="padding:8px 12px;border:1px solid var(--border-color);"><span class="badge badge-amz">' + ev.merchant + '</span></td>' +
         '<td style="padding:8px 12px;border:1px solid var(--border-color);font-family:monospace;font-weight:600;">' + ev.asin + '</td>' +
         '<td style="padding:8px 12px;border:1px solid var(--border-color);font-family:monospace;color:#10b981;">' + ev.tag + '</td>' +
-        '<td style="padding:8px 12px;border:1px solid var(--border-color);font-size:12px;color:var(--text-muted);">' + (ev.page || '/') + '</td>' +
+        '<td style="padding:8px 12px;border:1px solid var(--border-color);font-size:12px;color:var(--text-muted);">' + (ev.traffic_source || 'direct') + ' &middot; ' + (ev.page || '/') + '</td>' +
       '</tr>';
     }).join('');
   }
@@ -527,13 +581,40 @@ function handleModalBackdrop(e) {
   }
 }
 
-// Outbound Affiliate Link & Pageview Telemetry Engine
+// Outbound Affiliate Link, Social Attribution & Telemetry Engine (Plainpick 2026)
 (function() {
   try {
+    // 1. Capture incoming traffic source and UTM parameters
+    var urlParams = new URLSearchParams(window.location.search);
+    var utmSource = urlParams.get('utm_source');
+    var utmCampaign = urlParams.get('utm_campaign') || urlParams.get('campaign');
+    var ref = document.referrer || '';
+    
+    var detectedSource = 'Direct / Organic';
+    if (utmSource) {
+      detectedSource = utmSource.toLowerCase();
+    } else if (ref.indexOf('tiktok.com') > -1) {
+      detectedSource = 'tiktok';
+    } else if (ref.indexOf('instagram.com') > -1) {
+      detectedSource = 'instagram';
+    } else if (ref.indexOf('youtube.com') > -1 || ref.indexOf('youtu.be') > -1) {
+      detectedSource = 'youtube';
+    } else if (ref.indexOf('snapchat.com') > -1) {
+      detectedSource = 'snapchat';
+    } else if (ref.indexOf('google.') > -1) {
+      detectedSource = 'google_search';
+    } else if (ref.indexOf('pinterest.') > -1) {
+      detectedSource = 'pinterest';
+    }
+    
+    sessionStorage.setItem('plainpick_session_source', detectedSource);
+    if (utmCampaign) sessionStorage.setItem('plainpick_session_campaign', utmCampaign);
+    
     var pvKey = 'plainpick_pv_count';
     var pvs = parseInt(localStorage.getItem(pvKey) || '0', 10) + 1;
     localStorage.setItem(pvKey, pvs);
     
+    // 2. Track outbound clicks on Amazon & partner links
     document.addEventListener('click', function(e) {
       var target = e.target.closest('a');
       if (!target || !target.href) return;
@@ -545,6 +626,8 @@ function handleModalBackdrop(e) {
         var merchant = href.indexOf('amazon.sa') > -1 ? 'Amazon.sa' : (href.indexOf('noon.com') > -1 ? 'Noon.sa' : 'PartnerNetwork');
         var tagMatch = href.match(/tag=([a-zA-Z0-9_-]+)/);
         var tag = tagMatch ? tagMatch[1] : (merchant === 'Amazon.sa' ? 'plainpick-21' : 'direct');
+        var sessionSrc = sessionStorage.getItem('plainpick_session_source') || detectedSource;
+        var sessionCmp = sessionStorage.getItem('plainpick_session_campaign') || 'plainpick_general';
         
         var clickEvent = {
           timestamp: new Date().toISOString(),
@@ -553,17 +636,29 @@ function handleModalBackdrop(e) {
           tag: tag,
           url: href,
           page: window.location.pathname,
+          traffic_source: sessionSrc,
+          campaign: sessionCmp,
           referrer: document.referrer || 'direct'
         };
         
         var events = JSON.parse(localStorage.getItem('plainpick_telemetry_events') || '[]');
         events.push(clickEvent);
-        if (events.length > 200) events = events.slice(-200);
+        if (events.length > 250) events = events.slice(-250);
         localStorage.setItem('plainpick_telemetry_events', JSON.stringify(events));
         
         var clkKey = 'plainpick_outbound_clicks';
         var clks = parseInt(localStorage.getItem(clkKey) || '0', 10) + 1;
         localStorage.setItem(clkKey, clks);
+        
+        var channelKey = 'plainpick_clicks_' + sessionSrc;
+        var chClks = parseInt(localStorage.getItem(channelKey) || '0', 10) + 1;
+        localStorage.setItem(channelKey, chClks);
+
+        try {
+          if (navigator.sendBeacon) {
+            navigator.sendBeacon('/api/telemetry/click', JSON.stringify(clickEvent));
+          }
+        } catch(beaconErr) {}
       }
     }, true);
   } catch(e) {}
