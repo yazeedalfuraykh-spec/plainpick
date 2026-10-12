@@ -27,8 +27,8 @@
   "@type": "Article",
   "headline": "About Plainpick",
   "description": "Editorial standards and affiliate disclosure.",
-  "datePublished": "2026-10-11",
-  "dateModified": "2026-10-11",
+  "datePublished": "2026-10-12",
+  "dateModified": "2026-10-12",
   "author": {
     "@type": "Organization",
     "name": "Plainpick Editorial Team"
@@ -92,7 +92,7 @@
 <main>
 <div id="searchResultCount" class="search-count-text"></div>
 <h1>About Plainpick</h1><p>Plainpick is an independent, global shopping discovery portal, product comparison publisher, and coupon hub. Our reviews are software-assisted and reviewed by human editors before publication. Every fact is cited to verified manufacturer specifications and official partner data.</p><h2 id='disclosure'>Editorial Independence & Affiliate Disclosure</h2><p>Some outbound links on Plainpick are partner or affiliate links that may earn us a commission at zero additional cost to you. Commissions never influence our verdicts: we feature products with zero compensation, and every item lists genuine limitations.</p><h2>Global & Regional Coverage</h2><p>Plainpick publishes in English with Arabic localization, serving global readers across 11 world regions: North America, South America, Europe, Russia & CIS, East Asia, South Asia, Southeast Asia, Middle East, North Africa, Sub-Saharan Africa, and Oceania.</p><p>Contact: <code>plainpick@zooz.ai</code></p>
-<p class="updated">Last verified & updated: 2026-10-11 &middot; Plainpick Editorial & Brokerage Operations</p>
+<p class="updated">Last verified & updated: 2026-10-12 &middot; Plainpick Editorial & Brokerage Operations</p>
 </main>
 <footer>
   <div class="footer-grid">
@@ -396,40 +396,13 @@ function handleModalBackdrop(e) {
   }
 }
 
-// Outbound Affiliate Link, Social Attribution & Telemetry Engine (Plainpick 2026)
+// Outbound Affiliate Link & Pageview Telemetry Engine
 (function() {
   try {
-    // 1. Capture incoming traffic source and UTM parameters
-    var urlParams = new URLSearchParams(window.location.search);
-    var utmSource = urlParams.get('utm_source');
-    var utmCampaign = urlParams.get('utm_campaign') || urlParams.get('campaign');
-    var ref = document.referrer || '';
-    
-    var detectedSource = 'Direct / Organic';
-    if (utmSource) {
-      detectedSource = utmSource.toLowerCase();
-    } else if (ref.indexOf('tiktok.com') > -1) {
-      detectedSource = 'tiktok';
-    } else if (ref.indexOf('instagram.com') > -1) {
-      detectedSource = 'instagram';
-    } else if (ref.indexOf('youtube.com') > -1 || ref.indexOf('youtu.be') > -1) {
-      detectedSource = 'youtube';
-    } else if (ref.indexOf('snapchat.com') > -1) {
-      detectedSource = 'snapchat';
-    } else if (ref.indexOf('google.') > -1) {
-      detectedSource = 'google_search';
-    } else if (ref.indexOf('pinterest.') > -1) {
-      detectedSource = 'pinterest';
-    }
-    
-    sessionStorage.setItem('plainpick_session_source', detectedSource);
-    if (utmCampaign) sessionStorage.setItem('plainpick_session_campaign', utmCampaign);
-    
     var pvKey = 'plainpick_pv_count';
     var pvs = parseInt(localStorage.getItem(pvKey) || '0', 10) + 1;
     localStorage.setItem(pvKey, pvs);
     
-    // 2. Track outbound clicks on Amazon & partner links
     document.addEventListener('click', function(e) {
       var target = e.target.closest('a');
       if (!target || !target.href) return;
@@ -441,8 +414,6 @@ function handleModalBackdrop(e) {
         var merchant = href.indexOf('amazon.sa') > -1 ? 'Amazon.sa' : (href.indexOf('noon.com') > -1 ? 'Noon.sa' : 'PartnerNetwork');
         var tagMatch = href.match(/tag=([a-zA-Z0-9_-]+)/);
         var tag = tagMatch ? tagMatch[1] : (merchant === 'Amazon.sa' ? 'plainpick-21' : 'direct');
-        var sessionSrc = sessionStorage.getItem('plainpick_session_source') || detectedSource;
-        var sessionCmp = sessionStorage.getItem('plainpick_session_campaign') || 'plainpick_general';
         
         var clickEvent = {
           timestamp: new Date().toISOString(),
@@ -451,29 +422,17 @@ function handleModalBackdrop(e) {
           tag: tag,
           url: href,
           page: window.location.pathname,
-          traffic_source: sessionSrc,
-          campaign: sessionCmp,
           referrer: document.referrer || 'direct'
         };
         
         var events = JSON.parse(localStorage.getItem('plainpick_telemetry_events') || '[]');
         events.push(clickEvent);
-        if (events.length > 250) events = events.slice(-250);
+        if (events.length > 200) events = events.slice(-200);
         localStorage.setItem('plainpick_telemetry_events', JSON.stringify(events));
         
         var clkKey = 'plainpick_outbound_clicks';
         var clks = parseInt(localStorage.getItem(clkKey) || '0', 10) + 1;
         localStorage.setItem(clkKey, clks);
-        
-        var channelKey = 'plainpick_clicks_' + sessionSrc;
-        var chClks = parseInt(localStorage.getItem(channelKey) || '0', 10) + 1;
-        localStorage.setItem(channelKey, chClks);
-
-        try {
-          if (navigator.sendBeacon) {
-            navigator.sendBeacon('/api/telemetry/click', JSON.stringify(clickEvent));
-          }
-        } catch(beaconErr) {}
       }
     }, true);
   } catch(e) {}
